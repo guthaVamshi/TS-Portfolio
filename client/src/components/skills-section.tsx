@@ -1,27 +1,8 @@
 import { Container } from "@/components/ui/container";
 import { motion } from "framer-motion";
-import { useRef, useEffect } from "react";
-import { create3DObject } from "@/lib/3d-models";
 import { skills } from "@/lib/data";
 
 export default function SkillsSection() {
-  const sectionRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    if (!sectionRef.current) return;
-    
-    const { cleanup } = create3DObject({
-      el: sectionRef.current,
-      type: "code", // Using code symbols as background
-      color: 0x6C63FF,
-      rotation: true,
-      scale: 1.5,
-      isBackground: true
-    });
-
-    return cleanup;
-  }, []);
-
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -40,11 +21,10 @@ export default function SkillsSection() {
   return (
     <section 
       id="skills" 
-      ref={sectionRef}
-      className="py-16 md:py-24 bg-light-accent/50 dark:bg-dark-accent/50 clip-path-slant relative overflow-hidden"
+      className="py-16 md:py-24 relative"
     >
-      {/* 3D background will be rendered here */}
-      <div className="absolute inset-0 bg-gradient-to-b from-light-accent/80 to-light-accent/95 dark:from-dark-accent/80 dark:to-dark-accent/95 pointer-events-none"></div>
+      {/* Modern gradient background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-primary/10 dark:from-primary/10 dark:to-primary/5"></div>
       
       <Container className="relative z-10">
         <motion.div 
@@ -54,36 +34,45 @@ export default function SkillsSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          <h2 className="text-3xl md:text-4xl font-bold font-poppins mb-4">My <span className="text-primary">Skills</span></h2>
-          <div className="w-24 h-1 bg-primary mx-auto rounded-full"></div>
+          <h2 className="text-3xl md:text-5xl font-bold mb-6">My <span className="text-primary">Skills</span></h2>
+          <p className="text-lg text-dark/70 dark:text-light/70 max-w-2xl mx-auto">
+            I've developed expertise in various technologies throughout my professional journey.
+          </p>
         </motion.div>
         
         <motion.div 
-          className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 md:gap-8"
+          className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-5 md:gap-8"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
         >
-          {skills.map((skill, index) => (
+          {skills.map((skill) => (
             <motion.div 
               key={skill.name} 
-              className="skill-card group"
+              className="skill-card"
               variants={itemVariants}
             >
-              <div className="bg-light/80 dark:bg-dark/80 backdrop-blur-sm rounded-xl p-6 text-center transition-all duration-300 hover:shadow-xl hover:shadow-primary/10 hover:-translate-y-2 border border-transparent hover:border-primary/20">
-                <div className="w-16 h-16 mx-auto bg-primary/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
-                  <i className={`${skill.icon} text-3xl text-primary`}></i>
+              <div className="bg-white dark:bg-dark rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 h-full flex flex-col border border-light-accent/50 dark:border-dark-accent/50 hover:border-primary/20">
+                <div className="h-12 mb-4 flex items-center">
+                  <i className={`${skill.icon} text-2xl text-primary`}></i>
+                  <h3 className="font-medium text-lg ml-3">{skill.name}</h3>
                 </div>
-                <h3 className="font-poppins font-medium text-lg mb-2">{skill.name}</h3>
-                <div className="w-full bg-light-accent dark:bg-dark-accent h-2 rounded-full overflow-hidden">
-                  <motion.div 
-                    className="bg-primary h-full rounded-full"
-                    initial={{ width: 0 }}
-                    whileInView={{ width: `${skill.level}%` }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.8, delay: 0.2 }}
-                  ></motion.div>
+                
+                <div className="mt-auto">
+                  <div className="flex items-center justify-between mb-1">
+                    <span className="text-xs text-dark/60 dark:text-light/60">Proficiency</span>
+                    <span className="text-xs font-medium text-primary">{skill.level}%</span>
+                  </div>
+                  <div className="w-full bg-light-accent/30 dark:bg-dark-accent/30 h-1.5 rounded-full overflow-hidden">
+                    <motion.div 
+                      className="bg-primary h-full rounded-full"
+                      initial={{ width: 0 }}
+                      whileInView={{ width: `${skill.level}%` }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.8, delay: 0.2 }}
+                    ></motion.div>
+                  </div>
                 </div>
               </div>
             </motion.div>

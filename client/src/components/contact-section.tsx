@@ -1,7 +1,6 @@
 import { Container } from "@/components/ui/container";
 import { motion } from "framer-motion";
-import { ChangeEvent, FormEvent, useRef, useState, useEffect } from "react";
-import { create3DObject } from "@/lib/3d-models";
+import { ChangeEvent, FormEvent, useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
 
@@ -20,23 +19,7 @@ export default function ContactSection() {
     message: ""
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const sectionRef = useRef<HTMLElement>(null);
   const { toast } = useToast();
-
-  useEffect(() => {
-    if (!sectionRef.current) return;
-    
-    const { cleanup } = create3DObject({
-      el: sectionRef.current,
-      type: "computer", // Use computer model
-      color: 0x6C63FF, 
-      rotation: false,
-      scale: 2,
-      isBackground: true
-    });
-
-    return cleanup;
-  }, []);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -99,11 +82,12 @@ export default function ContactSection() {
   return (
     <section 
       id="contact" 
-      ref={sectionRef} 
-      className="py-16 md:py-24 relative overflow-hidden"
+      className="py-16 md:py-28 relative"
     >
-      {/* Overlay to ensure content visibility over 3D background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-light/90 to-light/95 dark:from-dark/90 dark:to-dark/95 pointer-events-none"></div>
+      {/* Modern patterned background */}
+      <div className="absolute inset-0 bg-primary/5 dark:bg-primary/10">
+        <div className="absolute inset-0 opacity-20 dark:opacity-10 bg-[radial-gradient(#6C63FF_1px,transparent_1px)] [background-size:20px_20px]"></div>
+      </div>
       
       <Container className="relative z-10">
         <motion.div 
@@ -113,122 +97,150 @@ export default function ContactSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          <h2 className="text-3xl md:text-4xl font-bold font-poppins mb-4">Get In <span className="text-primary">Touch</span></h2>
-          <div className="w-24 h-1 bg-primary mx-auto rounded-full"></div>
+          <h2 className="text-3xl md:text-5xl font-bold mb-6">Get In <span className="text-primary">Touch</span></h2>
+          <p className="text-lg text-dark/70 dark:text-light/70 max-w-2xl mx-auto">
+            Have a project in mind or want to discuss opportunities? Feel free to reach out!
+          </p>
         </motion.div>
         
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 items-stretch">
           <motion.div
+            className="lg:col-span-3 bg-white dark:bg-dark rounded-2xl shadow-xl overflow-hidden"
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <div className="bg-light/80 dark:bg-dark/80 backdrop-blur-sm rounded-xl shadow-xl p-8">
+            <div className="p-8 md:p-10">
+              <h3 className="text-2xl font-bold mb-6">Send a Message</h3>
               <form id="contact-form" className="space-y-6" onSubmit={handleSubmit}>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div>
-                    <label htmlFor="name" className="block mb-2 font-medium">Name</label>
+                    <label htmlFor="name" className="block mb-2 text-sm font-medium">Full Name</label>
                     <input 
                       type="text" 
                       id="name" 
                       name="name"
                       value={formData.name}
                       onChange={handleChange}
-                      placeholder="Your name" 
-                      className="w-full px-4 py-3 rounded-lg bg-light-accent/50 dark:bg-dark-accent/50 border border-transparent focus:border-primary focus:outline-none transition-colors" 
+                      placeholder="John Doe" 
+                      className="w-full px-4 py-3 rounded-lg bg-light-accent/20 dark:bg-dark-accent/10 border border-light-accent/30 dark:border-dark-accent/20 focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all" 
                     />
                   </div>
                   <div>
-                    <label htmlFor="email" className="block mb-2 font-medium">Email</label>
+                    <label htmlFor="email" className="block mb-2 text-sm font-medium">Email Address</label>
                     <input 
                       type="email" 
                       id="email" 
                       name="email"
                       value={formData.email}
                       onChange={handleChange}
-                      placeholder="Your email" 
-                      className="w-full px-4 py-3 rounded-lg bg-light-accent/50 dark:bg-dark-accent/50 border border-transparent focus:border-primary focus:outline-none transition-colors" 
+                      placeholder="john@example.com" 
+                      className="w-full px-4 py-3 rounded-lg bg-light-accent/20 dark:bg-dark-accent/10 border border-light-accent/30 dark:border-dark-accent/20 focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all" 
                     />
                   </div>
                 </div>
                 <div>
-                  <label htmlFor="subject" className="block mb-2 font-medium">Subject</label>
+                  <label htmlFor="subject" className="block mb-2 text-sm font-medium">Subject</label>
                   <input 
                     type="text" 
                     id="subject" 
                     name="subject"
                     value={formData.subject}
                     onChange={handleChange}
-                    placeholder="Subject" 
-                    className="w-full px-4 py-3 rounded-lg bg-light-accent/50 dark:bg-dark-accent/50 border border-transparent focus:border-primary focus:outline-none transition-colors" 
+                    placeholder="How can I help you?" 
+                    className="w-full px-4 py-3 rounded-lg bg-light-accent/20 dark:bg-dark-accent/10 border border-light-accent/30 dark:border-dark-accent/20 focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all" 
                   />
                 </div>
                 <div>
-                  <label htmlFor="message" className="block mb-2 font-medium">Message</label>
+                  <label htmlFor="message" className="block mb-2 text-sm font-medium">Message</label>
                   <textarea 
                     id="message" 
                     name="message"
                     value={formData.message}
                     onChange={handleChange}
                     rows={5} 
-                    placeholder="Your message" 
-                    className="w-full px-4 py-3 rounded-lg bg-light-accent/50 dark:bg-dark-accent/50 border border-transparent focus:border-primary focus:outline-none transition-colors"
+                    placeholder="Tell me about your project..." 
+                    className="w-full px-4 py-3 rounded-lg bg-light-accent/20 dark:bg-dark-accent/10 border border-light-accent/30 dark:border-dark-accent/20 focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all resize-none"
                   ></textarea>
                 </div>
                 <button 
                   type="submit" 
                   disabled={isSubmitting}
-                  className="w-full py-3 bg-primary text-white rounded-lg font-medium hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20 hover:shadow-primary/40 disabled:opacity-70 disabled:cursor-not-allowed"
+                  className="w-full py-4 bg-primary text-white rounded-lg font-medium hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20 hover:shadow-primary/40 disabled:opacity-70 disabled:cursor-not-allowed flex justify-center items-center"
                 >
-                  {isSubmitting ? 'Sending...' : 'Send Message'}
+                  {isSubmitting ? (
+                    <>
+                      <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                      </svg>
+                      Sending...
+                    </>
+                  ) : 'Send Message'}
                 </button>
               </form>
             </div>
           </motion.div>
           
           <motion.div 
-            className="space-y-8"
+            className="lg:col-span-2 flex flex-col"
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <div className="bg-light/80 dark:bg-dark/80 backdrop-blur-sm p-8 rounded-xl shadow-xl">
-              <h3 className="text-2xl font-poppins font-semibold mb-6">Contact Information</h3>
-              <div className="space-y-6">
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                    <i className="fas fa-map-marker-alt text-primary text-xl"></i>
+            <div className="bg-primary text-white p-8 md:p-10 rounded-2xl shadow-xl h-full flex flex-col">
+              <h3 className="text-2xl font-bold mb-8">Contact Information</h3>
+              
+              <div className="space-y-8 flex-1">
+                <div className="flex items-start">
+                  <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0 mr-4">
+                    <i className="fas fa-map-marker-alt text-xl"></i>
                   </div>
                   <div>
-                    <h4 className="font-medium text-lg mb-1">Location</h4>
-                    <p className="text-dark/70 dark:text-light/70">Khammam, Telangana</p>
+                    <h4 className="font-medium text-lg">Location</h4>
+                    <p className="text-white/80 mt-1">Khammam, Telangana, India</p>
                   </div>
                 </div>
                 
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                    <i className="fas fa-envelope text-primary text-xl"></i>
+                <div className="flex items-start">
+                  <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0 mr-4">
+                    <i className="fas fa-envelope text-xl"></i>
                   </div>
                   <div>
-                    <h4 className="font-medium text-lg mb-1">Email</h4>
-                    <p className="text-dark/70 dark:text-light/70">
-                      <a href="mailto:vamshigutha@gmail.com" className="hover:text-primary transition-colors">vamshigutha@gmail.com</a>
-                    </p>
+                    <h4 className="font-medium text-lg">Email</h4>
+                    <a href="mailto:vamshigutha@gmail.com" className="text-white/80 hover:text-white mt-1 block transition-colors">
+                      vamshigutha@gmail.com
+                    </a>
                   </div>
                 </div>
                 
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                    <i className="fab fa-skype text-primary text-xl"></i>
+                <div className="flex items-start">
+                  <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0 mr-4">
+                    <i className="fab fa-skype text-xl"></i>
                   </div>
                   <div>
-                    <h4 className="font-medium text-lg mb-1">Skype</h4>
-                    <p className="text-dark/70 dark:text-light/70">
-                      <a href="skype:vamshigutha?call" className="hover:text-primary transition-colors">vamshigutha</a>
-                    </p>
+                    <h4 className="font-medium text-lg">Skype</h4>
+                    <a href="skype:vamshigutha?call" className="text-white/80 hover:text-white mt-1 block transition-colors">
+                      vamshigutha
+                    </a>
                   </div>
+                </div>
+              </div>
+              
+              <div className="mt-12 pt-8 border-t border-white/20">
+                <h4 className="font-medium mb-4">Follow Me</h4>
+                <div className="flex gap-4">
+                  <a href="#" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors">
+                    <i className="fab fa-linkedin-in"></i>
+                  </a>
+                  <a href="#" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors">
+                    <i className="fab fa-github"></i>
+                  </a>
+                  <a href="#" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors">
+                    <i className="fab fa-twitter"></i>
+                  </a>
                 </div>
               </div>
             </div>
