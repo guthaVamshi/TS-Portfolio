@@ -1,6 +1,6 @@
 import * as THREE from "three";
 
-type ModelType = "torus" | "octa" | "terrain" | "waves" | "skills" | "contact" | "projects";
+type ModelType = "torus" | "octa" | "terrain" | "waves" | "skills" | "contact" | "projects" | "code" | "computer" | "wave-bg";
 
 interface Create3DObjectParams {
   el: HTMLElement;
@@ -8,6 +8,7 @@ interface Create3DObjectParams {
   color?: number;
   rotation?: boolean;
   scale?: number;
+  isBackground?: boolean;
 }
 
 export function create3DObject({ 
@@ -15,7 +16,8 @@ export function create3DObject({
   type, 
   color = 0x6C63FF, 
   rotation = false,
-  scale = 1
+  scale = 1,
+  isBackground = false
 }: Create3DObjectParams) {
   // Setup renderer
   const renderer = new THREE.WebGLRenderer({ 
@@ -25,6 +27,18 @@ export function create3DObject({
   
   renderer.setSize(el.clientWidth, el.clientHeight);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  
+  // If it's background, position it absolutely
+  if (isBackground) {
+    renderer.domElement.style.position = 'absolute';
+    renderer.domElement.style.top = '0';
+    renderer.domElement.style.left = '0';
+    renderer.domElement.style.width = '100%';
+    renderer.domElement.style.height = '100%';
+    renderer.domElement.style.zIndex = '0';
+    renderer.domElement.style.pointerEvents = 'none';
+  }
+  
   el.appendChild(renderer.domElement);
   
   // Setup scene and camera
@@ -35,7 +49,13 @@ export function create3DObject({
     0.1, 
     1000
   );
-  camera.position.z = 5;
+  
+  // Position camera based on if it's background or not
+  if (isBackground) {
+    camera.position.z = 15;
+  } else {
+    camera.position.z = 5;
+  }
   
   // Add ambient light
   const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
@@ -120,6 +140,25 @@ export function create3DObject({
       
       mesh = new THREE.Mesh(geometry, material);
       mesh.rotation.x = -Math.PI / 3;
+      mesh.scale.set(scale, scale, scale);
+      scene.add(mesh);
+      break;
+
+    case "wave-bg":
+      // Create wave background
+      geometry = new THREE.PlaneGeometry(40, 20, 64, 32);
+      material = new THREE.MeshPhongMaterial({ 
+        color: color,
+        wireframe: true,
+        side: THREE.DoubleSide,
+        transparent: true,
+        opacity: 0.4
+      });
+      
+      mesh = new THREE.Mesh(geometry, material);
+      mesh.rotation.x = -Math.PI / 4;
+      mesh.position.z = -10;
+      mesh.position.y = -5;
       mesh.scale.set(scale, scale, scale);
       scene.add(mesh);
       break;
@@ -254,6 +293,119 @@ export function create3DObject({
       
       scene.add(group);
       break;
+
+    case "code":
+      // Create a field of floating code symbols
+      group = new THREE.Group();
+      
+      // Create symbol geometries
+      const symbolGeometries = [
+        new THREE.BoxGeometry(0.3, 0.3, 0.05),        // [ ]
+        new THREE.TorusGeometry(0.2, 0.05, 16, 16),   // ()
+        new THREE.CylinderGeometry(0.05, 0.05, 0.4),   // |
+        new THREE.ConeGeometry(0.2, 0.4, 4),          // ^
+        new THREE.PlaneGeometry(0.3, 0.3),            // =
+        new THREE.RingGeometry(0.1, 0.2, 16)          // o
+      ];
+      
+      // Create a simple set of code-like symbols
+      for (let i = 0; i < 40; i++) {
+        const geoIndex = Math.floor(Math.random() * symbolGeometries.length);
+        const geo = symbolGeometries[geoIndex];
+        
+        // Create color variations
+        const symbolColor = new THREE.Color(color).offsetHSL(
+          (Math.random() - 0.5) * 0.1,
+          Math.random() * 0.2,
+          (Math.random() - 0.5) * 0.1
+        );
+        
+        const boxMat = new THREE.MeshPhongMaterial({ 
+          color: symbolColor,
+          transparent: true,
+          opacity: 0.6,
+          flatShading: true
+        });
+        
+        const symbolMesh = new THREE.Mesh(geo, boxMat);
+        
+        // Random position - spread them widely
+        symbolMesh.position.set(
+          (Math.random() - 0.5) * 30,
+          (Math.random() - 0.5) * 20,
+          (Math.random() - 0.5) * 10 - 5
+        );
+        
+        // Random rotation
+        symbolMesh.rotation.set(
+          Math.random() * Math.PI,
+          Math.random() * Math.PI,
+          Math.random() * Math.PI
+        );
+        
+        // Random scale variation
+        const scale = Math.random() * 0.5 + 0.8;
+        symbolMesh.scale.set(scale, scale, scale);
+        
+        group.add(symbolMesh);
+      }
+      
+      scene.add(group);
+      break;
+
+    case "computer":
+      // Create a 3D computer/laptop model
+      group = new THREE.Group();
+      
+      // Create laptop base
+      const laptopBaseGeo = new THREE.BoxGeometry(2, 0.1, 1.5);
+      const laptopBaseMat = new THREE.MeshPhongMaterial({
+        color: 0x333333,
+        shininess: 100
+      });
+      
+      const laptopBase = new THREE.Mesh(laptopBaseGeo, laptopBaseMat);
+      group.add(laptopBase);
+      
+      // Create laptop screen
+      const laptopScreenGeo = new THREE.BoxGeometry(2, 1.2, 0.08);
+      const laptopScreenMat = new THREE.MeshPhongMaterial({
+        color: 0x222222,
+        shininess: 100
+      });
+      
+      const laptopScreen = new THREE.Mesh(laptopScreenGeo, laptopScreenMat);
+      laptopScreen.position.set(0, 0.7, -0.7);
+      laptopScreen.rotation.x = -Math.PI / 6;
+      group.add(laptopScreen);
+      
+      // Create screen display
+      const displayGeo = new THREE.PlaneGeometry(1.8, 1.1);
+      const displayMat = new THREE.MeshPhongMaterial({
+        color: color,
+        emissive: new THREE.Color(color).multiplyScalar(0.5),
+        shininess: 100
+      });
+      
+      const display = new THREE.Mesh(displayGeo, displayMat);
+      display.position.set(0, 0, 0.05);
+      laptopScreen.add(display);
+      
+      // Create keyboard
+      const keyboardGeo = new THREE.PlaneGeometry(1.8, 1.2);
+      const keyboardMat = new THREE.MeshPhongMaterial({
+        color: 0x444444,
+        shininess: 50
+      });
+      
+      const keyboard = new THREE.Mesh(keyboardGeo, keyboardMat);
+      keyboard.position.set(0, 0.06, 0);
+      keyboard.rotation.x = -Math.PI / 2;
+      laptopBase.add(keyboard);
+      
+      group.scale.set(scale, scale, scale);
+      scene.add(group);
+      break;
   }
   
   // Animation loop
@@ -266,8 +418,8 @@ export function create3DObject({
     }
     
     // Type-specific animations
-    if (type === "waves" && mesh && geometry) {
-      const time = Date.now() * 0.002;
+    if ((type === "waves" || type === "wave-bg") && mesh && geometry) {
+      const time = Date.now() * 0.001;
       const positionAttribute = geometry.getAttribute('position') as THREE.BufferAttribute;
       
       for (let i = 0; i < positionAttribute.count; i++) {
@@ -275,7 +427,7 @@ export function create3DObject({
         const y = positionAttribute.getY(i);
         
         // Create wave effect
-        const waveZ = Math.sin(x * 2 + time) * 0.3 + Math.cos(y * 2 + time) * 0.3;
+        const waveZ = Math.sin(x * 0.5 + time) * 0.3 + Math.cos(y * 0.5 + time) * 0.3;
         positionAttribute.setZ(i, waveZ);
       }
       
@@ -325,6 +477,35 @@ export function create3DObject({
           child.position.x = Math.sin(time * 2 + i) * 0.5;
         }
       });
+    }
+    
+    // Animate code symbols
+    if (type === "code" && group) {
+      const time = Date.now() * 0.001;
+      
+      // Animate each code symbol individually
+      group.children.forEach((child: THREE.Object3D, i: number) => {
+        // Floating motion
+        child.position.y += Math.sin(time + i * 0.1) * 0.003;
+        child.position.x += Math.cos(time + i * 0.1) * 0.002;
+        
+        // Slowly rotate
+        child.rotation.z += 0.001;
+        child.rotation.y += 0.002;
+        
+        // Reset position if it goes too far
+        if (child.position.y > 10) child.position.y = -10;
+        if (child.position.x > 15) child.position.x = -15;
+      });
+    }
+    
+    // Animate computer/laptop
+    if (type === "computer" && group) {
+      const time = Date.now() * 0.001;
+      
+      // Gentle floating and rotating animation
+      group.position.y = Math.sin(time * 0.5) * 0.05;
+      group.rotation.y = Math.sin(time * 0.3) * 0.1;
     }
     
     renderer.render(scene, camera);

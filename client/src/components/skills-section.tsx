@@ -5,16 +5,18 @@ import { create3DObject } from "@/lib/3d-models";
 import { skills } from "@/lib/data";
 
 export default function SkillsSection() {
-  const skillsModelRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    if (!skillsModelRef.current) return;
+    if (!sectionRef.current) return;
     
     const { cleanup } = create3DObject({
-      el: skillsModelRef.current,
-      type: "skills", // Using the new skills-specific 3D model
+      el: sectionRef.current,
+      type: "code", // Using code symbols as background
       color: 0x6C63FF,
-      rotation: true
+      rotation: true,
+      scale: 1.5,
+      isBackground: true
     });
 
     return cleanup;
@@ -36,8 +38,15 @@ export default function SkillsSection() {
   };
 
   return (
-    <section id="skills" className="py-16 md:py-24 bg-light-accent/50 dark:bg-dark-accent/50 clip-path-slant relative">
-      <Container>
+    <section 
+      id="skills" 
+      ref={sectionRef}
+      className="py-16 md:py-24 bg-light-accent/50 dark:bg-dark-accent/50 clip-path-slant relative overflow-hidden"
+    >
+      {/* 3D background will be rendered here */}
+      <div className="absolute inset-0 bg-gradient-to-b from-light-accent/80 to-light-accent/95 dark:from-dark-accent/80 dark:to-dark-accent/95 pointer-events-none"></div>
+      
+      <Container className="relative z-10">
         <motion.div 
           className="text-center mb-16"
           initial={{ opacity: 0, y: 20 }}
@@ -62,7 +71,7 @@ export default function SkillsSection() {
               className="skill-card group"
               variants={itemVariants}
             >
-              <div className="bg-light dark:bg-dark rounded-xl p-6 text-center transition-all duration-300 hover:shadow-xl hover:shadow-primary/10 hover:-translate-y-2 border border-transparent hover:border-primary/20">
+              <div className="bg-light/80 dark:bg-dark/80 backdrop-blur-sm rounded-xl p-6 text-center transition-all duration-300 hover:shadow-xl hover:shadow-primary/10 hover:-translate-y-2 border border-transparent hover:border-primary/20">
                 <div className="w-16 h-16 mx-auto bg-primary/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
                   <i className={`${skill.icon} text-3xl text-primary`}></i>
                 </div>
@@ -79,18 +88,6 @@ export default function SkillsSection() {
               </div>
             </motion.div>
           ))}
-        </motion.div>
-        
-        <motion.div 
-          id="skills-3d-container" 
-          ref={skillsModelRef}
-          className="mt-16 h-64 relative rounded-xl overflow-hidden shadow-xl dark:shadow-primary/10"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-        >
-          {/* 3D visualization of skills will be rendered here */}
         </motion.div>
       </Container>
     </section>

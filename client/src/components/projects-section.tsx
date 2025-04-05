@@ -6,7 +6,7 @@ import { create3DObject } from "@/lib/3d-models";
 
 export default function ProjectsSection() {
   const [filter, setFilter] = useState<ProjectCategory | 'All'>('All');
-  const projectsModelRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
   
   const filteredProjects = filter === 'All' 
     ? projects 
@@ -15,13 +15,15 @@ export default function ProjectsSection() {
   const categories: (ProjectCategory | 'All')[] = ['All', 'Web Development', 'Salesforce', 'MERN Stack'];
 
   useEffect(() => {
-    if (!projectsModelRef.current) return;
+    if (!sectionRef.current) return;
     
     const { cleanup } = create3DObject({
-      el: projectsModelRef.current,
-      type: "projects",
+      el: sectionRef.current,
+      type: "wave-bg",
       color: 0x6C63FF,
-      rotation: true
+      rotation: false,
+      scale: 1,
+      isBackground: true
     });
 
     return cleanup;
@@ -43,8 +45,15 @@ export default function ProjectsSection() {
   };
 
   return (
-    <section id="projects" className="py-16 md:py-24 bg-light-accent/50 dark:bg-dark-accent/50 clip-path-slant relative">
-      <Container>
+    <section 
+      id="projects" 
+      ref={sectionRef}
+      className="py-16 md:py-24 bg-light-accent/50 dark:bg-dark-accent/50 clip-path-slant relative overflow-hidden"
+    >
+      {/* 3D wave background will be rendered here */}
+      <div className="absolute inset-0 bg-gradient-to-b from-light-accent/80 to-light-accent/95 dark:from-dark-accent/80 dark:to-dark-accent/95 pointer-events-none"></div>
+
+      <Container className="relative z-10">
         <motion.div 
           className="text-center mb-16"
           initial={{ opacity: 0, y: 20 }}
@@ -71,7 +80,7 @@ export default function ProjectsSection() {
                 className={`px-4 py-2 rounded-full transition-colors ${
                   filter === category 
                     ? 'bg-primary text-white' 
-                    : 'bg-light dark:bg-dark hover:bg-primary hover:text-white'
+                    : 'bg-light/80 dark:bg-dark/80 backdrop-blur-sm hover:bg-primary hover:text-white'
                 }`}
               >
                 {category}
@@ -94,7 +103,7 @@ export default function ProjectsSection() {
               variants={itemVariants}
               data-category={project.category}
             >
-              <div className="bg-light dark:bg-dark rounded-xl overflow-hidden shadow-lg group h-full flex flex-col">
+              <div className="bg-light/80 dark:bg-dark/80 backdrop-blur-sm rounded-xl overflow-hidden shadow-lg group h-full flex flex-col">
                 <div className="relative overflow-hidden">
                   <img 
                     src={project.image} 
@@ -129,18 +138,6 @@ export default function ProjectsSection() {
               </div>
             </motion.div>
           ))}
-        </motion.div>
-
-        <motion.div 
-          id="projects-3d-container"
-          ref={projectsModelRef}
-          className="mt-16 h-64 relative rounded-xl overflow-hidden shadow-xl dark:shadow-primary/10"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-        >
-          {/* 3D visualization of projects will be rendered here */}
         </motion.div>
       </Container>
     </section>

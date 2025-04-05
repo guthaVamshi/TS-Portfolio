@@ -20,17 +20,19 @@ export default function ContactSection() {
     message: ""
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const contactModelRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
   const { toast } = useToast();
 
   useEffect(() => {
-    if (!contactModelRef.current) return;
+    if (!sectionRef.current) return;
     
     const { cleanup } = create3DObject({
-      el: contactModelRef.current,
-      type: "contact", // Use the contact-specific 3D model
-      color: 0x6C63FF,
-      rotation: false
+      el: sectionRef.current,
+      type: "computer", // Use computer model
+      color: 0x6C63FF, 
+      rotation: false,
+      scale: 2,
+      isBackground: true
     });
 
     return cleanup;
@@ -95,8 +97,15 @@ export default function ContactSection() {
   };
 
   return (
-    <section id="contact" className="py-16 md:py-24">
-      <Container>
+    <section 
+      id="contact" 
+      ref={sectionRef} 
+      className="py-16 md:py-24 relative overflow-hidden"
+    >
+      {/* Overlay to ensure content visibility over 3D background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-light/90 to-light/95 dark:from-dark/90 dark:to-dark/95 pointer-events-none"></div>
+      
+      <Container className="relative z-10">
         <motion.div 
           className="text-center mb-16"
           initial={{ opacity: 0, y: 20 }}
@@ -115,7 +124,7 @@ export default function ContactSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <div className="bg-light dark:bg-dark rounded-xl shadow-xl p-8">
+            <div className="bg-light/80 dark:bg-dark/80 backdrop-blur-sm rounded-xl shadow-xl p-8">
               <form id="contact-form" className="space-y-6" onSubmit={handleSubmit}>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div>
@@ -185,7 +194,7 @@ export default function ContactSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <div>
+            <div className="bg-light/80 dark:bg-dark/80 backdrop-blur-sm p-8 rounded-xl shadow-xl">
               <h3 className="text-2xl font-poppins font-semibold mb-6">Contact Information</h3>
               <div className="space-y-6">
                 <div className="flex items-start gap-4">
@@ -222,10 +231,6 @@ export default function ContactSection() {
                   </div>
                 </div>
               </div>
-            </div>
-            
-            <div ref={contactModelRef} className="h-64 relative rounded-xl overflow-hidden shadow-xl dark:shadow-primary/10">
-              {/* 3D visualization for contact section */}
             </div>
           </motion.div>
         </div>
