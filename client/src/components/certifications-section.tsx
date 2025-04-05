@@ -45,7 +45,7 @@ export default function CertificationsSection() {
               className="certification-card group"
               variants={itemVariants}
             >
-              <div className="bg-light dark:bg-dark rounded-xl overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-primary/10 hover:-translate-y-2 border border-transparent hover:border-primary/20 h-full flex flex-col">
+              <div className="bg-light rounded-xl overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-primary/10 hover:-translate-y-2 border border-transparent hover:border-primary/20 h-full flex flex-col">
                 <div className="p-6 pt-8 flex-1">
                   <div className="w-16 h-16 mx-auto mb-6">
                     {cert.logo ? (
@@ -58,18 +58,18 @@ export default function CertificationsSection() {
                   </div>
                   <h3 className="font-poppins font-semibold text-xl text-center mb-2">{cert.provider}</h3>
                   <h4 className="font-poppins font-medium text-lg text-center text-primary mb-4">{cert.name}</h4>
-                  <div className="text-center text-dark/70 dark:text-light/70">
+                  <div className="text-center text-dark/70">
                     <p>{cert.isComingSoon ? cert.description : <><i className="far fa-calendar-alt mr-2"></i> {cert.date}</>}</p>
                   </div>
                 </div>
                 <div className="px-6 pb-6 pt-2">
-                  <div className="w-full bg-light-accent dark:bg-dark-accent h-1 rounded-full my-4"></div>
+                  <div className="w-full bg-light-accent h-1 rounded-full my-4"></div>
                   {cert.isComingSoon ? (
-                    <p className="text-dark/60 dark:text-light/60 text-center italic">In progress</p>
+                    <p className="text-dark/60 text-center italic">In progress</p>
                   ) : (
-                    <a href={cert.link || "#"} className="text-primary hover:text-primary/80 font-medium flex items-center justify-center gap-2 transition-colors">
-                      <i className="fas fa-external-link-alt"></i> View Certificate
-                    </a>
+                    <p className="text-dark/70 text-center">
+                      <i className="fas fa-check text-primary mr-2"></i> Completed
+                    </p>
                   )}
                 </div>
               </div>
