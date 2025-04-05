@@ -6,10 +6,12 @@ import { projects, ProjectCategory } from "@/lib/data";
 export default function ProjectsSection() {
   const [filter, setFilter] = useState<ProjectCategory | 'All'>('All');
   
+  // Filter projects by exact category match
   const filteredProjects = filter === 'All' 
     ? projects 
     : projects.filter(project => project.category === filter);
 
+  // Make sure these match exactly with the categories in data.ts
   const categories: (ProjectCategory | 'All')[] = ['All', 'Web Development', 'Salesforce', 'MERN Stack'];
 
   const containerVariants = {

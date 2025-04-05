@@ -118,9 +118,9 @@ export default function Navbar() {
           <button 
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className={cn(
-              "md:hidden w-10 h-10 flex items-center justify-center rounded-full",
+              "md:hidden w-10 h-10 flex items-center justify-center rounded-full text-dark dark:text-light",
               scrolled 
-                ? "bg-light/30 dark:bg-dark-accent/30" 
+                ? "bg-light/30 dark:bg-dark-accent/50" 
                 : "bg-light/80 dark:bg-dark-accent/80"
             )}
             aria-label="Toggle mobile menu"
@@ -143,7 +143,7 @@ export default function Navbar() {
               <a 
                 key={link.name}
                 href={link.href} 
-                className="py-3 px-4 text-lg font-medium hover:text-primary hover:bg-primary/5 rounded-xl transition-colors"
+                className="py-3 px-4 text-lg font-medium text-dark dark:text-light hover:text-primary hover:bg-primary/5 rounded-xl transition-colors"
                 onClick={handleNavLinkClick}
               >
                 {link.name}
@@ -156,7 +156,7 @@ export default function Navbar() {
                   href="https://github.com/guthaVamshi" 
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full bg-light-accent/50 dark:bg-dark-accent/50 flex items-center justify-center"
+                  className="w-10 h-10 rounded-full bg-light-accent/50 dark:bg-dark-accent/50 text-dark dark:text-light flex items-center justify-center hover:bg-primary hover:text-white transition-all"
                 >
                   <i className="fab fa-github"></i>
                 </a>
@@ -164,7 +164,7 @@ export default function Navbar() {
                   href="https://www.linkedin.com/in/vamshigutha/" 
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full bg-light-accent/50 dark:bg-dark-accent/50 flex items-center justify-center"
+                  className="w-10 h-10 rounded-full bg-light-accent/50 dark:bg-dark-accent/50 text-dark dark:text-light flex items-center justify-center hover:bg-primary hover:text-white transition-all"
                 >
                   <i className="fab fa-linkedin-in"></i>
                 </a>
@@ -172,7 +172,7 @@ export default function Navbar() {
               
               <button 
                 onClick={toggleTheme}
-                className="flex items-center gap-2 py-2 px-4 rounded-full bg-light-accent/30 dark:bg-dark-accent/30"
+                className="flex items-center gap-2 py-2 px-4 rounded-full bg-light-accent/30 dark:bg-dark-accent/30 text-dark dark:text-light"
               >
                 {mounted && (
                   <>
