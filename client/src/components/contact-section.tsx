@@ -28,8 +28,9 @@ export default function ContactSection() {
     
     const { cleanup } = create3DObject({
       el: contactModelRef.current,
-      type: "waves",
+      type: "contact", // Use the contact-specific 3D model
       color: 0x6C63FF,
+      rotation: false
     });
 
     return cleanup;
@@ -223,7 +224,7 @@ export default function ContactSection() {
               </div>
             </div>
             
-            <div ref={contactModelRef} className="h-64 relative rounded-xl overflow-hidden">
+            <div ref={contactModelRef} className="h-64 relative rounded-xl overflow-hidden shadow-xl dark:shadow-primary/10">
               {/* 3D visualization for contact section */}
             </div>
           </motion.div>

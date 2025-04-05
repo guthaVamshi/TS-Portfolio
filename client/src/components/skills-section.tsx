@@ -12,8 +12,9 @@ export default function SkillsSection() {
     
     const { cleanup } = create3DObject({
       el: skillsModelRef.current,
-      type: "terrain",
+      type: "skills", // Using the new skills-specific 3D model
       color: 0x6C63FF,
+      rotation: true
     });
 
     return cleanup;
@@ -83,7 +84,7 @@ export default function SkillsSection() {
         <motion.div 
           id="skills-3d-container" 
           ref={skillsModelRef}
-          className="mt-16 h-64 relative rounded-xl overflow-hidden"
+          className="mt-16 h-64 relative rounded-xl overflow-hidden shadow-xl dark:shadow-primary/10"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}

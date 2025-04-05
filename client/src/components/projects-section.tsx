@@ -1,16 +1,31 @@
 import { Container } from "@/components/ui/container";
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { projects, ProjectCategory } from "@/lib/data";
+import { create3DObject } from "@/lib/3d-models";
 
 export default function ProjectsSection() {
   const [filter, setFilter] = useState<ProjectCategory | 'All'>('All');
+  const projectsModelRef = useRef<HTMLDivElement>(null);
   
   const filteredProjects = filter === 'All' 
     ? projects 
     : projects.filter(project => project.category === filter);
 
   const categories: (ProjectCategory | 'All')[] = ['All', 'Web Development', 'Salesforce', 'MERN Stack'];
+
+  useEffect(() => {
+    if (!projectsModelRef.current) return;
+    
+    const { cleanup } = create3DObject({
+      el: projectsModelRef.current,
+      type: "projects",
+      color: 0x6C63FF,
+      rotation: true
+    });
+
+    return cleanup;
+  }, []);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -114,6 +129,18 @@ export default function ProjectsSection() {
               </div>
             </motion.div>
           ))}
+        </motion.div>
+
+        <motion.div 
+          id="projects-3d-container"
+          ref={projectsModelRef}
+          className="mt-16 h-64 relative rounded-xl overflow-hidden shadow-xl dark:shadow-primary/10"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+        >
+          {/* 3D visualization of projects will be rendered here */}
         </motion.div>
       </Container>
     </section>
