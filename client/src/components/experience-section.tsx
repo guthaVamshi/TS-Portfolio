@@ -3,29 +3,13 @@ import { motion } from "framer-motion";
 import { experience } from "@/lib/data";
 
 export default function ExperienceSection() {
-  const sectionVariants = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1 }
-  };
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.3
-      }
-    }
-  };
-
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0 }
   };
 
   return (
-    <section id="experience" className="py-16 md:py-24 bg-light-accent/30 clip-path-slant relative">
+    <section id="experience" className="py-16 md:py-24 bg-light-accent/30 relative">
       <Container>
         <motion.div 
           className="text-center mb-16"
@@ -40,46 +24,43 @@ export default function ExperienceSection() {
           </p>
         </motion.div>
         
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-3xl mx-auto">
           <div className="relative">
-            {/* Timeline center line */}
-            <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-primary/20 rounded-full"></div>
+            {/* Vertical Timeline Line */}
+            <div className="absolute top-0 bottom-0 left-0 md:left-1/2 w-1 bg-primary/20 rounded-full -ml-0.5 md:-ml-0.5"></div>
             
             {experience.map((exp, index) => (
               <motion.div 
                 key={`${exp.company}-${exp.position}`}
-                className={`experience-item mb-16 relative`}
-                variants={itemVariants}
-                initial="hidden"
-                whileInView="visible"
+                className="mb-16 relative"
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
               >
-                {/* Timeline node */}
-                <div className="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-white border-4 border-primary rounded-full z-10"></div>
+                {/* Timeline dot */}
+                <div className="absolute left-0 md:left-1/2 -ml-2 md:-ml-2 mt-1.5 w-4 h-4 bg-white border-2 border-primary rounded-full z-10"></div>
                 
-                <div className={`flex flex-col md:flex-row items-center md:items-start gap-8 ${index % 2 === 0 ? 'md:flex-row-reverse' : ''}`}>
-                  {/* Date badge */}
-                  <div className="flex-1 md:max-w-[180px] text-center md:text-right">
-                    <div className={`inline-block bg-primary text-white px-4 py-2 rounded-lg font-semibold text-sm ${index % 2 === 0 ? 'md:text-left' : 'md:text-right'}`}>
-                      {exp.period}
-                    </div>
-                  </div>
-                  
-                  {/* Content */}
-                  <div className={`flex-1 bg-white rounded-xl p-6 shadow-lg border-t-4 border-primary`}>
-                    <div className="flex items-center gap-4 mb-4">
-                      <div className="w-14 h-14 overflow-hidden rounded-lg flex-shrink-0 bg-light p-2">
-                        <img src={exp.logo} alt={exp.company} className="w-full h-full object-contain" />
+                {/* Content container */}
+                <div className={`ml-8 md:ml-0 md:${index % 2 === 0 ? 'mr-1/2 md:pr-8' : 'ml-1/2 md:pl-8'}`}>
+                  <div className={`md:${index % 2 === 0 ? 'text-right' : 'text-left'}`}>
+                    <div className={`bg-white rounded-xl p-6 shadow-md border-t-4 border-primary`}>
+                      <div className="flex flex-col sm:flex-row items-start gap-4 mb-4">
+                        <div className="w-14 h-14 overflow-hidden rounded-lg flex-shrink-0 bg-light p-2 mx-auto sm:mx-0">
+                          <img src={exp.logo} alt={exp.company} className="w-full h-full object-contain" />
+                        </div>
+                        <div className="sm:flex-1">
+                          <h3 className="font-bold text-lg">{exp.company}</h3>
+                          <p className="text-primary font-medium">{exp.position}</p>
+                          <div className="mt-2 inline-block bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium">
+                            {exp.period}
+                          </div>
+                        </div>
                       </div>
-                      <div>
-                        <h3 className="font-bold text-lg">{exp.company}</h3>
-                        <p className="text-primary font-medium">{exp.position}</p>
-                      </div>
+                      <p className="text-dark/80 mt-3">
+                        {exp.description}
+                      </p>
                     </div>
-                    <p className="text-dark/80">
-                      {exp.description}
-                    </p>
                   </div>
                 </div>
               </motion.div>
