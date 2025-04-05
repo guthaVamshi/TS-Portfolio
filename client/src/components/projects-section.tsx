@@ -64,7 +64,7 @@ export default function ProjectsSection() {
                 className={`px-5 py-2.5 rounded-lg transition-all duration-300 font-medium ${
                   filter === category 
                     ? 'bg-primary text-white shadow-lg shadow-primary/20' 
-                    : 'bg-white dark:bg-dark-accent/10 hover:bg-primary/10 dark:hover:bg-primary/20 border border-light-accent/50 dark:border-dark-accent/50'
+                    : 'bg-white dark:bg-dark-accent text-dark dark:text-light hover:bg-primary/10 dark:hover:bg-primary/20 border border-light-accent/50 dark:border-dark-accent/50'
                 }`}
               >
                 {category}
@@ -116,7 +116,7 @@ export default function ProjectsSection() {
                   <p className="text-dark/70 dark:text-light/70 mb-4 flex-1">{project.description}</p>
                   <div className="flex flex-wrap gap-2 pt-2 border-t border-light-accent/20 dark:border-dark-accent/20">
                     {project.technologies.map((tech) => (
-                      <span key={tech} className="px-2 py-1 bg-light-accent/20 dark:bg-dark-accent/20 rounded text-xs font-medium">{tech}</span>
+                      <span key={tech} className="px-2 py-1 bg-light-accent/50 dark:bg-dark-accent/50 text-dark dark:text-light rounded text-xs font-medium">{tech}</span>
                     ))}
                   </div>
                 </div>
