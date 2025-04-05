@@ -6,7 +6,7 @@ import NotFound from "@/pages/not-found";
 import Home from "@/pages/home";
 import ThreeBackground from "@/components/three-background";
 import CustomCursor from "@/components/custom-cursor";
-import { useEffect } from "react";
+import useFixedTheme from "@/hooks/use-fixed-theme";
 
 function Router() {
   return (
@@ -18,15 +18,8 @@ function Router() {
 }
 
 function App() {
-  // Set theme based on localStorage or system preference
-  useEffect(() => {
-    if (localStorage.getItem('theme') === 'dark' || 
-        (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  }, []);
+  // Apply fixed light theme
+  useFixedTheme();
 
   return (
     <QueryClientProvider client={queryClient}>

@@ -19,12 +19,8 @@
     --dark-accent: 217 32% 17%;
   }
 
-  .dark {
-    --background: var(--dark);
-    --foreground: var(--light);
-  }
-
-  .light {
+  /* Using only light theme */
+  :root {
     --background: var(--light);
     --foreground: var(--dark);
   }
