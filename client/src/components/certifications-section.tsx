@@ -19,7 +19,7 @@ export default function CertificationsSection() {
   };
 
   return (
-    <section id="certifications" className="py-16 md:py-24">
+    <section id="certifications" className="py-16 md:py-24 bg-gradient-to-b from-white to-light-accent/20">
       <Container>
         <motion.div 
           className="text-center mb-16"
@@ -28,8 +28,10 @@ export default function CertificationsSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          <h2 className="text-3xl md:text-4xl font-bold font-poppins mb-4">My <span className="text-primary">Certifications</span></h2>
-          <div className="w-24 h-1 bg-primary mx-auto rounded-full"></div>
+          <h2 className="text-3xl md:text-5xl font-bold mb-6">My <span className="text-primary">Certifications</span></h2>
+          <p className="text-lg text-dark/70 max-w-2xl mx-auto">
+            Professional certifications that validate my expertise and knowledge in various technologies.
+          </p>
         </motion.div>
         
         <motion.div 
@@ -45,32 +47,38 @@ export default function CertificationsSection() {
               className="certification-card group"
               variants={itemVariants}
             >
-              <div className="bg-light rounded-xl overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-primary/10 hover:-translate-y-2 border border-transparent hover:border-primary/20 h-full flex flex-col">
-                <div className="p-6 pt-8 flex-1">
-                  <div className="w-16 h-16 mx-auto mb-6">
-                    {cert.logo ? (
-                      <img src={cert.logo} alt={`${cert.provider} ${cert.name}`} className="w-full h-full object-contain" />
-                    ) : (
-                      <div className="w-16 h-16 mx-auto mb-6 flex items-center justify-center">
-                        <i className="fas fa-certificate text-4xl text-primary"></i>
+              <div className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:shadow-primary/20 border border-gray-100 h-full flex flex-col transform hover:-translate-y-1">
+                <div className="h-2 bg-primary w-full"></div>
+                <div className="p-6 flex-1">
+                  <div className="flex items-center mb-4">
+                    <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mr-4 p-2">
+                      {cert.logo ? (
+                        <img src={cert.logo} alt={`${cert.provider} ${cert.name}`} className="w-full h-full object-contain" />
+                      ) : (
+                        <i className="fas fa-certificate text-3xl text-primary"></i>
+                      )}
+                    </div>
+                    <div>
+                      <h3 className="font-bold text-lg mb-1">{cert.provider}</h3>
+                      <p className="text-primary font-medium">{cert.name}</p>
+                    </div>
+                  </div>
+                  
+                  <div className="bg-gray-50 rounded-lg p-4 mb-4">
+                    <div className="flex items-center">
+                      <div className={`w-3 h-3 rounded-full mr-2 ${cert.isComingSoon ? 'bg-yellow-400' : 'bg-green-500'}`}></div>
+                      <p className="text-sm font-medium">
+                        {cert.isComingSoon ? 'In Progress' : 'Completed'}
+                      </p>
+                      <div className="ml-auto text-sm text-dark/60">
+                        {!cert.isComingSoon && <span><i className="far fa-calendar-alt mr-1"></i>{cert.date}</span>}
                       </div>
-                    )}
+                    </div>
                   </div>
-                  <h3 className="font-poppins font-semibold text-xl text-center mb-2">{cert.provider}</h3>
-                  <h4 className="font-poppins font-medium text-lg text-center text-primary mb-4">{cert.name}</h4>
-                  <div className="text-center text-dark/70">
-                    <p>{cert.isComingSoon ? cert.description : <><i className="far fa-calendar-alt mr-2"></i> {cert.date}</>}</p>
-                  </div>
-                </div>
-                <div className="px-6 pb-6 pt-2">
-                  <div className="w-full bg-light-accent h-1 rounded-full my-4"></div>
-                  {cert.isComingSoon ? (
-                    <p className="text-dark/60 text-center italic">In progress</p>
-                  ) : (
-                    <p className="text-dark/70 text-center">
-                      <i className="fas fa-check text-primary mr-2"></i> Completed
-                    </p>
-                  )}
+                  
+                  <p className="text-dark/70 text-sm">
+                    {cert.description || `${cert.provider} certification that validates expertise in ${cert.name}.`}
+                  </p>
                 </div>
               </div>
             </motion.div>

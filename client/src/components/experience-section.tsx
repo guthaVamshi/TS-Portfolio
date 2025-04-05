@@ -25,7 +25,7 @@ export default function ExperienceSection() {
   };
 
   return (
-    <section id="experience" className="py-16 md:py-24 bg-light-accent/50 dark:bg-dark-accent/50 clip-path-slant relative">
+    <section id="experience" className="py-16 md:py-24 bg-light-accent/30 clip-path-slant relative">
       <Container>
         <motion.div 
           className="text-center mb-16"
@@ -34,85 +34,58 @@ export default function ExperienceSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          <h2 className="text-3xl md:text-4xl font-bold font-poppins mb-4">My <span className="text-primary">Experience</span></h2>
-          <div className="w-24 h-1 bg-primary mx-auto rounded-full"></div>
+          <h2 className="text-3xl md:text-5xl font-bold mb-6">My <span className="text-primary">Experience</span></h2>
+          <p className="text-lg text-dark/70 max-w-2xl mx-auto">
+            Professional experience in the software development industry.
+          </p>
         </motion.div>
         
-        <motion.div 
-          className="grid grid-cols-1 lg:grid-cols-2 gap-y-16 gap-x-12"
-          variants={sectionVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-        >
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-          >
-            <div className="relative pl-7">
-              {experience.slice(0, 2).map((exp, index) => (
-                <motion.div 
-                  key={`${exp.company}-${exp.position}`}
-                  className="experience-item mb-12"
-                  variants={itemVariants}
-                >
-                  <div className="bg-primary w-4 h-4 absolute left-0 top-0 rounded-full"></div>
-                  <div className="bg-light dark:bg-dark rounded-xl p-6 shadow-lg ml-8">
+        <div className="max-w-4xl mx-auto">
+          <div className="relative">
+            {/* Timeline center line */}
+            <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-primary/20 rounded-full"></div>
+            
+            {experience.map((exp, index) => (
+              <motion.div 
+                key={`${exp.company}-${exp.position}`}
+                className={`experience-item mb-16 relative`}
+                variants={itemVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+              >
+                {/* Timeline node */}
+                <div className="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-white border-4 border-primary rounded-full z-10"></div>
+                
+                <div className={`flex flex-col md:flex-row items-center md:items-start gap-8 ${index % 2 === 0 ? 'md:flex-row-reverse' : ''}`}>
+                  {/* Date badge */}
+                  <div className="flex-1 md:max-w-[180px] text-center md:text-right">
+                    <div className={`inline-block bg-primary text-white px-4 py-2 rounded-lg font-semibold text-sm ${index % 2 === 0 ? 'md:text-left' : 'md:text-right'}`}>
+                      {exp.period}
+                    </div>
+                  </div>
+                  
+                  {/* Content */}
+                  <div className={`flex-1 bg-white rounded-xl p-6 shadow-lg border-t-4 border-primary`}>
                     <div className="flex items-center gap-4 mb-4">
-                      <div className="w-14 h-14 overflow-hidden rounded-lg flex-shrink-0">
+                      <div className="w-14 h-14 overflow-hidden rounded-lg flex-shrink-0 bg-light p-2">
                         <img src={exp.logo} alt={exp.company} className="w-full h-full object-contain" />
                       </div>
                       <div>
-                        <h3 className="font-poppins font-semibold text-lg">{exp.company}</h3>
+                        <h3 className="font-bold text-lg">{exp.company}</h3>
                         <p className="text-primary font-medium">{exp.position}</p>
                       </div>
                     </div>
-                    <p className="text-dark/70 dark:text-light/70 mb-2">{exp.period}</p>
-                    <p className="text-dark/80 dark:text-light/80">
+                    <p className="text-dark/80">
                       {exp.description}
                     </p>
                   </div>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-          
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-          >
-            <div className="relative pl-7">
-              {experience.slice(2).map((exp, index) => (
-                <motion.div 
-                  key={`${exp.company}-${exp.position}`}
-                  className={`experience-item ${index === experience.slice(2).length - 1 ? '' : 'mb-12'}`}
-                  variants={itemVariants}
-                >
-                  <div className="bg-primary w-4 h-4 absolute left-0 top-0 rounded-full"></div>
-                  <div className="bg-light dark:bg-dark rounded-xl p-6 shadow-lg ml-8">
-                    <div className="flex items-center gap-4 mb-4">
-                      <div className="w-14 h-14 overflow-hidden rounded-lg flex-shrink-0">
-                        <img src={exp.logo} alt={exp.company} className="w-full h-full object-contain" />
-                      </div>
-                      <div>
-                        <h3 className="font-poppins font-semibold text-lg">{exp.company}</h3>
-                        <p className="text-primary font-medium">{exp.position}</p>
-                      </div>
-                    </div>
-                    <p className="text-dark/70 dark:text-light/70 mb-2">{exp.period}</p>
-                    <p className="text-dark/80 dark:text-light/80">
-                      {exp.description}
-                    </p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-        </motion.div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
       </Container>
     </section>
   );
