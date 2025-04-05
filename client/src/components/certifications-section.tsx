@@ -47,10 +47,9 @@ export default function CertificationsSection() {
               className="certification-card group"
               variants={itemVariants}
             >
-              <div className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:shadow-primary/20 border border-gray-100 h-full flex flex-col transform hover:-translate-y-1">
-                <div className="h-2 bg-primary w-full"></div>
+              <div className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 border border-gray-100 h-full flex flex-col transform hover:-translate-y-1">
                 <div className="p-6 flex-1">
-                  <div className="flex items-center mb-4">
+                  <div className="flex items-center mb-5">
                     <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mr-4 p-2">
                       {cert.logo ? (
                         <img src={cert.logo} alt={`${cert.provider} ${cert.name}`} className="w-full h-full object-contain" />
