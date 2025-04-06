@@ -1,5 +1,12 @@
 export type ProjectCategory = 'Web Development' | 'Salesforce' | 'MERN Stack';
-
+import salesforce from "../images/Salesforce.webp"
+import cg from "../images/CGI.png"
+import cog from "../images/COG.png"
+import Admin from "../images/Admin.png"
+import pd1 from "../images/Pd1.png"
+import AIAssociate from "../images/AIAssociate.png"
+import Associate from "../images/Associate.png"
+import MCAdmin from "../images/MCAdmin.png"
 export interface Skill {
   name: string;
   icon: string;
@@ -115,28 +122,28 @@ export const education: Education[] = [
 export const experience: Experience[] = [
   {
     company: "CG Infinity",
-    logo: "https://vamshigutha.netlify.app/CGI.png",
+    logo: cg,
     position: "SDE - 2",
     period: "April 2023 - August 2023",
     description: "Working on cutting edge technologies to solve business problems on a daily basis."
   },
   {
     company: "CG Infinity",
-    logo: "https://vamshigutha.netlify.app/CGI.png",
+    logo: cg,
     position: "SDE - 1",
     period: "July 2022 - March 2023",
     description: "Working on cutting-edge technologies to solve business problems on a daily basis."
   },
   {
     company: "CG Infinity",
-    logo: "https://vamshigutha.netlify.app/CGI.png",
+    logo: cg,
     position: "Intern",
     period: "July 2021 - July 2022",
     description: "Trained on multiple tech like Salesforce, Java, Dot Net Etc. Learned a lot about work, life and people."
   },
   {
     company: "Cognizant",
-    logo: "https://vamshigutha.netlify.app/COG.png",
+    logo: cog,
     position: "Digital Nurture",
     period: "Mar 2021 - June 2021",
     description: "Trained on multiple tech like Front End Web development, Testing, Java, Dot Net Etc."
@@ -147,31 +154,31 @@ export const certifications: Certification[] = [
   {
     provider: "Salesforce",
     name: "Administrator",
-    logo: "https://vamshigutha.netlify.app/Admin.png",
+    logo: Admin,
     date: "Nov 2024"
   },
   {
     provider: "Salesforce",
     name: "Platform Developer - 1",
-    logo: "https://vamshigutha.netlify.app/Pd1.png",
+    logo:   pd1,
     date: "Oct 2024"
   },
   {
     provider: "Salesforce",
     name: "AI Associate",
-    logo: "https://vamshigutha.netlify.app/AIAssociate.png",
+    logo: AIAssociate,
     date: "Sep 2024"
   },
   {
     provider: "Salesforce",
     name: "Associate",
-    logo: "https://vamshigutha.netlify.app/Associate.png",
+    logo: Associate,
     date: "May 2023"
   },
   {
     provider: "Salesforce",
     name: "Marketing Cloud Administrator",
-    logo: "https://vamshigutha.netlify.app/MCAdmin.png",
+    logo: MCAdmin,
     date: "Jan 2023"
   },
   {
