@@ -193,16 +193,8 @@ export default function ContactSection() {
             <div className="bg-primary text-white p-8 md:p-10 rounded-2xl shadow-xl h-full flex flex-col">
               <h3 className="text-2xl font-bold mb-8">Contact Information</h3>
               
-              <div className="space-y-8 flex-1">
-                <div className="flex items-start">
-                  <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0 mr-4">
-                    <i className="fas fa-map-marker-alt text-xl"></i>
-                  </div>
-                  <div>
-                    <h4 className="font-medium text-lg">Location</h4>
-                    <p className="text-white/80 mt-1">Khammam, Telangana, India</p>
-                  </div>
-                </div>
+              <div className="space-y-8 flex-2">
+               
                 
                 <div className="flex items-start">
                   <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0 mr-4">

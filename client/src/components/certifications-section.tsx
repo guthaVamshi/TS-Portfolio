@@ -74,10 +74,6 @@ export default function CertificationsSection() {
                       </div>
                     </div>
                   </div>
-                  
-                  <p className="text-dark/70 text-sm">
-                    {cert.description || `${cert.provider} certification that validates expertise in ${cert.name}.`}
-                  </p>
                 </div>
               </div>
             </motion.div>

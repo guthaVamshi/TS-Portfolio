@@ -27,7 +27,7 @@ export default function HeroSection() {
               transition={{ delay: 0.3, duration: 0.5 }}
               className="inline-block px-4 py-1.5 bg-primary/10 text-primary rounded-full text-sm font-medium"
             >
-              Full Stack Developer
+              Full Stack Developer / Salesforce Developer
             </motion.div>
             
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-poppins leading-tight">

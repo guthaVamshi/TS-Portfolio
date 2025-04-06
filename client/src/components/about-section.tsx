@@ -1,6 +1,6 @@
 import { Container } from "@/components/ui/container";
 import { motion } from "framer-motion";
-
+import profilepic from "../images/Profile.jpeg"
 export default function AboutSection() {
   return (
     <section id="about" className="py-20 md:py-28 relative overflow-hidden">
@@ -41,7 +41,7 @@ export default function AboutSection() {
                     <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-xl"></div>
                     <div className="relative overflow-hidden rounded-lg aspect-square">
                       <img 
-                        src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?fit=crop&w=800&h=800" 
+                        src={profilepic}
                         alt="Vamshi Gutha" 
                         className="w-full h-full object-cover"
                       />
@@ -60,7 +60,7 @@ export default function AboutSection() {
                   </div>
                   <div>
                     <span className="block text-xs text-dark/60 dark:text-light/60">Experience</span>
-                    <span className="font-semibold">5+ Years</span>
+                    <span className="font-semibold">2+ Years</span>
                   </div>
                 </div>
                 
@@ -71,7 +71,7 @@ export default function AboutSection() {
                   </div>
                   <div>
                     <span className="block text-xs text-dark/60 dark:text-light/60">Projects</span>
-                    <span className="font-semibold">20+ Done</span>
+                    <span className="font-semibold">20+</span>
                   </div>
                 </div>
               </div>
@@ -99,18 +99,8 @@ export default function AboutSection() {
               </p>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="bg-white/50 dark:bg-dark-accent/30 rounded-xl p-5 backdrop-blur-sm border border-light-accent/20 dark:border-dark-accent/20">
-                <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center text-primary">
-                    <i className="fas fa-map-marker-alt"></i>
-                  </div>
-                  <div>
-                    <h4 className="font-medium text-lg mb-1">Location</h4>
-                    <p className="text-dark/70 dark:text-light/70">Khammam, Telangana</p>
-                  </div>
-                </div>
-              </div>
+            {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            
               
               <div className="bg-white/50 dark:bg-dark-accent/30 rounded-xl p-5 backdrop-blur-sm border border-light-accent/20 dark:border-dark-accent/20">
                 <div className="flex items-start gap-4">
@@ -149,7 +139,7 @@ export default function AboutSection() {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
             
             <div className="pt-4">
               <a 

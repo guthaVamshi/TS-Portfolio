@@ -48,9 +48,19 @@ export const skills: Skill[] = [
     level: 90
   },
   {
-    name: "CSS",
-    icon: "fab fa-css3-alt",
+    name: "React JS",
+    icon: "fab fa-react",
+    level: 90
+  },
+  {
+    name: "Rest API",
+    icon: "fa fa-laptop-code",
     level: 85
+  },
+  {
+    name: "Node JS",
+    icon: "fab fa-node-js",
+    level: 90
   },
   {
     name: "JAVASCRIPT",
@@ -81,7 +91,8 @@ export const skills: Skill[] = [
     name: "HTML",
     icon: "fab fa-html5",
     level: 90
-  }
+  },
+  
 ];
 
 export const education: Education[] = [
@@ -164,6 +175,18 @@ export const certifications: Certification[] = [
     date: "Jan 2023"
   },
   {
+    provider: "Coursera",
+    name: "Javascript",
+    logo: "https://d3njjcbhbojbot.cloudfront.net/api/utilities/v1/imageproxy/https://coursera.s3.amazonaws.com/media/coursera-rebrand-logo-square.png?auto=format%2Ccompress&dpr=1",
+    date: "April 2022"
+  },
+  {
+    provider: "Simplilearn",
+    name: "React JS",
+    logo: "https://m.media-amazon.com/images/I/41aPSdaShQL.png",
+    date: "May 2021"
+  },
+  {
     provider: "Coming Up",
     name: "Future Certification",
     isComingSoon: true,
@@ -177,7 +200,7 @@ export const projects: Project[] = [
     description: "A job search Platform",
     image: "https://images.unsplash.com/photo-1573167507387-6b4b98cb7c13?q=80&w=1000",
     category: "Web Development",
-    technologies: ["React", "Node.js", "MongoDB"],
+    technologies: ["Node JS","Express JS","API","Apex"],
     link: "https://github.com/guthaVamshi/Next-Hire"
   },
   {
@@ -207,7 +230,7 @@ export const projects: Project[] = [
   {
     name: "Nike",
     description: "Website Based on Bootstrap, CSS",
-    image: "https://images.unsplash.com/photo-1539695356420-fe2317e27f4b?q=80&w=1974",
+    image: "https://c.static-nike.com/a/images/w_1920,c_limit/bzl2wmsfh7kgdkufrrjq/image.jpg",
     category: "Web Development",
     technologies: ["HTML", "CSS", "Bootstrap"],
     link: "https://nike-shoewebsite.netlify.app/"
@@ -215,7 +238,7 @@ export const projects: Project[] = [
   {
     name: "WhatsApp Clone",
     description: "Build based on MERN stack",
-    image: "https://images.unsplash.com/photo-1636697792267-89de09a6febe?q=80&w=2070",
+    image: "https://cdn.prod.website-files.com/5c29380b1110ec92a203aa84/5e310f19b76b834dcb2ce77b_whatsapp-hero.png",
     category: "MERN Stack",
     technologies: ["MongoDB", "Express", "React", "Node.js"],
     link: "https://github.com/guthaVamshi/whatsApp-Clone---Merne"
