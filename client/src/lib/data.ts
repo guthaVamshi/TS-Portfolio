@@ -108,7 +108,7 @@ export const education: Education[] = [
     logo: "https://upload.wikimedia.org/wikipedia/en/thumb/5/59/Sacred_Heart_University_seal.svg/1200px-Sacred_Heart_University_seal.svg.png",
     degree: "Masters in Computer Science",
     period: "August 2023 - December 2024",
-    description: "Currently pursuing my Masters degree with focus on advanced technologies and software engineering principles."
+    description: "Completed my Masters degree with focus on advanced technologies and software engineering principles."
   },
   {
     institution: "Lovely Professional University",

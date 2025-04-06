@@ -22,11 +22,26 @@ export default function Navbar() {
     };
     
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    
+    // Prevent scrolling when mobile menu is open
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      document.body.style.overflow = 'unset';
+    };
+  }, [isMenuOpen]);
 
   const handleNavLinkClick = () => {
     setIsMenuOpen(false);
+  };
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
   };
 
   return (
@@ -52,7 +67,7 @@ export default function Navbar() {
           
           <div className="hidden md:flex items-center">
             <div className="mr-6 flex items-center space-x-1">
-              {NAV_LINKS.map((link, index) => (
+              {NAV_LINKS.map((link) => (
                 <a 
                   key={link.name}
                   href={link.href} 
@@ -89,14 +104,16 @@ export default function Navbar() {
             </div>
           </div>
           
+          {/* Hamburger button with solid background */}
           <button 
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            onClick={toggleMenu}
             className={cn(
-              "md:hidden w-10 h-10 flex items-center justify-center rounded-full text-dark",
-              scrolled 
-                ? "bg-light/30" 
-                : "bg-light/80"
+              "md:hidden w-10 h-10 flex items-center justify-center rounded-full z-50",
+              isMenuOpen 
+                ? "fixed top-6 right-6 bg-primary text-white shadow-lg" 
+                : "bg-white shadow-md text-dark"
             )}
+            style={isMenuOpen ? { position: 'fixed' } : {}}
             aria-label="Toggle mobile menu"
           >
             <i className={cn("fas", isMenuOpen ? "fa-times" : "fa-bars")}></i>
@@ -104,48 +121,53 @@ export default function Navbar() {
         </div>
       </Container>
       
-      {/* Mobile menu */}
+      {/* Mobile menu with close button */}
       <div 
         className={cn(
-          "fixed inset-0 bg-white z-40 md:hidden transition-transform duration-300 pt-20",
+          "fixed top-0 left-0 w-full h-full bg-white/95 backdrop-blur-sm z-40 md:hidden transition-transform duration-300",
           isMenuOpen ? "transform translate-x-0" : "transform translate-x-full"
         )}
+        style={{ position: 'fixed', top: 0, height: '100vh' }}
       >
-        <Container>
-          <div className="flex flex-col space-y-4 py-8">
-            {NAV_LINKS.map((link) => (
-              <a 
-                key={link.name}
-                href={link.href} 
-                className="py-3 px-4 text-lg font-medium text-dark hover:text-primary hover:bg-primary/5 rounded-xl transition-colors"
-                onClick={handleNavLinkClick}
-              >
-                {link.name}
-              </a>
-            ))}
-            
-            <div className="mt-6 pt-6 border-t border-light-accent/30 flex items-center justify-center">
-              <div className="flex items-center gap-4">
-                <a 
-                  href="https://github.com/guthaVamshi" 
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full bg-light-accent/50 text-dark flex items-center justify-center hover:bg-primary hover:text-white transition-all"
-                >
-                  <i className="fab fa-github"></i>
-                </a>
-                <a 
-                  href="https://www.linkedin.com/in/vamshigutha/" 
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full bg-light-accent/50 text-dark flex items-center justify-center hover:bg-primary hover:text-white transition-all"
-                >
-                  <i className="fab fa-linkedin-in"></i>
-                </a>
+        <div className="flex flex-col h-full">
+          <div className="py-20 flex-1 overflow-y-auto">
+            <Container>
+              <div className="flex flex-col space-y-4 pb-10">
+                {NAV_LINKS.map((link) => (
+                  <a 
+                    key={link.name}
+                    href={link.href} 
+                    className="py-3 px-4 text-lg font-medium text-dark hover:text-primary hover:bg-primary/5 rounded-xl transition-colors"
+                    onClick={handleNavLinkClick}
+                  >
+                    {link.name}
+                  </a>
+                ))}
+                
+                <div className="mt-6 pt-6 border-t border-light-accent/30 flex items-center justify-center">
+                  <div className="flex items-center gap-4">
+                    <a 
+                      href="https://github.com/guthaVamshi" 
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-10 h-10 rounded-full bg-light-accent/50 text-dark flex items-center justify-center hover:bg-primary hover:text-white transition-all"
+                    >
+                      <i className="fab fa-github"></i>
+                    </a>
+                    <a 
+                      href="https://www.linkedin.com/in/vamshigutha/" 
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-10 h-10 rounded-full bg-light-accent/50 text-dark flex items-center justify-center hover:bg-primary hover:text-white transition-all"
+                    >
+                      <i className="fab fa-linkedin-in"></i>
+                    </a>
+                  </div>
+                </div>
               </div>
-            </div>
+            </Container>
           </div>
-        </Container>
+        </div>
       </div>
     </motion.nav>
   );
