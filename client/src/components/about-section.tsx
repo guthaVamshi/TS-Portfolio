@@ -1,5 +1,6 @@
 import { Container } from "@/components/ui/container";
 import { motion } from "framer-motion";
+import resume from "../Files/VamshiGutha_Latest.pdf"
 import profilepic from "../images/Profile.jpeg"
 export default function AboutSection() {
   return (
@@ -143,7 +144,7 @@ export default function AboutSection() {
             
             <div className="pt-4">
               <a 
-                href="https://vamshigutha.netlify.app/VamshiGutha_Latest.pdf" 
+                href="../Files/VamshiGutha_Latest.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-6 py-3.5 bg-primary text-white rounded-lg font-medium hover:bg-primary/90 transition-all shadow-lg shadow-primary/20 hover:shadow-primary/40 group"
