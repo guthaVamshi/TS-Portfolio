@@ -144,7 +144,7 @@ export default function AboutSection() {
             
             <div className="pt-4">
               <a 
-                href="../Files/VamshiGutha_Latest.pdf"
+                href="https://drive.google.com/file/d/1ot3A9S8d72-2LDljYnN4O96XHz1c-EsU/view?usp=sharing"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-6 py-3.5 bg-primary text-white rounded-lg font-medium hover:bg-primary/90 transition-all shadow-lg shadow-primary/20 hover:shadow-primary/40 group"
