@@ -50,6 +50,11 @@ export interface Project {
 
 export const skills: Skill[] = [
   {
+    name: "Spring Boot",
+    icon: "fa fa-leaf",
+    level: 90
+  },
+  {
     name: "SALESFORCE",
     icon: "fab fa-salesforce",
     level: 90
@@ -124,7 +129,7 @@ export const experience: Experience[] = [
     company: "One Community",
     logo: "https://onecommunityglobal.org/wp-content/uploads/2019/12/HD-Circular-Logo-300x300-1.jpg",
     position: "Full Stack Developer",
-    period: "April 2023 - August 2023",
+    period: "Mar 2025 - Present",
     description: "Designed and implemented robust REST & SOAP APIs.Improved API response time by 40% by optimizing database queries. Built responsive, mobile-first UIs using Tailwind CSS and Bootstrap. Collaborated with business stakeholders for feature delivery under agile sprints.Conducted end-to-end API testing using Postman, Mocha, and Chai."
   },
   {
@@ -199,6 +204,13 @@ export const certifications: Certification[] = [
     name: "React JS",
     logo: "https://m.media-amazon.com/images/I/41aPSdaShQL.png",
     date: "May 2021"
+  },
+  {
+    provider: "",
+    name: "Comming Up",
+    logo: "",
+    date: "",
+    isComingSoon: true,
   },
 ];
 

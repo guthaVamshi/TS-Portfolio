@@ -2,6 +2,7 @@ import { Container } from "@/components/ui/container";
 import { motion } from "framer-motion";
 import resume from "../Files/Vamshi Gutha FSD.pdf"
 import profilepic from "../images/Profile.jpeg"
+import { Bold } from "lucide-react";
 export default function AboutSection() {
   return (
     <section id="about" className="py-20 md:py-28 relative overflow-hidden">
@@ -96,13 +97,13 @@ export default function AboutSection() {
               </p>
 
               <p className="text-dark/80 dark:text-light/70 leading-relaxed">
-                What sets me apart is my blend of **frontend design**, **backend logic**, and **Salesforce platform development**. I’ve worked on:
-                <li>
-                  <ul>Real-time CRM integrations using Apex, LWC, and Flows</ul>
-                  <ul>Enterprise-scale deployments with GitHub Actions, Docker, and AWS</ul>
-                  <ul>RESTful and SOAP API integration for web and cloud platforms</ul>
-                </li>
-              
+                What sets me apart is my blend of frontend design, backend logic, and Salesforce platform development. I’ve worked on:
+                <ul style={{ listStyleType: "disc", paddingLeft: "1.5rem" }} className="mt-4 space-y-2">
+                  <li>Real-time CRM integrations using Apex, LWC, and Flows</li>
+                  <li>Enterprise-scale deployments with GitHub Actions, Docker, and AWS</li>
+                  <li>RESTful and SOAP API integration for web and cloud platforms</li>
+                </ul>
+                <br />
                 When I’m not coding, you’ll find me learning the latest in cloud tech or helping others grow in tech communities. Let’s connect and create something impactful!
 
               </p>
@@ -152,7 +153,7 @@ export default function AboutSection() {
 
             <div className="pt-4">
               <a
-                href= {resume}
+                href={resume}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-6 py-3.5 bg-primary text-white rounded-lg font-medium hover:bg-primary/90 transition-all shadow-lg shadow-primary/20 hover:shadow-primary/40 group"
