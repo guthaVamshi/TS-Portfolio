@@ -121,25 +121,32 @@ export const education: Education[] = [
 
 export const experience: Experience[] = [
   {
-    company: "CG Infinity",
-    logo: cg,
-    position: "SDE - 2",
+    company: "One Community",
+    logo: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fonecommunityglobal.org%2F&psig=AOvVaw2EM0rPcLa-Lxi8aNCLcKNC&ust=1752079305338000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCIiAu5barY4DFQAAAAAdAAAAABAE",
+    position: "Full Stack Developer",
     period: "April 2023 - August 2023",
-    description: "Working on cutting edge technologies to solve business problems on a daily basis."
+    description: "Designed and implemented robust REST & SOAP APIs.Improved API response time by 40% by optimizing database queries. Built responsive, mobile-first UIs using Tailwind CSS and Bootstrap. Collaborated with business stakeholders for feature delivery under agile sprints.Conducted end-to-end API testing using Postman, Mocha, and Chai."
   },
   {
     company: "CG Infinity",
     logo: cg,
-    position: "SDE - 1",
+    position: "Full Stack Developer - 2",
+    period: "April 2023 - August 2023",
+    description: "Designed and implemented robust REST & SOAP APIs.Improved API response time by 40% by optimizing database queries. Built responsive, mobile-first UIs using Tailwind CSS and Bootstrap. Collaborated with business stakeholders for feature delivery under agile sprints.Conducted end-to-end API testing using Postman, Mocha, and Chai."
+  },
+  {
+    company: "CG Infinity",
+    logo: cg,
+    position: "Full Stack Developer - 1",
     period: "July 2022 - March 2023",
-    description: "Working on cutting-edge technologies to solve business problems on a daily basis."
+    description: "Delivered full-stack features for an energy utility project serving 1000s of users. Integrated Salesforce CRM with real-time data sync into React + Node apps. Improved deployment turnaround using GitHub Actions for automation. Boosted app stability by 20% through debugging and backend improvements."
   },
   {
     company: "CG Infinity",
     logo: cg,
     position: "Intern",
     period: "July 2021 - July 2022",
-    description: "Trained on multiple tech like Salesforce, Java, Dot Net Etc. Learned a lot about work, life and people."
+    description: "Completed full-stack training in web & Salesforce development. Built & deployed two complete apps (WhatsApp clone & COVID tracker). Worked in agile teams, attended client demos, and participated in QA reviews. Promoted to consultant based on performance and project readiness."
   },
   {
     company: "Cognizant",
@@ -193,12 +200,6 @@ export const certifications: Certification[] = [
     logo: "https://m.media-amazon.com/images/I/41aPSdaShQL.png",
     date: "May 2021"
   },
-  {
-    provider: "Coming Up",
-    name: "Future Certification",
-    isComingSoon: true,
-    description: "Working on Projects, haven't started preparing for any new Certifications"
-  }
 ];
 
 export const projects: Project[] = [
