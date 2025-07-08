@@ -7,7 +7,7 @@ import EmailIcon from '@mui/icons-material/Email';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { Link } from 'wouter';
-import resume from '../Files/Vamshi Gutha FSD.pdf';
+import resume  from '../Files/Vamshi Gutha FSD.pdf';
 
 // Styled components
 const StyledContainer = styled(Container)(({ theme }) => ({
@@ -68,7 +68,7 @@ export default function HeroSection() {
     <Box component="section" minHeight="100vh" display="flex" alignItems="center" position="relative">
       <GradientBox />
       <PatternBox />
-
+      
       {/* Animated blurred shapes */}
       <BlurredCircle
         sx={{
@@ -100,7 +100,7 @@ export default function HeroSection() {
           opacity: 0.1,
         }}
       />
-
+      
       <StyledContainer>
         <Grid container spacing={10} alignItems="center">
           <Grid container item xs={12} lg={6}>
@@ -131,7 +131,7 @@ export default function HeroSection() {
                   Full Stack Developer / Salesforce Developer
                 </Typography>
               </Box>
-
+              
               <Typography variant="h1" gutterBottom position="relative" display="inline-block">
                 Vamshi Gutha
                 <Box
@@ -144,17 +144,16 @@ export default function HeroSection() {
                   sx={{ opacity: 0.2, zIndex: -1 }}
                 />
               </Typography>
-
+              
               <Typography variant="h4" color="text.secondary" gutterBottom>
                 Passionate Developer & Problem Solver
               </Typography>
-
+              
               <Typography variant="body1" color="text.secondary" maxWidth="600px" mx={{ xs: 'auto', lg: 0 }} mb={6}>
-                I build clean, scalable full-stack web apps using React.js, Node.js, Spring Boot, and Salesforce.
-                Skilled in solving real-world problems with elegant, efficient code.
-                Let’s build something impactful together.
+                I specialize in creating innovative solutions using cutting-edge technologies.
+                With expertise in Salesforce, web development, and software engineering, I transform complex problems into elegant solutions.
               </Typography>
-
+              
               <Box display="flex" gap={2} justifyContent={{ xs: 'center', lg: 'flex-start' }} mb={8}>
                 <Button
                   variant="contained"
@@ -174,7 +173,7 @@ export default function HeroSection() {
                   Download Resume
                 </Button>
               </Box>
-
+              
               <Box
                 component={motion.div}
                 initial={{ opacity: 0 }}
@@ -248,7 +247,7 @@ export default function HeroSection() {
               </Box>
             </Box>
           </Grid>
-
+          
           <Grid container item xs={12} lg={6} sx={{ display: { xs: 'none', lg: 'block' } }}>
             <Box
               component={motion.div}
@@ -309,7 +308,7 @@ export default function HeroSection() {
                     />
                   ))}
                 </Box>
-
+                
                 {/* Secondary orbit */}
                 <Box
                   position="absolute"
@@ -367,7 +366,7 @@ export default function HeroSection() {
                     <Typography fontSize={24}>☁️</Typography>
                   </Box>
                 </Box>
-
+                
                 {/* Center element */}
                 <Box
                   position="absolute"

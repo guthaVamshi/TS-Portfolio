@@ -122,7 +122,7 @@ export const education: Education[] = [
 export const experience: Experience[] = [
   {
     company: "One Community",
-    logo: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fonecommunityglobal.org%2F&psig=AOvVaw2EM0rPcLa-Lxi8aNCLcKNC&ust=1752079305338000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCIiAu5barY4DFQAAAAAdAAAAABAE",
+    logo: "https://onecommunityglobal.org/wp-content/uploads/2019/12/HD-Circular-Logo-300x300-1.jpg",
     position: "Full Stack Developer",
     period: "April 2023 - August 2023",
     description: "Designed and implemented robust REST & SOAP APIs.Improved API response time by 40% by optimizing database queries. Built responsive, mobile-first UIs using Tailwind CSS and Bootstrap. Collaborated with business stakeholders for feature delivery under agile sprints.Conducted end-to-end API testing using Postman, Mocha, and Chai."
