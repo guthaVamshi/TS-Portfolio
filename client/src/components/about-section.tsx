@@ -1,6 +1,6 @@
 import { Container } from "@/components/ui/container";
 import { motion } from "framer-motion";
-import resume from "../Files/VamshiGutha_Latest.pdf"
+import resume from "../Files/Vamshi Gutha FSD.pdf"
 import profilepic from "../images/Profile.jpeg"
 export default function AboutSection() {
   return (
