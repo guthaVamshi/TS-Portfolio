@@ -1,6 +1,6 @@
 import { Container } from "@/components/ui/container";
 import { motion } from "framer-motion";
-import resume from "../Files/Vamshi Gutha FSD.pdf"
+import resume from "../Files/Vamshi_SFDC.pdf"
 import profilepic from "../images/Profile.jpeg"
 import { Bold } from "lucide-react";
 export default function AboutSection() {
@@ -62,7 +62,7 @@ export default function AboutSection() {
                   </div>
                   <div>
                     <span className="block text-xs text-dark/60 dark:text-light/60">Experience</span>
-                    <span className="font-semibold">2+ Years</span>
+                    <span className="font-semibold">4+ Years</span>
                   </div>
                 </div>
 
@@ -88,23 +88,25 @@ export default function AboutSection() {
             transition={{ duration: 0.5 }}
           >
             <div className="space-y-4">
-              <h3 className="text-2xl font-bold">Developer & Problem Solver with Modern Tech Skills</h3>
+               <h3 className="text-2xl font-bold">Certified Salesforce Developer with Enterprise Solutions Expertise</h3>
 
               <p className="text-dark/80 dark:text-light/70 leading-relaxed">
-                I'm a Full Stack Developer with 3+ years of experience developing full-stack applications using technologies like React.js, Node.js, Spring Boot, and Salesforce.
+                I'm a Certified Salesforce Developer with 3+ years of experience in CRM implementation, Lightning Web Components development, and Salesforce ecosystem solutions. I hold multiple Salesforce certifications including Administrator, Platform Developer I, and AI Associate.
 
-                I’ve contributed to live enterprise projects in both startup and agile environments — building everything from job portals and customer support tools to scalable REST APIs and CI/CD pipelines.
+                I've contributed to enterprise Salesforce projects, designing custom solutions that streamline business processes and enhance user experience across various industries.
               </p>
 
               <p className="text-dark/80 dark:text-light/70 leading-relaxed">
-                What sets me apart is my blend of frontend design, backend logic, and Salesforce platform development. I’ve worked on:
+                My expertise spans across the entire Salesforce ecosystem and modern development practices. I've successfully delivered:
                 <ul style={{ listStyleType: "disc", paddingLeft: "1.5rem" }} className="mt-4 space-y-2">
-                  <li>Real-time CRM integrations using Apex, LWC, and Flows</li>
-                  <li>Enterprise-scale deployments with GitHub Actions, Docker, and AWS</li>
-                  <li>RESTful and SOAP API integration for web and cloud platforms</li>
+                  <li>Custom Lightning Web Components (LWC) and Aura Components</li>
+                  <li>Advanced Apex development including triggers, batch classes, and integrations</li>
+                  <li>Salesforce Flow automation and Process Builder implementations</li>
+                  <li>Integration solutions using REST/SOAP APIs and middleware</li>
+                  <li>Marketing Cloud and Service Cloud customizations</li>
                 </ul>
                 <br />
-                When I’m not coding, you’ll find me learning the latest in cloud tech or helping others grow in tech communities. Let’s connect and create something impactful!
+                I'm passionate about leveraging Salesforce's powerful platform to create scalable, user-friendly solutions that drive business growth and efficiency.
 
               </p>
             </div>

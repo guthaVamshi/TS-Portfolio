@@ -1,6 +1,6 @@
 import { Container } from "@/components/ui/container";
 import { motion } from "framer-motion";
-import resume from '../Files/Vamshi Gutha FSD.pdf';
+import resume from '../Files/Vamshi_SFDC.pdf';
 
 export default function HeroSection() {
   return (
@@ -28,7 +28,7 @@ export default function HeroSection() {
               transition={{ delay: 0.3, duration: 0.5 }}
               className="inline-block px-4 py-1.5 bg-primary/10 text-primary rounded-full text-sm font-medium"
             >
-              Full Stack Developer / Salesforce Developer
+               Salesforce Developer / Full Stack Developer
             </motion.div>
             
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-poppins leading-tight">
@@ -38,14 +38,14 @@ export default function HeroSection() {
               </span>
             </h1>
             
-            <h2 className="text-xl md:text-2xl font-medium text-dark/70 dark:text-light/70">
-              Passionate Developer & Problem Solver
-            </h2>
+             <h2 className="text-xl md:text-2xl font-medium text-dark/70 dark:text-light/70">
+               Certified Salesforce Expert & Problem Solver
+             </h2>
             
-            <p className="text-base md:text-lg max-w-2xl mx-auto lg:mx-0 text-dark/80 dark:text-light/80">
-              I specialize in creating innovative solutions using cutting-edge technologies.
-              With expertise in Salesforce, web development, and software engineering, I transform complex problems into elegant solutions.
-            </p>
+             <p className="text-base md:text-lg max-w-2xl mx-auto lg:mx-0 text-dark/80 dark:text-light/80">
+               I specialize in Salesforce development and implementation, with expertise in Lightning Web Components, Apex, and Platform development.
+               With multiple Salesforce certifications and proven experience in CRM solutions, I help businesses optimize their sales processes and customer relationships.
+             </p>
             
             <div className="flex flex-wrap gap-4 pt-6 justify-center lg:justify-start">
               <a 

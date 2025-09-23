@@ -126,39 +126,39 @@ export const education: Education[] = [
 
 export const experience: Experience[] = [
   {
-    company: "One Community",
-    logo: "https://onecommunityglobal.org/wp-content/uploads/2019/12/HD-Circular-Logo-300x300-1.jpg",
-    position: "Full Stack Developer",
+    company: "Ameran",
+    logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSdWdaGNrY5_4Z1H7rnwgqzzzMyjz1jHtKqQ&s",
+    position: "Salesforce Developer",
     period: "Mar 2025 - Present",
-    description: "Designed and implemented robust REST & SOAP APIs.Improved API response time by 40% by optimizing database queries. Built responsive, mobile-first UIs using Tailwind CSS and Bootstrap. Collaborated with business stakeholders for feature delivery under agile sprints.Conducted end-to-end API testing using Postman, Mocha, and Chai."
+    description: "Leading Salesforce implementation and customization projects for nonprofit organizations. Developed custom Lightning Web Components and Apex solutions to streamline donor management and volunteer coordination. Implemented automated workflows using Salesforce Flow, reducing manual processing time by 60%. Integrated third-party APIs to enhance fundraising capabilities and reporting accuracy."
   },
   {
     company: "CG Infinity",
     logo: cg,
-    position: "Full Stack Developer - 2",
+    position: "Senior Salesforce Developer",
     period: "April 2023 - August 2023",
-    description: "Designed and implemented robust REST & SOAP APIs.Improved API response time by 40% by optimizing database queries. Built responsive, mobile-first UIs using Tailwind CSS and Bootstrap. Collaborated with business stakeholders for feature delivery under agile sprints.Conducted end-to-end API testing using Postman, Mocha, and Chai."
+    description: "Designed and implemented comprehensive Salesforce solutions for enterprise clients. Built custom Lightning components and Apex triggers to support complex business processes. Developed integration solutions using REST/SOAP APIs to connect Salesforce with external systems. Led data migration projects and implemented security models following Salesforce best practices."
   },
   {
     company: "CG Infinity",
     logo: cg,
-    position: "Full Stack Developer - 1",
+    position: "Salesforce Developer",
     period: "July 2022 - March 2023",
-    description: "Delivered full-stack features for an energy utility project serving 1000s of users. Integrated Salesforce CRM with real-time data sync into React + Node apps. Improved deployment turnaround using GitHub Actions for automation. Boosted app stability by 20% through debugging and backend improvements."
+    description: "Delivered Salesforce CRM solutions for energy utility projects serving thousands of users. Integrated Salesforce with real-time data systems using custom APIs and middleware. Implemented Service Cloud features including case management and knowledge base. Optimized existing workflows and reduced case resolution time by 30% through automation."
   },
   {
     company: "CG Infinity",
     logo: cg,
-    position: "Intern",
+    position: "Salesforce Developer Intern",
     period: "July 2021 - July 2022",
-    description: "Completed full-stack training in web & Salesforce development. Built & deployed two complete apps (WhatsApp clone & COVID tracker). Worked in agile teams, attended client demos, and participated in QA reviews. Promoted to consultant based on performance and project readiness."
+    description: "Completed comprehensive Salesforce development training including Apex, Lightning components, and platform fundamentals. Built proof-of-concept applications demonstrating Salesforce capabilities. Participated in Salesforce implementation projects, contributing to requirement gathering and solution design. Achieved Salesforce Associate certification during internship period."
   },
   {
     company: "Cognizant",
     logo: cog,
-    position: "Digital Nurture",
+    position: "Technology Trainee",
     period: "Mar 2021 - June 2021",
-    description: "Trained on multiple tech like Front End Web development, Testing, Java, Dot Net Etc."
+    description: "Participated in intensive training program covering enterprise technologies including Salesforce fundamentals, web development, and software testing methodologies. Completed hands-on projects demonstrating proficiency in multiple technology stacks."
   }
 ];
 
