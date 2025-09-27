@@ -62,7 +62,7 @@ export default function AboutSection() {
                   </div>
                   <div>
                     <span className="block text-xs text-dark/60 dark:text-light/60">Experience</span>
-                    <span className="font-semibold">4+ Years</span>
+                    <span className="font-semibold">~5 Years</span>
                   </div>
                 </div>
 
@@ -91,7 +91,7 @@ export default function AboutSection() {
                <h3 className="text-2xl font-bold">Certified Salesforce Developer with Enterprise Solutions Expertise</h3>
 
               <p className="text-dark/80 dark:text-light/70 leading-relaxed">
-                I'm a Certified Salesforce Developer with 3+ years of experience in CRM implementation, Lightning Web Components development, and Salesforce ecosystem solutions. I hold multiple Salesforce certifications including Administrator, Platform Developer I, and AI Associate.
+                I'm a Certified Salesforce Developer with ~5 years of experience in CRM implementation, Lightning Web Components development, and Salesforce ecosystem solutions. I hold multiple Salesforce certifications including Administrator, Platform Developer I, and AI Associate.
 
                 I've contributed to enterprise Salesforce projects, designing custom solutions that streamline business processes and enhance user experience across various industries.
               </p>
