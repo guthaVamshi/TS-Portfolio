@@ -39,7 +39,7 @@ export default function Home() {
   }, []);
   
   return (
-    <div className="min-h-screen bg-light dark:bg-dark text-dark dark:text-light font-inter transition-colors duration-300">
+    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-cyan-50 text-slate-800 font-inter transition-colors duration-300">
       <Navbar />
       <main>
         <HeroSection />
