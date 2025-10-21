@@ -28,7 +28,7 @@ export default function Footer() {
               <i className="fas fa-envelope text-xl"></i>
             </a>
             <a 
-              href="https://www.linkedin.com/in/vamshigutha/" 
+              href="https://www.linkedin.com/in/vamshi-gutha/" 
               target="_blank"
               rel="noopener noreferrer"
               className="text-light hover:text-primary transition-colors"

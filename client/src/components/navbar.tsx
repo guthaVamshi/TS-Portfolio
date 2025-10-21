@@ -94,7 +94,7 @@ export default function Navbar() {
               </a>
               
               <a 
-                href="https://www.linkedin.com/in/vamshigutha/" 
+                href="https://www.linkedin.com/in/vamshi-gutha/" 
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-9 h-9 rounded-full bg-light/50 flex items-center justify-center hover:bg-primary hover:text-white transition-all"

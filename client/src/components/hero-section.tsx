@@ -141,7 +141,7 @@ export default function HeroSection() {
           >
             {[
               { icon: "fab fa-github", href: "https://github.com/guthaVamshi", color: "hover:text-gray-900" },
-              { icon: "fab fa-linkedin-in", href: "https://www.linkedin.com/in/vamshigutha/", color: "hover:text-blue-600" },
+              { icon: "fab fa-linkedin-in", href: "https://www.linkedin.com/in/vamshi-gutha/", color: "hover:text-blue-600" },
               { icon: "fas fa-envelope", href: "mailto:vamshigutha@gmail.com", color: "hover:text-red-500" }
             ].map((social, index) => (
               <motion.a
