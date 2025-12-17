@@ -61,7 +61,7 @@ export default function SkillsSection() {
                   <h3 className="font-medium text-base">{skill.name}</h3>
                 </div>
                 
-                <div className="mt-auto">
+                {/* <div className="mt-auto">
                   <div className="flex items-center justify-between mb-1">
                     <span className="text-xs text-dark/60">Proficiency</span>
                     <span className="text-xs font-medium text-primary">{skill.level}%</span>
@@ -75,7 +75,7 @@ export default function SkillsSection() {
                       transition={{ duration: 0.8, delay: 0.2 }}
                     ></motion.div>
                   </div>
-                </div>
+                </div> */}
               </div>
             </motion.div>
           ))}

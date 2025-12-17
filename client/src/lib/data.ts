@@ -50,13 +50,13 @@ export interface Project {
 
 export const skills: Skill[] = [
   {
-    name: "Spring Boot",
-    icon: "fa fa-leaf",
+    name: "SALESFORCE",
+    icon: "fab fa-salesforce",
     level: 90
   },
   {
-    name: "SALESFORCE",
-    icon: "fab fa-salesforce",
+    name: "Spring Boot",
+    icon: "fa fa-leaf",
     level: 90
   },
   {
@@ -65,7 +65,7 @@ export const skills: Skill[] = [
     level: 90
   },
   {
-    name: "Rest API",
+    name: "APIs",
     icon: "fa fa-laptop-code",
     level: 85
   },
@@ -80,9 +80,9 @@ export const skills: Skill[] = [
     level: 80
   },
   {
-    name: "BOOTSTRAP",
-    icon: "fab fa-bootstrap",
-    level: 85
+    name:"Express JS",
+    icon: "fab fa-js",
+    level: 80
   },
   {
     name: "SQL",
@@ -98,12 +98,7 @@ export const skills: Skill[] = [
     name: "SOFTWARE TESTING",
     icon: "fas fa-vial",
     level: 75
-  },
-  {
-    name: "HTML",
-    icon: "fab fa-html5",
-    level: 90
-  },
+  }
   
 ];
 
