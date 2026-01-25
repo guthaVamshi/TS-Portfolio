@@ -124,7 +124,7 @@ export const experience: Experience[] = [
     company: "Ameran",
     logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSdWdaGNrY5_4Z1H7rnwgqzzzMyjz1jHtKqQ&s",
     position: "Salesforce Developer",
-    period: "Mar 2025 - Present",
+    period: "May 2024 - Present",
     description: "Leading Salesforce implementation and customization projects for nonprofit organizations. Developed custom Lightning Web Components and Apex solutions to streamline donor management and volunteer coordination. Implemented automated workflows using Salesforce Flow, reducing manual processing time by 60%. Integrated third-party APIs to enhance fundraising capabilities and reporting accuracy."
   },
   {
