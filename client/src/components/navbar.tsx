@@ -1,174 +1,148 @@
 import { useState, useEffect } from "react";
 import { Container } from "@/components/ui/container";
 import { cn } from "@/lib/utils";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 const NAV_LINKS = [
-  { name: "About", href: "#about" },
-  { name: "Skills", href: "#skills" },
-  { name: "Education", href: "#education" },
+  { name: "About",    href: "#about" },
+  { name: "Skills",   href: "#skills" },
   { name: "Experience", href: "#experience" },
   { name: "Projects", href: "#projects" },
-  { name: "Contact", href: "#contact" },
+  { name: "Contact",  href: "#contact" },
 ];
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  const [scrolled, setScrolled]     = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+    let ticking = false;
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        setScrolled(window.scrollY > 40);
+        ticking = false;
+      });
     };
-    
-    window.addEventListener('scroll', handleScroll);
-    
-    // Prevent scrolling when mobile menu is open
-    if (isMenuOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
-    
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      document.body.style.overflow = 'unset';
-    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = isMenuOpen ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
   }, [isMenuOpen]);
 
-  const handleNavLinkClick = () => {
-    setIsMenuOpen(false);
-  };
-
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
-
   return (
-    <motion.nav 
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.5 }}
-      className={cn(
-        "fixed top-0 w-full z-50 transition-all duration-300",
-        scrolled 
-          ? "backdrop-blur-md bg-white/90 py-2 shadow-md" 
-          : "bg-transparent py-6"
-      )}
-    >
-      <Container>
-        <div className="flex justify-between items-center">
-          <a href="#" className="relative group">
-            <span className="text-xl sm:text-2xl font-bold">
-              Vamshi<span className="text-primary">.</span>
-            </span>
-            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
-          </a>
-          
-          <div className="hidden md:flex items-center">
-            <div className="mr-6 flex items-center space-x-1">
-              {NAV_LINKS.map((link) => (
-                <a 
-                  key={link.name}
-                  href={link.href} 
-                  className={cn(
-                    "px-4 py-2 rounded-full text-sm font-medium transition-all duration-200",
-                    "hover:text-primary hover:bg-primary/5",
-                    scrolled ? "text-dark" : "text-dark/90"
-                  )}
-                  onClick={handleNavLinkClick}
-                >
-                  {link.name}
-                </a>
-              ))}
-            </div>
-            
-            <div className="flex items-center gap-3">
-              <a 
-                href="https://github.com/guthaVamshi" 
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-9 h-9 rounded-full bg-light/50 flex items-center justify-center hover:bg-primary hover:text-white transition-all"
-              >
-                <i className="fab fa-github text-sm"></i>
-              </a>
-              
-              <a 
-                href="https://www.linkedin.com/in/vamshi-gutha/" 
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-9 h-9 rounded-full bg-light/50 flex items-center justify-center hover:bg-primary hover:text-white transition-all"
-              >
-                <i className="fab fa-linkedin-in text-sm"></i>
-              </a>
-            </div>
-          </div>
-          
-          {/* Hamburger button with solid background */}
-          <button 
-            onClick={toggleMenu}
-            className={cn(
-              "md:hidden w-10 h-10 flex items-center justify-center rounded-full z-50",
-              isMenuOpen 
-                ? "fixed top-6 right-6 bg-primary text-white shadow-lg" 
-                : "bg-white shadow-md text-dark"
-            )}
-            style={isMenuOpen ? { position: 'fixed' } : {}}
-            aria-label="Toggle mobile menu"
-          >
-            <i className={cn("fas", isMenuOpen ? "fa-times" : "fa-bars")}></i>
-          </button>
-        </div>
-      </Container>
-      
-      {/* Mobile menu with close button */}
-      <div 
-        className={cn(
-          "fixed top-0 left-0 w-full h-full bg-white/95 backdrop-blur-sm z-40 md:hidden transition-transform duration-300",
-          isMenuOpen ? "transform translate-x-0" : "transform translate-x-full"
-        )}
-        style={{ position: 'fixed', top: 0, height: '100vh' }}
+    <>
+      <motion.header
+        initial={{ y: -80, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        className="fixed top-0 inset-x-0 z-50 flex justify-center pt-4 sm:pt-5 px-4"
       >
-        <div className="flex flex-col h-full">
-          <div className="py-20 flex-1 overflow-y-auto">
-            <Container>
-              <div className="flex flex-col space-y-4 pb-10">
-                {NAV_LINKS.map((link) => (
-                  <a 
-                    key={link.name}
-                    href={link.href} 
-                    className="py-3 px-4 text-lg font-medium text-dark hover:text-primary hover:bg-primary/5 rounded-xl transition-colors"
-                    onClick={handleNavLinkClick}
-                  >
-                    {link.name}
-                  </a>
-                ))}
-                
-                <div className="mt-6 pt-6 border-t border-light-accent/30 flex items-center justify-center">
-                  <div className="flex items-center gap-4">
-                    <a 
-                      href="https://github.com/guthaVamshi" 
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-10 h-10 rounded-full bg-light-accent/50 text-dark flex items-center justify-center hover:bg-primary hover:text-white transition-all"
-                    >
-                      <i className="fab fa-github"></i>
-                    </a>
-                    <a 
-                      href="https://www.linkedin.com/in/vamshigutha/" 
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-10 h-10 rounded-full bg-light-accent/50 text-dark flex items-center justify-center hover:bg-primary hover:text-white transition-all"
-                    >
-                      <i className="fab fa-linkedin-in"></i>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </Container>
+        <nav
+          className={cn(
+            "flex items-center justify-between gap-2 px-4 sm:px-6 py-2.5 rounded-2xl transition-all duration-300",
+            scrolled
+              ? "bg-white/90 backdrop-blur-md shadow-lg shadow-black/5 border border-slate-200/80 w-full max-w-4xl"
+              : "bg-white/70 backdrop-blur-sm border border-white/50 shadow-sm w-full max-w-4xl"
+          )}
+        >
+          {/* Logo */}
+          <a href="#" className="font-bold text-lg tracking-tight flex-shrink-0 select-none">
+            Vamshi<span className="text-primary">.</span>
+          </a>
+
+          {/* Desktop links */}
+          <div className="hidden md:flex items-center gap-1">
+            {NAV_LINKS.map((link) => (
+              <a
+                key={link.name}
+                href={link.href}
+                className="px-3 py-1.5 text-[13px] font-medium text-slate-600 hover:text-primary hover:bg-primary/5 rounded-xl transition-all duration-150"
+              >
+                {link.name}
+              </a>
+            ))}
           </div>
-        </div>
-      </div>
-    </motion.nav>
+
+          {/* Desktop social + CTA */}
+          <div className="hidden md:flex items-center gap-2 flex-shrink-0">
+            <a
+              href="https://github.com/guthaVamshi"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-8 h-8 flex items-center justify-center rounded-xl text-slate-500 hover:text-slate-900 hover:bg-slate-100 transition-all"
+              aria-label="GitHub"
+            >
+              <i className="fab fa-github text-sm" />
+            </a>
+            <a
+              href="https://www.linkedin.com/in/vamshi-gutha/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-8 h-8 flex items-center justify-center rounded-xl text-slate-500 hover:text-blue-600 hover:bg-blue-50 transition-all"
+              aria-label="LinkedIn"
+            >
+              <i className="fab fa-linkedin-in text-sm" />
+            </a>
+            <a
+              href="#contact"
+              className="ml-2 px-4 py-1.5 text-[13px] font-semibold bg-primary text-white rounded-xl hover:bg-purple-600 transition-all shadow-sm hover:shadow-primary/30"
+            >
+              Hire Me
+            </a>
+          </div>
+
+          {/* Mobile hamburger */}
+          <button
+            onClick={() => setIsMenuOpen((v) => !v)}
+            className="md:hidden w-8 h-8 flex items-center justify-center rounded-xl text-slate-600 hover:bg-slate-100 transition-all"
+            aria-label="Toggle menu"
+          >
+            <i className={cn("fas text-sm", isMenuOpen ? "fa-times" : "fa-bars")} />
+          </button>
+        </nav>
+      </motion.header>
+
+      {/* Mobile menu */}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-40 bg-white/95 backdrop-blur-sm flex flex-col items-center justify-center gap-6 md:hidden"
+          >
+            {NAV_LINKS.map((link, i) => (
+              <motion.a
+                key={link.name}
+                href={link.href}
+                onClick={() => setIsMenuOpen(false)}
+                className="text-3xl font-bold text-slate-800 hover:text-primary transition-colors"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.06 }}
+              >
+                {link.name}
+              </motion.a>
+            ))}
+            <motion.a
+              href="#contact"
+              onClick={() => setIsMenuOpen(false)}
+              className="mt-4 px-8 py-3 bg-primary text-white rounded-2xl font-semibold text-lg shadow-lg shadow-primary/30"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: NAV_LINKS.length * 0.06 }}
+            >
+              Hire Me
+            </motion.a>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 }

@@ -126,4 +126,20 @@
       transition-duration: 0.01ms !important;
     }
   }
+
+  /* Hero section — hide native cursor so ripples feel immersive */
+  #hero {
+    cursor: none;
+  }
+
+  /* Ripple canvas fills the hero fully */
+  #hero canvas {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
 }

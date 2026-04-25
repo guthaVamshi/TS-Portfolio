@@ -1,90 +1,80 @@
-import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { useEffect, useRef } from "react";
 
+/**
+ * Lightweight custom cursor — uses direct DOM transforms instead of
+ * setState so it never triggers React re-renders.
+ */
 export default function CustomCursor() {
-  const [mousePosition, setMousePosition] = useState({ x: -100, y: -100 });
-  const [cursorVariant, setCursorVariant] = useState("default");
-  
+  const ringRef = useRef<HTMLDivElement>(null);
+  const dotRef  = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
-    const mouseMove = (e: MouseEvent) => {
-      setMousePosition({
-        x: e.clientX,
-        y: e.clientY
-      });
+    // Only on desktop
+    if (window.innerWidth < 1024) return;
+
+    const ring = ringRef.current;
+    const dot  = dotRef.current;
+    if (!ring || !dot) return;
+
+    let mouseX = -100;
+    let mouseY = -100;
+    let ringX  = -100;
+    let ringY  = -100;
+    let rafId  = 0;
+
+    const onMouseMove = (e: MouseEvent) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      // Dot follows exactly — no lag
+      dot.style.transform = `translate(${mouseX - 3}px, ${mouseY - 3}px)`;
     };
 
-    window.addEventListener("mousemove", mouseMove);
+    // Ring lags behind via RAF lerp — smooth without setState
+    const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
 
-    // Event listeners for links and buttons to change cursor style
-    const links = document.querySelectorAll("a, button");
-    
-    const mouseEnterLink = () => setCursorVariant("link");
-    const mouseLeaveLink = () => setCursorVariant("default");
-    
-    links.forEach(link => {
-      link.addEventListener("mouseenter", mouseEnterLink);
-      link.addEventListener("mouseleave", mouseLeaveLink);
+    const animate = () => {
+      rafId = requestAnimationFrame(animate);
+      ringX = lerp(ringX, mouseX, 0.18);
+      ringY = lerp(ringY, mouseY, 0.18);
+      ring.style.transform = `translate(${ringX - 12}px, ${ringY - 12}px)`;
+    };
+    rafId = requestAnimationFrame(animate);
+
+    // Change ring style on links/buttons
+    const onEnter = () => ring.classList.add("cursor-link");
+    const onLeave = () => ring.classList.remove("cursor-link");
+
+    window.addEventListener("mousemove", onMouseMove, { passive: true });
+
+    // Delegate to document — catches dynamically added elements
+    document.addEventListener("mouseover", (e) => {
+      if ((e.target as HTMLElement)?.closest("a, button")) onEnter();
+    });
+    document.addEventListener("mouseout", (e) => {
+      if ((e.target as HTMLElement)?.closest("a, button")) onLeave();
     });
 
     return () => {
-      window.removeEventListener("mousemove", mouseMove);
-      
-      links.forEach(link => {
-        link.removeEventListener("mouseenter", mouseEnterLink);
-        link.removeEventListener("mouseleave", mouseLeaveLink);
-      });
+      cancelAnimationFrame(rafId);
+      window.removeEventListener("mousemove", onMouseMove);
     };
   }, []);
 
-  // Only show custom cursor on desktop
-  if (typeof window !== 'undefined' && window.innerWidth < 1024) {
-    return null;
-  }
-
-  const variants = {
-    default: {
-      x: mousePosition.x - 10,
-      y: mousePosition.y - 10,
-      height: 20,
-      width: 20,
-      backgroundColor: "var(--primary)"
-    },
-    link: {
-      x: mousePosition.x - 15,
-      y: mousePosition.y - 15,
-      height: 30,
-      width: 30,
-      backgroundColor: "var(--primary)",
-      mixBlendMode: "difference"
-    }
-  };
-
-  const dotVariants = {
-    default: {
-      x: mousePosition.x - 2.5,
-      y: mousePosition.y - 2.5,
-      opacity: 1
-    },
-    link: {
-      x: mousePosition.x - 2.5,
-      y: mousePosition.y - 2.5,
-      opacity: 0
-    }
-  };
+  if (typeof window !== "undefined" && window.innerWidth < 1024) return null;
 
   return (
     <>
-      <motion.div
-        className="custom-cursor hidden lg:block fixed rounded-full pointer-events-none z-50 mix-blend-difference"
-        variants={variants}
-        animate={cursorVariant}
-        transition={{ type: "spring", stiffness: 500, damping: 28 }}
+      {/* Trailing ring */}
+      <div
+        ref={ringRef}
+        className="hidden lg:block fixed top-0 left-0 w-6 h-6 rounded-full border-2 border-primary pointer-events-none z-[9999] transition-[width,height,border-color] duration-150 [&.cursor-link]:w-9 [&.cursor-link]:h-9 [&.cursor-link]:border-purple-500"
+        style={{ willChange: "transform" }}
       />
-      <motion.div
-        className="cursor-dot hidden lg:block fixed bg-white rounded-full pointer-events-none z-50 w-[5px] h-[5px] mix-blend-difference"
-        variants={dotVariants}
-        animate={cursorVariant}
-        transition={{ type: "spring", stiffness: 500, damping: 28 }}
+      {/* Center dot */}
+      <div
+        ref={dotRef}
+        className="hidden lg:block fixed top-0 left-0 w-[6px] h-[6px] bg-primary rounded-full pointer-events-none z-[9999]"
+        style={{ willChange: "transform" }}
       />
     </>
   );

@@ -80,7 +80,7 @@ export const skills: Skill[] = [
     level: 80
   },
   {
-    name:"Express JS",
+    name: "Express JS",
     icon: "fab fa-js",
     level: 80
   },
@@ -99,13 +99,13 @@ export const skills: Skill[] = [
     icon: "fas fa-vial",
     level: 75
   }
-  
+
 ];
 
 export const education: Education[] = [
   {
     institution: "Sacred Heart University",
-    logo: "https://upload.wikimedia.org/wikipedia/en/thumb/5/59/Sacred_Heart_University_seal.svg/1200px-Sacred_Heart_University_seal.svg.png",
+    logo: "https://images.credly.com/images/6dfcf719-4f7b-42ab-9bca-268464afc1e6/69bfcc305e3eb9075648a37b17483d65.png",
     degree: "Masters in Computer Science",
     period: "August 2023 - December 2024",
     description: "Completed my Masters degree with focus on advanced technologies and software engineering principles."
@@ -130,7 +130,7 @@ export const experience: Experience[] = [
   {
     company: "CG Infinity",
     logo: cg,
-    position: "Senior Salesforce Developer",
+    position: "Salesforce Developer",
     period: "April 2023 - August 2023",
     description: "Designed and implemented comprehensive Salesforce solutions for enterprise clients. Built custom Lightning components and Apex triggers to support complex business processes. Developed integration solutions using REST/SOAP APIs to connect Salesforce with external systems. Led data migration projects and implemented security models following Salesforce best practices."
   },
@@ -167,7 +167,7 @@ export const certifications: Certification[] = [
   {
     provider: "Salesforce",
     name: "Platform Developer - 1",
-    logo:   pd1,
+    logo: pd1,
     date: "Oct 2024"
   },
   {
@@ -215,7 +215,7 @@ export const projects: Project[] = [
     description: "A job search Platform",
     image: "https://images.unsplash.com/photo-1573167507387-6b4b98cb7c13?q=80&w=1000",
     category: "Web Development",
-    technologies: ["Node JS","Express JS","API","Apex"],
+    technologies: ["Node JS", "Express JS", "API", "Apex"],
     link: "https://github.com/guthaVamshi/Next-Hire"
   },
   {
