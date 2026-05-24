@@ -24,18 +24,18 @@ const theme = createTheme({
   typography: {
     fontFamily: '"Inter", "Roboto", "Helvetica", "Arial", sans-serif',
     h1: {
-      fontFamily: '"Poppins", "Inter", sans-serif',
+      fontFamily: '"Playfair Display", "Inter", sans-serif',
       fontWeight: 700,
       fontSize: '3.5rem',
       lineHeight: 1.2,
     },
     h2: {
-      fontFamily: '"Poppins", "Inter", sans-serif',
+      fontFamily: '"Playfair Display", "Inter", sans-serif',
       fontWeight: 600,
       fontSize: '2.5rem',
     },
     h3: {
-      fontFamily: '"Poppins", "Inter", sans-serif',
+      fontFamily: '"Playfair Display", "Inter", sans-serif',
       fontWeight: 600,
       fontSize: '2rem',
     },
