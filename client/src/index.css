@@ -431,6 +431,41 @@
     color: hsl(246, 100%, 69%) !important;
   }
 
+  /* Hamburger button time-of-day overrides */
+  .time-evening .hamburger-button, .time-night .hamburger-button {
+    color: #f1f5f9 !important;
+  }
+  .time-evening .hamburger-button:hover, .time-night .hamburger-button:hover {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+  }
+  .time-morning .hamburger-button, .time-midday .hamburger-button {
+    color: #1e293b !important;
+  }
+  .time-morning .hamburger-button:hover, .time-midday .hamburger-button:hover {
+    background-color: rgba(0, 0, 0, 0.06) !important;
+  }
+
+  /* Mobile fullscreen menu overlay & links dynamic styling */
+  .time-morning .mobile-menu-overlay {
+    background-color: rgba(254, 243, 199, 0.96) !important; /* Morning warm */
+  }
+  .time-midday .mobile-menu-overlay {
+    background-color: rgba(240, 249, 255, 0.96) !important; /* Midday cool */
+  }
+  .time-evening .mobile-menu-overlay {
+    background-color: rgba(15, 23, 42, 0.96) !important; /* Evening deep slate */
+  }
+  .time-night .mobile-menu-overlay {
+    background-color: rgba(9, 15, 29, 0.97) !important; /* Night pitch */
+  }
+
+  .time-evening .mobile-menu-link, .time-night .mobile-menu-link {
+    color: #f8fafc !important;
+  }
+  .time-morning .mobile-menu-link, .time-midday .mobile-menu-link {
+    color: #0f172a !important;
+  }
+
   /* Timeline indicators & secondary elements */
   .time-evening .bg-slate-200, .time-night .bg-slate-200 {
     background-color: rgba(255, 255, 255, 0.1) !important;

@@ -14,6 +14,17 @@ const NAV_LINKS = [
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled]     = useState(false);
+  const [scrollY, setScrollY]       = useState(0);
+  const [isMobile, setIsMobile]     = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile, { passive: true });
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   useEffect(() => {
     let ticking = false;
@@ -21,6 +32,7 @@ export default function Navbar() {
       if (ticking) return;
       ticking = true;
       requestAnimationFrame(() => {
+        setScrollY(window.scrollY);
         setScrolled(window.scrollY > 40);
         ticking = false;
       });
@@ -34,13 +46,24 @@ export default function Navbar() {
     return () => { document.body.style.overflow = ""; };
   }, [isMenuOpen]);
 
+  // Compute dynamic opacity for mobile (hidden in hero, fades in as we scroll)
+  const headerOpacity = isMenuOpen
+    ? 1
+    : isMobile
+      ? Math.min(Math.max((scrollY - 50) / 350, 0), 1)
+      : 1;
+
   return (
     <>
       <motion.header
         initial={{ y: -80, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
+        animate={{ y: 0, opacity: headerOpacity }}
         transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-        className="fixed top-0 inset-x-0 z-50 flex justify-center pt-4 sm:pt-5 px-4"
+        style={{ opacity: headerOpacity }}
+        className={cn(
+          "fixed top-0 inset-x-0 z-50 flex justify-center pt-4 sm:pt-5 px-4 transition-opacity duration-150",
+          isMobile && headerOpacity === 0 ? "pointer-events-none" : ""
+        )}
       >
         <nav
           className={cn(
@@ -99,7 +122,7 @@ export default function Navbar() {
           {/* Mobile hamburger */}
           <button
             onClick={() => setIsMenuOpen((v) => !v)}
-            className="md:hidden w-8 h-8 flex items-center justify-center rounded-xl text-slate-600 hover:bg-slate-100 transition-all"
+            className="md:hidden w-8 h-8 flex items-center justify-center rounded-xl text-slate-600 hover:bg-slate-100 transition-all hamburger-button"
             aria-label="Toggle menu"
           >
             <i className={cn("fas text-sm", isMenuOpen ? "fa-times" : "fa-bars")} />
@@ -115,14 +138,14 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-40 bg-white/95 backdrop-blur-sm flex flex-col items-center justify-center gap-6 md:hidden"
+            className="fixed inset-0 z-40 bg-white/95 backdrop-blur-sm flex flex-col items-center justify-center gap-6 md:hidden mobile-menu-overlay"
           >
             {NAV_LINKS.map((link, i) => (
               <motion.a
                 key={link.name}
                 href={link.href}
                 onClick={() => setIsMenuOpen(false)}
-                className="text-3xl font-bold text-slate-800 hover:text-primary transition-colors"
+                className="text-3xl font-bold text-slate-800 hover:text-primary transition-colors mobile-menu-link"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.06 }}
