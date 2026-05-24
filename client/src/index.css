@@ -145,6 +145,297 @@
     animation: float-cloud 40s linear infinite;
   }
 
+  /* Bird wing flapping - realistic Cubic Beziers, unsquished */
+  @keyframes bird-flap {
+    0%, 100% {
+      d: path("M0,13 C4,8 8,0 12,6 C16,0 20,8 24,13 C20,11 16,11 12,12 C8,11 4,11 0,13 Z");
+    }
+    50% {
+      d: path("M0,3 C4,6 8,14 12,8 C16,14 20,6 24,3 C20,5 16,6 12,7 C8,6 4,5 0,3 Z");
+    }
+  }
+
+  .animate-bird-flap {
+    animation: bird-flap 0.45s ease-in-out infinite;
+  }
+
+  /* Bird flight paths - Flock of 5 */
+  @keyframes bird-fly-leader {
+    0% {
+      transform: translate3d(-10vw, 15vh, 0) scale(0.7);
+    }
+    50% {
+      transform: translate3d(50vw, 8vh, 0) scale(0.85);
+    }
+    100% {
+      transform: translate3d(110vw, 17vh, 0) scale(0.7);
+    }
+  }
+
+  @keyframes bird-fly-follower-1 {
+    0% {
+      transform: translate3d(-15vw, 19vh, 0) scale(0.55);
+    }
+    50% {
+      transform: translate3d(45vw, 12vh, 0) scale(0.7);
+    }
+    100% {
+      transform: translate3d(105vw, 21vh, 0) scale(0.55);
+    }
+  }
+
+  @keyframes bird-fly-follower-2 {
+    0% {
+      transform: translate3d(-18vw, 13vh, 0) scale(0.48);
+    }
+    50% {
+      transform: translate3d(48vw, 6vh, 0) scale(0.62);
+    }
+    100% {
+      transform: translate3d(108vw, 15vh, 0) scale(0.48);
+    }
+  }
+
+  @keyframes bird-fly-follower-3 {
+    0% {
+      transform: translate3d(-13vw, 21vh, 0) scale(0.5);
+    }
+    50% {
+      transform: translate3d(47vw, 15vh, 0) scale(0.65);
+    }
+    100% {
+      transform: translate3d(107vw, 23vh, 0) scale(0.5);
+    }
+  }
+
+  @keyframes bird-fly-follower-4 {
+    0% {
+      transform: translate3d(-20vw, 16vh, 0) scale(0.42);
+    }
+    50% {
+      transform: translate3d(42vw, 9vh, 0) scale(0.57);
+    }
+    100% {
+      transform: translate3d(102vw, 18vh, 0) scale(0.42);
+    }
+  }
+
+  .animate-bird-leader {
+    animation: bird-fly-leader 28s linear infinite;
+  }
+
+  .animate-bird-follower-1 {
+    animation: bird-fly-follower-1 25s linear infinite;
+  }
+
+  .animate-bird-follower-2 {
+    animation: bird-fly-follower-2 31s linear infinite;
+  }
+
+  .animate-bird-follower-3 {
+    animation: bird-fly-follower-3 29s linear infinite;
+  }
+
+  .animate-bird-follower-4 {
+    animation: bird-fly-follower-4 26s linear infinite;
+  }
+
+  /* High altitude commercial airplane flight */
+  @keyframes plane-fly {
+    0% {
+      transform: translate3d(115vw, 6vh, 0) scale(0.55);
+    }
+    100% {
+      transform: translate3d(-15vw, 11vh, 0) scale(0.55);
+    }
+  }
+
+  .animate-plane {
+    animation: plane-fly 75s linear infinite;
+  }
+
+  /* Blinking aviation lights */
+  @keyframes blink-red {
+    0%, 100% { opacity: 0; }
+    50% { opacity: 1; }
+  }
+
+  .animate-blink-red {
+    animation: blink-red 1s steps(2, start) infinite;
+  }
+
+  /* Shooting star physics (speed, tail length) */
+  @keyframes shooting-star {
+    0% {
+      transform: translate3d(0, 0, 0) rotate(-35deg) scaleX(0);
+      opacity: 0;
+    }
+    1% {
+      opacity: 1;
+      transform: translate3d(0, 0, 0) rotate(-35deg) scaleX(1);
+    }
+    12% {
+      transform: translate3d(-180px, 126px, 0) rotate(-35deg) scaleX(1.6);
+      opacity: 1;
+    }
+    18% {
+      transform: translate3d(-300px, 210px, 0) rotate(-35deg) scaleX(0);
+      opacity: 0;
+    }
+    100% {
+      transform: translate3d(-300px, 210px, 0) rotate(-35deg) scaleX(0);
+      opacity: 0;
+    }
+  }
+
+  .animate-shooting-star {
+    animation: shooting-star 10s ease-in infinite;
+    transform-origin: right center;
+    will-change: transform, opacity;
+  }
+
+  /* Organic twinkling stars */
+  @keyframes twinkle {
+    0%, 100% {
+      opacity: 0.2;
+      transform: scale(0.7);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.3);
+    }
+  }
+
+  .animate-twinkle {
+    animation: twinkle 3s ease-in-out infinite;
+  }
+
+  /* Time-of-day site-wide theme overrides (richer, more visible gradients) */
+  .time-morning {
+    background-image: linear-gradient(135deg, #bae6fd 0%, #fef3c7 50%, #fed7aa 100%) !important;
+  }
+  .time-midday {
+    background-image: linear-gradient(135deg, #93c5fd 0%, #e2e8f0 50%, #bae6fd 100%) !important;
+  }
+  .time-evening {
+    background-image: linear-gradient(135deg, #090310 0%, #15092a 50%, #2f073a 100%) !important;
+    color: #f1f5f9 !important;
+  }
+  .time-night {
+    background-image: linear-gradient(135deg, #02040a 0%, #0c0f1b 50%, #030a24 100%) !important;
+    color: #e2e8f0 !important;
+  }
+
+  /* Global light backgrounds transition to transparent to let site-wide gradients shine through */
+  .time-morning section, .time-midday section, .time-evening section, .time-night section {
+    background-color: transparent !important;
+  }
+
+  /* Footer transparent background adjustment */
+  .time-morning footer, .time-midday footer, .time-evening footer, .time-night footer {
+    background-color: transparent !important;
+  }
+
+  /* Heading typography contrast overrides */
+  .time-evening h1, .time-evening h2, .time-evening h3, .time-evening h4, .time-evening h5, .time-evening h6,
+  .time-night h1, .time-night h2, .time-night h3, .time-night h4, .time-night h5, .time-night h6 {
+    color: #f8fafc !important;
+  }
+  .time-evening p, .time-night p {
+    color: #cbd5e1 !important;
+  }
+
+  /* Global component class overrides (cards, list items, borders) */
+  .time-evening .bg-white, .time-night .bg-white {
+    background-color: rgba(15, 23, 42, 0.45) !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3) !important;
+  }
+  .time-evening .bg-slate-50, .time-night .bg-slate-50,
+  .time-evening .bg-slate-100, .time-night .bg-slate-100 {
+    background-color: rgba(30, 41, 59, 0.3) !important;
+    border-color: rgba(255, 255, 255, 0.06) !important;
+  }
+
+  /* Specific border colors for dark times */
+  .time-evening .border-slate-200, .time-night .border-slate-200,
+  .time-evening .border-slate-100, .time-night .border-slate-100,
+  .time-evening .border, .time-night .border {
+    border-color: rgba(255, 255, 255, 0.08) !important;
+  }
+
+  /* Specific text colors */
+  .time-evening .text-slate-900, .time-night .text-slate-900,
+  .time-evening .text-slate-800, .time-night .text-slate-800 {
+    color: #f8fafc !important;
+  }
+  .time-evening .text-slate-700, .time-night .text-slate-700,
+  .time-evening .text-slate-600, .time-night .text-slate-600 {
+    color: #cbd5e1 !important;
+  }
+  .time-evening .text-slate-500, .time-night .text-slate-500 {
+    color: #94a3b8 !important;
+  }
+
+  /* Morning theme warm translucent card adjustments */
+  .time-morning .bg-white {
+    background-color: rgba(255, 255, 255, 0.72) !important;
+    border-color: rgba(245, 158, 11, 0.28) !important;
+    box-shadow: 0 4px 20px rgba(245, 158, 11, 0.06) !important;
+    backdrop-filter: blur(8px);
+  }
+  .time-morning .bg-slate-50 {
+    background-color: rgba(254, 243, 199, 0.45) !important;
+    border-color: rgba(245, 158, 11, 0.15) !important;
+  }
+  .time-morning .border-slate-200, .time-morning .border {
+    border-color: rgba(245, 158, 11, 0.18) !important;
+  }
+
+  /* Midday theme blue translucent card adjustments */
+  .time-midday .bg-white {
+    background-color: rgba(255, 255, 255, 0.72) !important;
+    border-color: rgba(59, 130, 246, 0.24) !important;
+    box-shadow: 0 4px 20px rgba(59, 130, 246, 0.05) !important;
+    backdrop-filter: blur(8px);
+  }
+  .time-midday .bg-slate-50 {
+    background-color: rgba(224, 242, 254, 0.45) !important;
+    border-color: rgba(59, 130, 246, 0.15) !important;
+  }
+  .time-midday .border-slate-200, .time-midday .border {
+    border-color: rgba(59, 130, 246, 0.18) !important;
+  }
+
+  /* Input fields / Forms */
+  .time-evening input, .time-evening textarea, .time-evening select,
+  .time-night input, .time-night textarea, .time-night select {
+    background-color: rgba(15, 23, 42, 0.6) !important;
+    border-color: rgba(255, 255, 255, 0.15) !important;
+    color: #f8fafc !important;
+  }
+  .time-evening input::placeholder, .time-evening textarea::placeholder,
+  .time-night input::placeholder, .time-night textarea::placeholder {
+    color: #64748b !important;
+  }
+
+  /* Navbar styling matching the time of day */
+  .time-evening nav, .time-night nav {
+    background-color: rgba(15, 23, 42, 0.75) !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
+  }
+  .time-evening nav a, .time-night nav a {
+    color: #e2e8f0 !important;
+  }
+  .time-evening nav a:hover, .time-night nav a:hover {
+    color: hsl(246, 100%, 69%) !important;
+  }
+
+  /* Timeline indicators & secondary elements */
+  .time-evening .bg-slate-200, .time-night .bg-slate-200 {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+  }
+
   /* Reduced motion support */
   @media (prefers-reduced-motion: reduce) {
     * {

@@ -1,11 +1,16 @@
 import { Container } from "@/components/ui/container";
 import { motion } from "framer-motion";
 import resume from '../Files/Vamshi_SFDC.pdf';
+import FlightBirds from "./flight-birds";
 
 interface TimeConfig {
   skyGradient: string;
-  mountainBack: string;
-  mountainFront: string;
+  mountainBackStart: string;
+  mountainBackEnd: string;
+  mountainMidStart: string;
+  mountainMidEnd: string;
+  mountainFrontStart: string;
+  mountainFrontEnd: string;
   sunStyle: string;
   isDarkText: boolean;
   starsOpacity: number;
@@ -18,8 +23,12 @@ function getTimeConfig(hour: number): TimeConfig {
     // Morning (6 AM - 11 AM)
     return {
       skyGradient: "from-sky-300 via-amber-100 to-orange-100",
-      mountainBack: "#8BA3B5",
-      mountainFront: "#5A7A91",
+      mountainBackStart: "#7C95A9",
+      mountainBackEnd: "#BAC9D6",
+      mountainMidStart: "#648197",
+      mountainMidEnd: "#94AAB9",
+      mountainFrontStart: "#4F6D82",
+      mountainFrontEnd: "#6E889A",
       sunStyle: "bg-gradient-to-br from-amber-400 to-orange-500 shadow-[0_0_50px_rgba(245,158,11,0.5)] border border-orange-300",
       isDarkText: true,
       starsOpacity: 0,
@@ -30,8 +39,12 @@ function getTimeConfig(hour: number): TimeConfig {
     // Midday (11 AM - 5 PM)
     return {
       skyGradient: "from-sky-400 via-sky-200 to-blue-200",
-      mountainBack: "#6F8FA8",
-      mountainFront: "#3A607D",
+      mountainBackStart: "#6F8FA8",
+      mountainBackEnd: "#9FB5C7",
+      mountainMidStart: "#527490",
+      mountainMidEnd: "#7E9AB2",
+      mountainFrontStart: "#3A607D",
+      mountainFrontEnd: "#5E7E98",
       sunStyle: "bg-gradient-to-br from-yellow-300 to-amber-400 shadow-[0_0_60px_rgba(253,224,71,0.7)] border border-yellow-200",
       isDarkText: true,
       starsOpacity: 0,
@@ -42,11 +55,15 @@ function getTimeConfig(hour: number): TimeConfig {
     // Evening / Sunset (5 PM - 8 PM)
     return {
       skyGradient: "from-indigo-950 via-pink-700 to-orange-500",
-      mountainBack: "#4D3570",
-      mountainFront: "#2B1A47",
+      mountainBackStart: "#4A306D",
+      mountainBackEnd: "#75559E",
+      mountainMidStart: "#341C52",
+      mountainMidEnd: "#54367A",
+      mountainFrontStart: "#26143F",
+      mountainFrontEnd: "#3E2361",
       sunStyle: "bg-gradient-to-br from-orange-400 to-red-600 shadow-[0_0_50px_rgba(239,68,68,0.5)] border border-orange-400",
       isDarkText: false,
-      starsOpacity: 0.15,
+      starsOpacity: 0.25,
       cloudsOpacity: 0.2,
       label: "Evening"
     };
@@ -54,12 +71,16 @@ function getTimeConfig(hour: number): TimeConfig {
     // Night (8 PM - 6 AM)
     return {
       skyGradient: "from-slate-950 via-slate-900 to-indigo-950",
-      mountainBack: "#1B2244",
-      mountainFront: "#0F142D",
+      mountainBackStart: "#1B2244",
+      mountainBackEnd: "#2B3566",
+      mountainMidStart: "#121731",
+      mountainMidEnd: "#1F274F",
+      mountainFrontStart: "#0A0D20",
+      mountainFrontEnd: "#121836",
       sunStyle: "bg-gradient-to-br from-slate-100 to-slate-300 shadow-[0_0_40px_rgba(255,255,255,0.3)] border border-slate-200",
       isDarkText: false,
-      starsOpacity: 0.75,
-      cloudsOpacity: 0.15,
+      starsOpacity: 0.85,
+      cloudsOpacity: 0.1,
       label: "Night"
     };
   }
@@ -99,24 +120,43 @@ export default function HeroSection() {
       id="hero"
       className={`relative min-h-screen flex items-center justify-center overflow-hidden pt-20 pb-28 bg-gradient-to-b ${theme.skyGradient} transition-all duration-1000`}
     >
-      {/* ── Layer 1: Stars (Night Only) ── */}
+      {/* ── Layer 1: Stars & Comets (Evening / Night Only) ── */}
       {theme.starsOpacity > 0 && (
         <div
           className="absolute inset-0 pointer-events-none transition-opacity duration-1000 z-0"
           style={{ opacity: theme.starsOpacity }}
         >
-          <div className="absolute top-[8%] left-[12%] w-1 h-1 bg-white rounded-full animate-pulse" />
-          <div className="absolute top-[18%] left-[40%] w-1.5 h-1.5 bg-white rounded-full" />
-          <div className="absolute top-[10%] left-[72%] w-1 h-1 bg-white rounded-full animate-pulse" style={{ animationDelay: '1s' }} />
-          <div className="absolute top-[28%] left-[22%] w-1 h-1 bg-white rounded-full" />
-          <div className="absolute top-[24%] left-[58%] w-1.5 h-1.5 bg-white rounded-full animate-pulse" style={{ animationDelay: '1.5s' }} />
-          <div className="absolute top-[32%] left-[82%] w-1 h-1 bg-white rounded-full" />
-          <div className="absolute top-[14%] left-[88%] w-1 h-1 bg-white rounded-full animate-pulse" />
-          <div className="absolute top-[30%] left-[6%] w-1.5 h-1.5 bg-white rounded-full" />
-          <div className="absolute top-[5%] left-[30%] w-1 h-1 bg-white rounded-full animate-pulse" style={{ animationDelay: '0.5s' }} />
-          <div className="absolute top-[20%] left-[68%] w-1 h-1 bg-white rounded-full" />
+          {/* Twinkling Stars */}
+          <div className="absolute top-[8%] left-[12%] w-[2px] h-[2px] bg-white rounded-full animate-twinkle" style={{ animationDelay: '0.2s', animationDuration: '2.5s' }} />
+          <div className="absolute top-[18%] left-[40%] w-[3px] h-[3px] bg-white rounded-full animate-twinkle" style={{ animationDelay: '0.8s', animationDuration: '3.5s' }} />
+          <div className="absolute top-[10%] left-[72%] w-[2px] h-[2px] bg-white rounded-full animate-twinkle" style={{ animationDelay: '1.5s', animationDuration: '2s' }} />
+          <div className="absolute top-[28%] left-[22%] w-[3px] h-[3px] bg-white rounded-full animate-twinkle" style={{ animationDelay: '2.1s', animationDuration: '4s' }} />
+          <div className="absolute top-[24%] left-[58%] w-[2px] h-[2px] bg-white rounded-full animate-twinkle" style={{ animationDelay: '0.5s', animationDuration: '2.8s' }} />
+          <div className="absolute top-[32%] left-[82%] w-[3px] h-[3px] bg-white rounded-full animate-twinkle" style={{ animationDelay: '1.2s', animationDuration: '3.2s' }} />
+          <div className="absolute top-[14%] left-[88%] w-[2px] h-[2px] bg-white rounded-full animate-twinkle" style={{ animationDelay: '2.7s', animationDuration: '2.2s' }} />
+          <div className="absolute top-[30%] left-[6%] w-[3px] h-[3px] bg-white rounded-full animate-twinkle" style={{ animationDelay: '1.9s', animationDuration: '3.8s' }} />
+          <div className="absolute top-[5%] left-[30%] w-[2px] h-[2px] bg-white rounded-full animate-twinkle" style={{ animationDelay: '0.3s', animationDuration: '2.6s' }} />
+          <div className="absolute top-[20%] left-[68%] w-[3px] h-[3px] bg-white rounded-full animate-twinkle" style={{ animationDelay: '1.7s', animationDuration: '3.1s' }} />
+
+          {/* Shooting Stars / Comets (Trigger on different cycles and locations) */}
+          <div className="absolute top-[10%] left-[65%] w-[80px] h-[1px] bg-gradient-to-r from-white to-transparent opacity-0 animate-shooting-star" style={{ animationDelay: '2s', transformOrigin: 'right center' }} />
+          <div className="absolute top-[22%] left-[80%] w-[100px] h-[1px] bg-gradient-to-r from-white to-transparent opacity-0 animate-shooting-star" style={{ animationDelay: '6s', transformOrigin: 'right center' }} />
+          <div className="absolute top-[15%] left-[50%] w-[90px] h-[1.5px] bg-gradient-to-r from-white to-transparent opacity-0 animate-shooting-star" style={{ animationDelay: '11s', transformOrigin: 'right center' }} />
         </div>
       )}
+
+      {/* ── Layer 1: High-Altitude Airplane (Day & Night) ── */}
+      <div className="absolute top-0 left-0 animate-plane pointer-events-none z-0" style={{ animationDelay: '8s' }}>
+        <div className="relative flex items-center">
+          <svg viewBox="0 0 24 24" className="w-5 h-5 text-slate-700/10 dark:text-slate-100/10 fill-current -rotate-90">
+            <path d="M21,16V14L13,9V3.5A1.5,1.5 0 0,0 11.5,2A1.5,1.5 0 0,0 10,3.5V9L2,14V16L10,13.5V19L8,20.5V22L11.5,21L15,22V20.5L13,19V13.5L21,16Z" />
+          </svg>
+          <div className="absolute top-[8px] left-[8px] w-1 h-1 bg-red-500 rounded-full animate-blink-red" />
+        </div>
+      </div>
+
+      {/* ── Layer 1: Flying Birds (Day Only) ── */}
+      <FlightBirds theme={theme} isDay={isDay} />
 
       {/* ── Layer 1: Floating Clouds ── */}
       {theme.cloudsOpacity > 0 && (
@@ -156,9 +196,9 @@ export default function HeroSection() {
         }}
       />
 
-      {/* ── Layer 2: Celestial Body (Sun/Moon) ── */}
+      {/* ── Layer 2: Celestial Body (Sun / Waxing Crescent Moon) ── */}
       <div
-        className={`absolute w-20 h-20 sm:w-28 sm:h-28 rounded-full pointer-events-none transition-all duration-1000 z-10 ${theme.sunStyle}`}
+        className="absolute w-20 h-20 sm:w-28 sm:h-28 pointer-events-none transition-all duration-1000 z-10"
         style={{
           left: `${celestialX}%`,
           bottom: `${celestialY}%`,
@@ -166,39 +206,84 @@ export default function HeroSection() {
           willChange: 'left, bottom',
         }}
       >
-        {/* If night, add detail to make it look like a crescent/cratered moon */}
-        {!isDay && (
-          <div className="absolute inset-0 rounded-full bg-slate-900/10 backdrop-blur-[1px] overflow-hidden">
-            <div className="absolute top-4 left-4 w-4 h-4 rounded-full bg-black/5" />
-            <div className="absolute top-12 left-8 w-6 h-6 rounded-full bg-black/5" />
-            <div className="absolute top-6 left-16 w-3 h-3 rounded-full bg-black/5" />
-          </div>
+        {isDay ? (
+          /* Sun with custom styles & glowing background filter */
+          <div className={`w-full h-full rounded-full transition-all duration-1000 ${theme.sunStyle}`} />
+        ) : (
+          /* Waxing Crescent Moon (Yellowish tone and drop shadow) */
+          <svg
+            viewBox="0 0 100 100"
+            className="w-full h-full filter drop-shadow-[0_0_20px_rgba(253,224,71,0.55)]"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <defs>
+              <linearGradient id="moonGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#FFFEE8" />
+                <stop offset="45%" stopColor="#FFF27D" />
+                <stop offset="100%" stopColor="#E5B229" />
+              </linearGradient>
+            </defs>
+            <path
+              d="M50 10 A 40 40 0 1 1 50 90 A 30 40 0 0 0 50 10 Z"
+              fill="url(#moonGrad)"
+            />
+          </svg>
         )}
       </div>
 
-      {/* ── Layer 3: Back Mountains ── */}
+      {/* ── Layer 3: Back Mountains (Rugged, Gradient Filled) ── */}
       <svg
-        className="absolute bottom-0 left-0 w-full h-[220px] sm:h-[280px] md:h-[340px] pointer-events-none transition-all duration-1000 z-20"
+        className="absolute bottom-0 left-0 w-full h-[255px] sm:h-[320px] md:h-[385px] pointer-events-none transition-all duration-1000 z-20"
         viewBox="0 0 1440 320"
         preserveAspectRatio="none"
       >
+        <defs>
+          <linearGradient id="backMountainGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor={theme.mountainBackStart} className="transition-colors duration-1000" />
+            <stop offset="100%" stopColor={theme.mountainBackEnd} className="transition-colors duration-1000" />
+          </linearGradient>
+        </defs>
         <path
-          d="M0 240 L120 180 L280 230 L450 140 L600 200 L780 120 L950 190 L1150 130 L1300 210 L1440 160 L1440 320 L0 320 Z"
-          fill={theme.mountainBack}
-          className="transition-colors duration-1000"
+          d="M0 240 L100 210 L210 230 L310 180 L420 205 L530 160 L640 195 L750 140 L860 175 L970 135 L1080 180 L1190 150 L1300 190 L1440 160 L1440 320 L0 320 Z"
+          fill="url(#backMountainGrad)"
         />
       </svg>
 
-      {/* ── Layer 4: Front Mountains ── */}
+      {/* ── Layer 3.5: Middle Mountains (Rugged, Overlapping Gradient Filled) ── */}
       <svg
-        className="absolute bottom-0 left-0 w-full h-[170px] sm:h-[220px] md:h-[270px] pointer-events-none transition-all duration-1000 z-30"
+        className="absolute bottom-0 left-0 w-full h-[210px] sm:h-[265px] md:h-[320px] pointer-events-none transition-all duration-1000"
+        style={{ zIndex: 25 }}
         viewBox="0 0 1440 320"
         preserveAspectRatio="none"
       >
+        <defs>
+          <linearGradient id="midMountainGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor={theme.mountainMidStart} className="transition-colors duration-1000" />
+            <stop offset="100%" stopColor={theme.mountainMidEnd} className="transition-colors duration-1000" />
+          </linearGradient>
+        </defs>
         <path
-          d="M0 280 L200 200 L450 260 L700 170 L950 250 L1200 190 L1440 270 L1440 320 L0 320 Z"
-          fill={theme.mountainFront}
-          className="transition-colors duration-1000"
+          d="M0 270 L120 240 L240 255 L350 210 L470 235 L580 185 L700 215 L810 170 L930 200 L1040 175 L1160 215 L1280 190 L1400 220 L1440 200 L1440 320 L0 320 Z"
+          fill="url(#midMountainGrad)"
+        />
+      </svg>
+
+      {/* ── Layer 4: Front Mountains (Detailed Foreground Gradient Filled) ── */}
+      <svg
+        className="absolute bottom-0 left-0 w-full h-[165px] sm:h-[210px] md:h-[265px] pointer-events-none transition-all duration-1000 z-30"
+        viewBox="0 0 1440 320"
+        preserveAspectRatio="none"
+      >
+        <defs>
+          <linearGradient id="frontMountainGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor={theme.mountainFrontStart} className="transition-colors duration-1000" />
+            <stop offset="100%" stopColor={theme.mountainFrontEnd} className="transition-colors duration-1000" />
+          </linearGradient>
+        </defs>
+        <path
+          d="M0 290 L140 265 L270 280 L390 235 L510 260 L620 215 L740 240 L860 195 L980 225 L1100 190 L1220 215 L1330 190 L1440 210 L1440 320 L0 320 Z"
+          fill="url(#frontMountainGrad)"
         />
       </svg>
 
