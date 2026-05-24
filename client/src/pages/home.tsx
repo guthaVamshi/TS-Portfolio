@@ -8,6 +8,7 @@ import CertificationsSection from "@/components/certifications-section";
 import ProjectsSection from "@/components/projects-section";
 import ContactSection from "@/components/contact-section";
 import Footer from "@/components/footer";
+import SkyBackdrop from "@/components/sky-backdrop";
 import { useEffect, useMemo } from "react";
 
 export default function Home() {
@@ -63,17 +64,20 @@ export default function Home() {
   return (
     <div className={`min-h-screen font-inter transition-all duration-1000 ${timeClass}`}>
       <Navbar />
-      <main>
-        <HeroSection />
-        <AboutSection />
-        <SkillsSection />
-        <EducationSection />
-        <ExperienceSection />
-        <CertificationsSection />
-        <ProjectsSection />
-        <ContactSection />
-      </main>
-      <Footer />
+      <SkyBackdrop hour={hour} />
+      <div className="relative z-10">
+        <main>
+          <HeroSection />
+          <AboutSection />
+          <SkillsSection />
+          <EducationSection />
+          <ExperienceSection />
+          <CertificationsSection />
+          <ProjectsSection />
+          <ContactSection />
+        </main>
+        <Footer />
+      </div>
     </div>
   );
 }
