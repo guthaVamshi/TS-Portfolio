@@ -1,6 +1,6 @@
 import { Container } from "@/components/ui/container";
 import { motion } from "framer-motion";
-import resume from '../Files/Vamshi_SFDC.pdf';
+import resume from '../Files/VamshiGutha_JFSD.pdf';
 import { useState, useEffect } from "react";
 
 export interface TimeConfig {
@@ -378,14 +378,14 @@ export default function HeroSection() {
           >
             <h2 className={`text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold leading-tight font-display transition-colors duration-1000 ${theme.isDarkText ? "text-slate-800" : "text-slate-100"
               }`}>
-              Salesforce Developer &amp; Full Stack Engineer
+              Full Stack Java Developer
             </h2>
             <p className={`text-base sm:text-lg md:text-xl max-w-4xl mx-auto leading-relaxed px-4 transition-colors duration-1000 ${theme.isDarkText ? "text-slate-600" : "text-slate-300"
               }`}>
-              Passionate about creating scalable solutions with{" "}
+              Passionate about creating scalable enterprise web applications with{" "}
               <span className={`font-semibold ${theme.isDarkText ? "text-indigo-600" : "text-indigo-300"}`}>
-                5+ years
-              </span> of experience in Salesforce ecosystem and modern web technologies. I transform complex business requirements into elegant, user-friendly applications.
+                4+ years
+              </span> of experience in Java 17, Spring Boot, React.js, and Salesforce integration. I transform complex business requirements into elegant, high-performing applications.
             </p>
           </motion.div>
 
@@ -397,10 +397,10 @@ export default function HeroSection() {
             className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 max-w-3xl mx-auto px-4"
           >
             {[
-              { icon: "fab fa-salesforce", label: "Salesforce", color: "from-blue-500 to-blue-600" },
-              { icon: "fab fa-react", label: "React", color: "from-cyan-500 to-blue-500" },
+              { icon: "fab fa-java", label: "Java / Spring Boot", color: "from-green-600 to-green-500" },
+              { icon: "fab fa-react", label: "React & TypeScript", color: "from-cyan-500 to-blue-500" },
               { icon: "fab fa-node-js", label: "Node.js", color: "from-green-500 to-emerald-600" },
-              { icon: "fab fa-js", label: "JavaScript", color: "from-yellow-500 to-orange-500" },
+              { icon: "fab fa-salesforce", label: "Salesforce LWC", color: "from-blue-500 to-blue-600" },
             ].map((skill, i) => (
               <motion.div
                 key={skill.label}

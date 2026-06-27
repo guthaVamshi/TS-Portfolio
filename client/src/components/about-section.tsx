@@ -1,20 +1,21 @@
 import { Container } from "@/components/ui/container";
 import { motion } from "framer-motion";
-import resume from "../Files/Vamshi_SFDC.pdf";
+import resume from "../Files/VamshiGutha_JFSD.pdf";
 import profilepic from "../images/Profile.jpeg";
 
 const stats = [
-  { value: "5+", label: "Years Experience", icon: "fas fa-code" },
+  { value: "4+", label: "Years Experience", icon: "fas fa-code" },
   { value: "20+", label: "Projects Delivered", icon: "fas fa-laptop-code" },
   { value: "5", label: "Certifications", icon: "fas fa-certificate" },
 ];
 
 const highlights = [
-  "Custom Lightning Web Components (LWC) & Aura",
-  "Advanced Apex — triggers, batch, queueable, REST/SOAP",
-  "Salesforce Flow, Process Builder & approval workflows",
-  "Integration via REST/SOAP APIs and middleware",
-  "Marketing Cloud & Service Cloud customizations",
+  "Robust backend services with Java 17, J2EE, and Spring Boot",
+  "Responsive web interfaces using React.js, TypeScript, and Next.js",
+  "Secure API integrations and role-based access control (Spring Security, OAuth2)",
+  "Database design and query optimization (PostgreSQL, SQL Server, MongoDB)",
+  "Salesforce CRM features, LWC, Apex controllers, and API integration",
+  "Automated testing and CI/CD pipelines (JUnit, Mockito, GitHub Actions, Docker)",
 ];
 
 export default function AboutSection() {
@@ -82,7 +83,7 @@ export default function AboutSection() {
                 </div>
                 <div>
                   <span className="block text-[10px] text-slate-400 font-medium">Experience</span>
-                  <span className="font-bold text-sm text-slate-800">~5 Years</span>
+                  <span className="font-bold text-sm text-slate-800">4+ Years</span>
                 </div>
               </motion.div>
 
@@ -98,7 +99,7 @@ export default function AboutSection() {
                 </div>
                 <div>
                   <span className="block text-[10px] text-slate-400 font-medium">Certifications</span>
-                  <span className="font-bold text-sm text-slate-800">5 Salesforce</span>
+                  <span className="font-bold text-sm text-slate-800">5 Technical</span>
                 </div>
               </motion.div>
             </div>
@@ -114,17 +115,16 @@ export default function AboutSection() {
           >
             <div className="space-y-5">
               <h3 className="text-2xl font-bold text-slate-900">
-                Certified Salesforce Developer with Enterprise Solutions Expertise
+                Full Stack Java Developer with Enterprise Solutions Expertise
               </h3>
               <p className="text-slate-600 leading-relaxed text-[15px]">
-                I'm a <span className="font-semibold text-primary">Certified Salesforce Developer</span> with ~5 years
-                of experience in CRM implementation, Lightning Web Components development, and Salesforce ecosystem
-                solutions. I hold multiple Salesforce certifications including Administrator, Platform Developer I, and
-                AI Associate.
+                I'm a <span className="font-semibold text-primary">Full Stack Java Developer</span> with 4 years
+                of experience building enterprise web applications across retail, e-commerce, insurance, energy utility, and CRM platforms. 
+                I specialize in developing backend microservices, responsive frontend screens, secure API integrations, and database-driven workflows.
               </p>
               <p className="text-slate-600 leading-relaxed text-[15px]">
-                I've contributed to enterprise Salesforce projects, designing custom solutions that streamline business
-                processes and enhance user experience. My expertise spans across the full Salesforce ecosystem:
+                I've contributed to major enterprise applications, designing scalable solutions that improve transaction stability, 
+                streamline business processes, and reduce response latency. My expertise spans modern web stacks, cloud services, and CRM integration:
               </p>
 
               <ul className="space-y-2.5">

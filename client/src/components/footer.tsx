@@ -22,7 +22,7 @@ export default function Footer() {
             <a href="#" className="text-white font-bold text-xl tracking-tight">
               Vamshi<span className="text-primary">.</span>
             </a>
-            <p className="text-xs text-slate-500 mt-1">Salesforce Developer &amp; Full Stack Engineer</p>
+            <p className="text-xs text-slate-500 mt-1">Full Stack Java Developer</p>
           </div>
 
           {/* Center: copyright */}

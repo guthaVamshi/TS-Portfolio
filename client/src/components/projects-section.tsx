@@ -62,16 +62,6 @@ export default function ProjectsSection() {
                 ))}
               </div>
 
-              <a
-                href={featured.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-purple-600 transition-colors group/lnk"
-              >
-                <i className={`${featured.link.includes("github") ? "fab fa-github" : "fas fa-external-link-alt"}`} />
-                {featured.link.includes("github") ? "View on GitHub" : "View Project"}
-                <i className="fas fa-arrow-right text-xs transform group-hover/lnk:translate-x-1 transition-transform" />
-              </a>
             </div>
           </div>
         </motion.div>
@@ -81,7 +71,6 @@ export default function ProjectsSection() {
           {rest.map((project, i) => (
             <motion.a
               key={project.name}
-              href={project.link}
               target="_blank"
               rel="noopener noreferrer"
               className="group block"
@@ -99,12 +88,6 @@ export default function ProjectsSection() {
                     alt={project.name}
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                    <span className="text-white text-xs font-semibold flex items-center gap-1.5">
-                      <i className={`${project.link.includes("github") ? "fab fa-github" : "fas fa-external-link-alt"}`} />
-                      {project.link.includes("github") ? "View on GitHub" : "Open Project"}
-                    </span>
-                  </div>
                 </div>
 
                 {/* Content */}

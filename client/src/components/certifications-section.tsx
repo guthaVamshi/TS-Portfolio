@@ -41,7 +41,7 @@ export default function CertificationsSection() {
               >
                 {/* Shimmer overlay */}
                 {!cert.isComingSoon && (
-                  <div className="absolute inset-0 bg-gradient-to-br from-white via-transparent to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.02] via-transparent to-primary/[0.08] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
                 )}
 
                 <div className="relative z-10">
