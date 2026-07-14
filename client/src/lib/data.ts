@@ -8,6 +8,13 @@ import pd1 from "../images/Pd1.png"
 import AIAssociate from "../images/AIAssociate.png"
 import Associate from "../images/Associate.png"
 import MCAdmin from "../images/MCAdmin.png"
+import integrationHub from "../images/integration-hub.png"
+import retailAi from "../images/retail-ai.png"
+import insuranceClaims from "../images/insurance-claims.png"
+import nextHire from "../images/next-hire.png"
+import weatherApp from "../images/weather-app.png"
+import covidDashboard from "../images/covid-dashboard.png"
+import moneyfind from "../images/moneyfind.png"
 
 export interface Skill {
   name: string;
@@ -47,6 +54,8 @@ export interface Project {
   image: string;
   category: ProjectCategory;
   technologies: string[];
+  status?: 'completed' | 'in-progress';
+  synergy?: string;
 }
 
 export const skills: Skill[] = [
@@ -304,59 +313,87 @@ export const certifications: Certification[] = [
 
 export const projects: Project[] = [
   {
+    name: "Integration Hub",
+    description: "An automation platform combining Zapier's visual workflow builder, Postman's API environment, and n8n's visual node logic. Built to automate data synchronization between Salesforce, Slack, Gmail, Stripe, OpenAI, and GitHub, resolving complex API data fragmentation.",
+    image: integrationHub,
+    category: "Salesforce",
+    technologies: ["Salesforce API", "Apex", "OpenAI API", "REST APIs", "React.js", "Node.js", "n8n", "Postman"],
+    status: "in-progress",
+    synergy: "Core showcase of integration architecture. Leverages custom Apex triggers, LWC interfaces, RESTful web services, and AI assistants developed across my other portfolio applications."
+  },
+  {
     name: "AI-Assisted Retail Product Discovery Platform",
     description: "Built an AI-assisted product discovery feature using Spring Boot, OpenAI API, Gemini API, and PostgreSQL to summarize customer search intent and improve product match accuracy by 27%. Developed React.js and TypeScript search result components with API-driven filters, product cards, and relevance indicators, reducing product browsing friction by 24%. Deployed backend services on AWS EC2 with structured API logging and performance checks, improving search response consistency by 22% during high-traffic shopping sessions.",
-    image: "https://images.unsplash.com/photo-1573167507387-6b4b98cb7c13?q=80&w=1000",
+    image: retailAi,
     category: "Web Development",
-    technologies: ["Spring Boot", "OpenAI API", "Gemini API", "PostgreSQL", "React.js", "TypeScript", "AWS EC2"]
+    technologies: ["Spring Boot", "OpenAI API", "Gemini API", "PostgreSQL", "React.js", "TypeScript", "AWS EC2"],
+    status: "completed",
+    synergy: "Integrates OpenAI & Gemini APIs for workflow intelligence, providing direct architectural patterns for the AI automation nodes within Integration Hub."
+  },
+  {
+    name: "MoneyFind",
+    description: "A transaction tracking application designed to differentiate credit card expenses. Solves double-counting by identifying daily transactions made on credit cards and reconciling them with end-of-month payments.",
+    image: moneyfind,
+    category: "Web Development",
+    technologies: ["PostgreSQL", "Spring Boot", "TypeScript", "Express.js", "REST APIs"],
+    status: "completed",
+    synergy: "Combines Spring Boot services with Express.js endpoints and PostgreSQL schemas, mirroring the multi-framework architecture integrated in Integration Hub."
   },
   {
     name: "Insurance Claims Workflow Modernization",
     description: "Built claim intake and policy verification services using Spring Boot, Hibernate, and SQL Server to reduce manual claim review effort by 26% across servicing workflows. Developed secure React.js claim screens with Spring Security-backed REST APIs to improve member data access control and reduce validation issues by 23%. Added JUnit and Mockito test coverage for claim status, document tracking, and policy lookup flows, lowering release defects by 21% before production handoff.",
-    image: "https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?q=80&w=1932",
+    image: insuranceClaims,
     category: "Web Development",
-    technologies: ["Spring Boot", "Hibernate", "SQL Server", "React.js", "Spring Security", "REST APIs", "JUnit", "Mockito"]
+    technologies: ["Spring Boot", "Hibernate", "SQL Server", "React.js", "Spring Security", "REST APIs", "JUnit", "Mockito"],
+    status: "completed"
   },
   {
     name: "Next Hire",
     description: "A job search Platform",
-    image: "https://images.unsplash.com/photo-1573167507387-6b4b98cb7c13?q=80&w=1000",
+    image: nextHire,
     category: "Web Development",
     technologies: ["Node JS", "Express JS", "API", "Apex"],
+    status: "completed"
   },
   {
     name: "Next Hire Salesforce",
     description: "A job search platform developed using Salesforce",
-    image: "https://images.unsplash.com/photo-1661956602868-6ae368943878?q=80&w=2070",
+    image: nextHire,
     category: "Salesforce",
     technologies: ["Salesforce", "Apex", "LWC"],
+    status: "completed",
+    synergy: "Configured Apex controllers and LWC workflow layouts, matching the custom Salesforce triggers integrated into Integration Hub."
   },
   {
     name: "Weather",
     description: "Weather App",
-    image: "https://images.unsplash.com/photo-1492011221367-f47e3ccd77a0?q=80&w=1974",
+    image: weatherApp,
     category: "Web Development",
     technologies: ["HTML", "CSS", "JavaScript", "API"],
+    status: "completed"
   },
   {
     name: "COVID-19",
     description: "Build Based using API",
-    image: "https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?q=80&w=1932",
+    image: covidDashboard,
     category: "Web Development",
-    technologies: ["HTML", "CSS", "JavaScript", "API"]
+    technologies: ["HTML", "CSS", "JavaScript", "API"],
+    status: "completed"
   },
   {
     name: "Nike",
     description: "Website Based on Bootstrap, CSS",
     image: "https://c.static-nike.com/a/images/w_1920,c_limit/bzl2wmsfh7kgdkufrrjq/image.jpg",
     category: "Web Development",
-    technologies: ["HTML", "CSS", "Bootstrap"]
+    technologies: ["HTML", "CSS", "Bootstrap"],
+    status: "completed"
   },
   {
     name: "WhatsApp Clone",
     description: "Build based on MERN stack",
     image: "https://cdn.prod.website-files.com/5c29380b1110ec92a203aa84/5e310f19b76b834dcb2ce77b_whatsapp-hero.png",
     category: "MERN Stack",
-    technologies: ["MongoDB", "Express", "React", "Node.js"]
+    technologies: ["MongoDB", "Express", "React", "Node.js"],
+    status: "completed"
   }
 ];

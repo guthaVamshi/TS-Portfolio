@@ -39,15 +39,15 @@ export default function Home() {
     const handleAnchorClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       const anchor = target.closest('a');
-      
+
       if (!anchor) return;
-      
+
       const href = anchor.getAttribute('href');
       if (!href || !href.startsWith('#')) return;
       if (href === '#') return;
-      
+
       e.preventDefault();
-      
+
       const targetElement = document.querySelector(href);
       if (targetElement) {
         window.scrollTo({
@@ -56,11 +56,11 @@ export default function Home() {
         });
       }
     };
-    
+
     document.addEventListener('click', handleAnchorClick);
     return () => document.removeEventListener('click', handleAnchorClick);
   }, []);
-  
+
   return (
     <div className={`min-h-screen font-inter transition-all duration-1000 ${timeClass}`}>
       <Navbar />
@@ -72,7 +72,7 @@ export default function Home() {
           <SkillsSection />
           <EducationSection />
           <ExperienceSection />
-          <CertificationsSection />
+          {/* <CertificationsSection /> */}
           <ProjectsSection />
           <ContactSection />
         </main>
