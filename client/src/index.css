@@ -13,8 +13,14 @@
     @apply font-sans antialiased bg-background text-foreground;
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    font-family: 'Playfair Display', serif;
+  h1, h2, h3 {
+    font-family: 'Outfit', 'Inter', sans-serif;
+    letter-spacing: -0.03em;
+  }
+  
+  h4, h5, h6 {
+    font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+    letter-spacing: -0.02em;
   }
   
   :root {
@@ -469,6 +475,143 @@
   /* Timeline indicators & secondary elements */
   .time-evening .bg-slate-200, .time-night .bg-slate-200 {
     background-color: rgba(255, 255, 255, 0.1) !important;
+  }
+
+  /* Premium Design Utilities */
+  .glass-card {
+    position: relative;
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(16px) saturate(120%);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.04), 
+                inset 0 1px 0 rgba(255, 255, 255, 0.6);
+    transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  
+  .time-morning .glass-card {
+    background: rgba(255, 255, 255, 0.6);
+    border-color: rgba(245, 158, 11, 0.22);
+    box-shadow: 0 10px 30px -10px rgba(245, 158, 11, 0.05),
+                inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  }
+  
+  .time-midday .glass-card {
+    background: rgba(255, 255, 255, 0.6);
+    border-color: rgba(59, 130, 246, 0.18);
+    box-shadow: 0 10px 30px -10px rgba(59, 130, 246, 0.04),
+                inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  }
+  
+  .time-evening .glass-card, .time-night .glass-card {
+    background: rgba(15, 23, 42, 0.45);
+    border-color: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 10px 35px -10px rgba(0, 0, 0, 0.35),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  }
+  
+  /* Spotlight Cursor Tracker */
+  .spotlight-card {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .spotlight-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      800px circle at var(--mouse-x, 0px) var(--mouse-y, 0px),
+      rgba(108, 99, 255, 0.06),
+      transparent 40%
+    );
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+    z-index: 1;
+  }
+  
+  .time-evening .spotlight-card::before, .time-night .spotlight-card::before {
+    background: radial-gradient(
+      600px circle at var(--mouse-x, 0px) var(--mouse-y, 0px),
+      rgba(139, 132, 255, 0.15),
+      transparent 40%
+    );
+  }
+  
+  .spotlight-card:hover::before {
+    opacity: 1;
+  }
+  
+  /* Animated aurora blobs */
+  .aurora-container {
+    position: absolute;
+    inset: 0;
+    filter: blur(100px);
+    opacity: 0.5;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+  }
+  
+  .aurora-blob {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    mix-blend-mode: screen;
+    animation: aurora-move 20s infinite alternate ease-in-out;
+  }
+  
+  .aurora-1 {
+    background: radial-gradient(circle, rgba(108,99,255,0.4) 0%, transparent 70%);
+    top: -10%;
+    left: -10%;
+  }
+  
+  .aurora-2 {
+    background: radial-gradient(circle, rgba(255,101,132,0.3) 0%, transparent 70%);
+    bottom: -10%;
+    right: -10%;
+    animation-delay: -5s;
+  }
+  
+  @keyframes aurora-move {
+    0% {
+      transform: translate(0, 0) scale(1) rotate(0deg);
+    }
+    50% {
+      transform: translate(80px, -50px) scale(1.1) rotate(180deg);
+    }
+    100% {
+      transform: translate(-40px, 60px) scale(0.9) rotate(360deg);
+    }
+  }
+
+  /* Premium border highlight on hover */
+  .glow-border-hover {
+    position: relative;
+  }
+  
+  .glow-border-hover::after {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    background: linear-gradient(135deg, hsl(246, 100%, 69%), hsl(328, 100%, 54%));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1;
+  }
+  
+  .glow-border-hover:hover::after {
+    opacity: 0.4;
+  }
+
+  /* Refined custom cursor links classes */
+  .cursor-link {
+    background-color: rgba(108, 99, 255, 0.05);
+    border-color: rgba(108, 99, 255, 0.8) !important;
+    box-shadow: 0 0 15px rgba(108, 99, 255, 0.3);
   }
 
   /* Reduced motion support */

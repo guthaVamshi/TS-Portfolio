@@ -60,28 +60,28 @@ export default function ContactSection() {
         <div className="max-w-3xl mx-auto">
           {/* CTA headline */}
           <motion.div
-            className="text-center mb-12 space-y-4"
+            className="text-center mb-12 space-y-5"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <h3 className="text-2xl md:text-3xl font-bold text-slate-900">
+            <h3 className="text-2xl md:text-3xl font-black font-outfit text-slate-900 dark:text-slate-100">
               Currently <span className="text-primary">open to opportunities</span>
             </h3>
-            <p className="text-slate-500 max-w-xl mx-auto leading-relaxed text-[15px]">
+            <p className="text-slate-500 dark:text-slate-400 max-w-xl mx-auto leading-relaxed text-[15px]">
               Whether you have a project in mind, want to discuss Salesforce solutions, or just want to say hi —
               my inbox is always open. I'll get back to you as soon as I can!
             </p>
 
             <motion.a
               href="mailto:vamshigutha@gmail.com"
-              className="inline-flex items-center gap-3 px-8 py-4 bg-primary text-white rounded-2xl font-semibold text-sm shadow-xl shadow-primary/30 hover:shadow-primary/50 hover:bg-purple-600 transition-all duration-300 mt-2"
-              whileHover={{ scale: 1.04 }}
+              className="inline-flex items-center gap-2.5 px-8 py-3.5 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-xl font-bold text-xs tracking-wider uppercase shadow-lg hover:shadow-indigo-500/25 transition-all duration-300 mt-2"
+              whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
             >
               <i className="fas fa-paper-plane" />
-              Say Hello
+              <span>Say Hello</span>
             </motion.a>
           </motion.div>
 
@@ -92,21 +92,22 @@ export default function ContactSection() {
                 key={m.label}
                 href={m.href}
                 target={m.href.startsWith("mailto:") || m.href.startsWith("skype:") ? undefined : "_blank"}
-                rel="noopener noreferrer"
-                className="flex items-center gap-4 p-4 bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-md hover:border-primary/20 hover:-translate-y-1 transition-all duration-200 group"
+                rel={m.href.startsWith("mailto:") || m.href.startsWith("skype:") ? undefined : "noopener noreferrer"}
+                className="flex items-center gap-4 p-4 glass-card rounded-2xl border border-white/20 dark:border-white/5 shadow-sm hover:shadow-lg hover:border-primary/30 transition-all duration-300 group"
                 initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.07 }}
+                whileHover={{ y: -4 }}
               >
                 <div className={`w-11 h-11 rounded-xl flex items-center justify-center border ${m.color} flex-shrink-0`}>
                   <i className={`${m.icon} text-base`} />
                 </div>
                 <div className="min-w-0">
-                  <p className="text-[11px] font-bold tracking-widest text-slate-400 uppercase">{m.label}</p>
-                  <p className="text-sm font-semibold text-slate-800 truncate group-hover:text-primary transition-colors">{m.value}</p>
+                  <p className="text-[10px] font-bold tracking-widest text-slate-400 dark:text-slate-500 uppercase">{m.label}</p>
+                  <p className="text-sm font-bold text-slate-800 dark:text-slate-200 truncate group-hover:text-primary transition-colors">{m.value}</p>
                 </div>
-                <i className="fas fa-arrow-right ml-auto text-slate-300 text-xs group-hover:text-primary group-hover:translate-x-1 transition-all" />
+                <i className="fas fa-arrow-right ml-auto text-slate-350 dark:text-slate-600 text-xs group-hover:text-primary group-hover:translate-x-1 transition-all duration-200" />
               </motion.a>
             ))}
           </div>

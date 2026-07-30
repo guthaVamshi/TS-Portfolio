@@ -47,7 +47,12 @@ const groups = [
 
 export default function SkillsSection() {
   return (
-    <section id="skills" className="py-24 md:py-32 bg-[#f8f8fa] relative overflow-hidden">
+    <section id="skills" className="py-24 md:py-32 bg-[#f8f8fa]/30 relative overflow-hidden">
+      {/* Decorative background grid and aurora */}
+      <div className="absolute inset-0 pointer-events-none opacity-40">
+        <div className="absolute top-10 right-10 w-80 h-80 bg-primary/5 rounded-full blur-3xl" />
+      </div>
+
       <Container className="relative z-10">
         {/* Section label */}
         <motion.div
@@ -57,24 +62,24 @@ export default function SkillsSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          <span className="text-5xl font-black text-slate-200 select-none leading-none">02.</span>
+          <span className="text-5xl font-black font-outfit text-slate-200 select-none leading-none">02.</span>
           <div>
             <p className="text-xs font-semibold tracking-[0.2em] text-primary uppercase mb-1">What I Know</p>
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-900">Skills &amp; Technologies</h2>
+            <h2 className="text-3xl md:text-4xl font-bold font-outfit text-slate-900 dark:text-slate-100">Skills &amp; Technologies</h2>
           </div>
           <div className="flex-1 h-px bg-gradient-to-r from-primary/30 to-transparent ml-6 hidden sm:block" />
         </motion.div>
 
-        <div className="space-y-10">
+        <div className="space-y-12">
           {groups.map((group, gi) => (
             <motion.div
               key={group.label}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: gi * 0.1 }}
+              transition={{ duration: 0.5, delay: gi * 0.08 }}
             >
-              <p className="text-xs font-semibold tracking-widest text-slate-400 uppercase mb-4">
+              <p className="text-xs font-bold tracking-widest text-slate-400 dark:text-slate-500 uppercase mb-4">
                 {group.label}
               </p>
               <div className="flex flex-wrap gap-3">
@@ -89,14 +94,16 @@ export default function SkillsSection() {
                     return (
                       <motion.div
                         key={skill.name}
-                        className={`flex items-center gap-2.5 px-4 py-2.5 rounded-xl border ${colors.bg} ${colors.border} cursor-default group transition-all duration-200 hover:shadow-md hover:-translate-y-0.5`}
-                        initial={{ opacity: 0, scale: 0.9 }}
+                        className="glass-card flex items-center gap-2.5 px-4 py-2.5 rounded-xl border border-white/20 dark:border-white/5 cursor-default group transition-all duration-300 hover:border-primary/30 hover:-translate-y-0.5 hover:shadow-md"
+                        initial={{ opacity: 0, scale: 0.95 }}
                         whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ once: true }}
-                        transition={{ delay: gi * 0.05 + i * 0.05 }}
+                        transition={{ delay: gi * 0.02 + i * 0.02 }}
                       >
-                        <i className={`${skill.icon} text-base ${colors.text}`} />
-                        <span className={`text-sm font-semibold ${colors.text}`}>{skill.name}</span>
+                        <div className="w-5 h-5 rounded flex items-center justify-center">
+                          <i className={`${skill.icon} text-sm ${colors.text} group-hover:scale-110 transition-transform duration-300`} />
+                        </div>
+                        <span className="text-xs sm:text-sm font-bold text-slate-700 dark:text-slate-200">{skill.name}</span>
                       </motion.div>
                     );
                   })}
@@ -104,9 +111,6 @@ export default function SkillsSection() {
             </motion.div>
           ))}
         </div>
-
-        {/* Decorative background blob */}
-        <div className="absolute -right-32 top-1/2 -translate-y-1/2 w-96 h-96 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
       </Container>
     </section>
   );

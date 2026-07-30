@@ -17,8 +17,17 @@ export default function ProjectsSection() {
     ? filteredProjects.slice(1)
     : filteredProjects;
 
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const currentTarget = e.currentTarget;
+    const rect = currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    currentTarget.style.setProperty("--mouse-x", `${x}px`);
+    currentTarget.style.setProperty("--mouse-y", `${y}px`);
+  };
+
   return (
-    <section id="projects" className="py-24 md:py-32 bg-[#f8f8fa] relative overflow-hidden">
+    <section id="projects" className="py-24 md:py-32 bg-[#f8f8fa]/30 relative overflow-hidden">
       {/* Background Decorative Blobs matching the site's skills/about patterns */}
       <div className="absolute -left-32 top-1/3 w-96 h-96 bg-primary/5 rounded-full blur-3xl pointer-events-none -z-10 animate-blob" />
       <div className="absolute -right-32 bottom-1/3 w-96 h-96 bg-primary/5 rounded-full blur-3xl pointer-events-none -z-10 animate-blob animation-delay-2000" />
@@ -84,7 +93,10 @@ export default function ProjectsSection() {
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.5 }}
             >
-              <div className="grid grid-cols-1 lg:grid-cols-12 rounded-3xl overflow-hidden border border-slate-100 bg-white shadow-sm hover:shadow-xl hover:shadow-indigo-50/50 hover:border-primary/20 transition-all duration-300">
+              <div 
+                onMouseMove={handleMouseMove}
+                className="grid grid-cols-1 lg:grid-cols-12 rounded-3xl overflow-hidden border border-white/20 dark:border-white/5 glass-card shadow-sm hover:shadow-xl hover:border-primary/30 transition-all duration-300 spotlight-card"
+              >
                 {/* Image */}
                 <div className="relative overflow-hidden aspect-video lg:aspect-auto lg:col-span-7 min-h-[300px] lg:min-h-[420px]">
                   <img
@@ -102,7 +114,7 @@ export default function ProjectsSection() {
                 </div>
 
                 {/* Details */}
-                <div className="p-8 lg:p-10 lg:col-span-5 flex flex-col justify-center gap-5">
+                <div className="p-8 lg:p-10 lg:col-span-5 flex flex-col justify-center gap-5 relative z-10">
                   <div className="flex flex-wrap items-center justify-between gap-3">
                     <span className="text-xs font-bold tracking-widest text-primary uppercase">
                       {featured.category}
@@ -110,7 +122,7 @@ export default function ProjectsSection() {
                     
                     {featured.status && (
                       featured.status === "in-progress" ? (
-                        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-amber-50 text-amber-600 border border-amber-200">
+                        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20">
                           <span className="relative flex h-2 w-2">
                             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
                             <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
@@ -118,8 +130,8 @@ export default function ProjectsSection() {
                           In Progress
                         </span>
                       ) : (
-                        <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-600 border border-emerald-200">
-                          <svg className="w-3.5 h-3.5 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="3">
+                        <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
+                          <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="3">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                           </svg>
                           Completed
@@ -128,16 +140,16 @@ export default function ProjectsSection() {
                     )}
                   </div>
                   
-                  <h3 className="text-2xl lg:text-3xl font-bold text-slate-900 tracking-tight leading-tight">
+                  <h3 className="text-2xl lg:text-3xl font-black font-outfit text-slate-900 dark:text-slate-100 tracking-tight leading-tight group-hover:text-primary transition-colors">
                     {featured.name}
                   </h3>
                   
-                  <p className="text-slate-600 text-sm leading-relaxed font-normal">
+                  <p className="text-slate-650 dark:text-slate-350 text-sm leading-relaxed font-medium">
                     {featured.description}
                   </p>
 
                   {featured.synergy && (
-                    <div className="p-4 rounded-2xl bg-slate-50 border border-slate-100/50">
+                    <div className="p-4 rounded-2xl bg-primary/5 dark:bg-white/5 border border-primary/10 dark:border-white/10">
                       <div className="flex items-start gap-2.5">
                         <span className="mt-0.5 text-primary">
                           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
@@ -145,10 +157,10 @@ export default function ProjectsSection() {
                           </svg>
                         </span>
                         <div>
-                          <p className="text-[10px] font-black uppercase tracking-wider text-slate-400 leading-none mb-1">
+                          <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 leading-none mb-1">
                             Ecosystem Synergy
                           </p>
-                          <p className="text-xs text-slate-600 leading-relaxed font-semibold">
+                          <p className="text-xs text-slate-650 dark:text-slate-350 leading-relaxed font-bold">
                             {featured.synergy}
                           </p>
                         </div>
@@ -158,7 +170,7 @@ export default function ProjectsSection() {
 
                   <div className="flex flex-wrap gap-2 pt-2">
                     {featured.technologies.map((t) => (
-                      <span key={t} className="px-2.5 py-1 bg-slate-100 text-slate-600 rounded-lg text-xs font-medium">
+                      <span key={t} className="px-2.5 py-1 bg-slate-200/50 dark:bg-white/5 text-slate-600 dark:text-slate-350 rounded-lg text-xs font-bold">
                         {t}
                       </span>
                     ))}
@@ -185,7 +197,10 @@ export default function ProjectsSection() {
                 transition={{ duration: 0.3, delay: i * 0.05 }}
                 className="group flex flex-col h-full"
               >
-                <div className="h-full bg-white rounded-2xl border border-slate-100 overflow-hidden shadow-sm hover:shadow-xl hover:shadow-indigo-50/50 hover:border-primary/20 transition-all duration-300 flex flex-col">
+                <div 
+                  onMouseMove={handleMouseMove}
+                  className="h-full glass-card rounded-3xl border border-white/20 dark:border-white/5 overflow-hidden shadow-sm hover:shadow-lg hover:border-primary/30 transition-all duration-300 flex flex-col spotlight-card"
+                >
                   {/* Image */}
                   <div className="relative overflow-hidden aspect-video">
                     <img
@@ -193,11 +208,11 @@ export default function ProjectsSection() {
                       alt={project.name}
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/25 to-transparent" />
                   </div>
 
                   {/* Content */}
-                  <div className="p-6 flex flex-col flex-1 gap-3">
+                  <div className="p-6 flex flex-col flex-1 gap-3 relative z-10">
                     <div className="flex items-center justify-between gap-2">
                       <span className="text-[10px] font-bold tracking-widest text-primary uppercase">
                         {project.category}
@@ -205,7 +220,7 @@ export default function ProjectsSection() {
                       
                       {project.status && (
                         project.status === "in-progress" ? (
-                          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-amber-50 text-amber-600 border border-amber-200">
+                          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20">
                             <span className="relative flex h-1.5 w-1.5">
                               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
                               <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-amber-500"></span>
@@ -213,8 +228,8 @@ export default function ProjectsSection() {
                             In Progress
                           </span>
                         ) : (
-                          <span className="inline-flex items-center gap-0.5 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-50 text-emerald-600 border border-emerald-200">
-                            <svg className="w-2.5 h-2.5 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="3">
+                          <span className="inline-flex items-center gap-0.5 px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
+                            <svg className="w-2.5 h-2.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="3">
                               <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                             </svg>
                             Completed
@@ -223,17 +238,17 @@ export default function ProjectsSection() {
                       )}
                     </div>
                     
-                    <h3 className="font-bold text-lg text-slate-900 group-hover:text-primary transition-colors duration-300">
+                    <h3 className="font-outfit font-black text-lg text-slate-900 dark:text-slate-100 group-hover:text-primary transition-colors duration-200">
                       {project.name}
                     </h3>
                     
-                    <p className="text-xs text-slate-500 leading-relaxed flex-1 font-medium">
+                    <p className="text-xs text-slate-550 dark:text-slate-400 leading-relaxed flex-1 font-medium">
                       {project.description}
                     </p>
 
                     {/* Synergy box in Grid Card */}
                     {project.synergy && (
-                      <div className="p-3 rounded-xl bg-slate-50 border border-slate-100/50">
+                      <div className="p-3.5 rounded-2xl bg-primary/5 dark:bg-white/5 border border-primary/10 dark:border-white/10">
                         <div className="flex items-start gap-2">
                           <span className="mt-0.5 text-primary">
                             <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
@@ -241,10 +256,10 @@ export default function ProjectsSection() {
                             </svg>
                           </span>
                           <div>
-                            <p className="text-[9px] font-black uppercase tracking-wider text-slate-400 leading-none mb-1">
+                            <p className="text-[9px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 leading-none mb-1">
                               Ecosystem Synergy
                             </p>
-                            <p className="text-[10px] text-slate-600 leading-relaxed font-semibold">
+                            <p className="text-[10px] text-slate-650 dark:text-slate-350 leading-relaxed font-bold">
                               {project.synergy}
                             </p>
                           </div>
@@ -252,9 +267,9 @@ export default function ProjectsSection() {
                       </div>
                     )}
 
-                    <div className="flex flex-wrap gap-1.5 pt-3 border-t border-slate-50">
+                    <div className="flex flex-wrap gap-1.5 pt-3 border-t border-slate-100/40 dark:border-white/5">
                       {project.technologies.map((t) => (
-                        <span key={t} className="px-2 py-0.5 bg-slate-100 text-slate-500 rounded text-[10px] font-medium">
+                        <span key={t} className="px-2 py-0.5 bg-slate-200/50 dark:bg-white/5 text-slate-500 dark:text-slate-400 rounded text-[10px] font-bold">
                           {t}
                         </span>
                       ))}
