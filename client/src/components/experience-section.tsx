@@ -1,131 +1,171 @@
-"use client";
-import { Container } from "@/components/ui/container";
 import { motion } from "framer-motion";
 import { experience } from "@/lib/data";
 
+const ease = [0.22, 1, 0.36, 1] as const;
+
 export default function ExperienceSection() {
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const currentTarget = e.currentTarget;
-    const rect = currentTarget.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    currentTarget.style.setProperty("--mouse-x", `${x}px`);
-    currentTarget.style.setProperty("--mouse-y", `${y}px`);
-  };
-
   return (
-    <section id="experience" className="py-24 md:py-32 bg-white relative overflow-hidden">
-      {/* Background auroras */}
-      <div className="absolute inset-0 pointer-events-none opacity-20">
-        <div className="absolute top-1/4 left-1/4 w-[400px] h-[400px] bg-primary/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-purple-500/5 rounded-full blur-3xl" />
-      </div>
+    <section
+      id="experience"
+      aria-label="Work experience"
+      className="section-padding"
+      style={{ background: "var(--c-surface)" }}
+    >
+      <div className="content-container">
 
-      <Container className="relative z-10">
-        {/* Section label */}
+        {/* Section header */}
         <motion.div
-          className="flex items-center gap-4 mb-24"
-          initial={{ opacity: 0, x: -20 }}
-          whileInView={{ opacity: 1, x: 0 }}
+          className="mb-14"
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.5, ease }}
         >
-          <span className="text-5xl font-black font-outfit text-slate-200 select-none leading-none">03.</span>
-          <div>
-            <p className="text-xs font-semibold tracking-[0.2em] text-primary uppercase mb-1">Work History</p>
-            <h2 className="text-3xl md:text-4xl font-bold font-outfit text-slate-900 dark:text-slate-100">Experience</h2>
-          </div>
-          <div className="flex-1 h-px bg-gradient-to-r from-primary/30 to-transparent ml-6 hidden sm:block" />
+          <p className="section-label">Experience</p>
+          <h2 className="section-title">Where I've worked</h2>
         </motion.div>
 
-        {/* Timeline path container */}
-        <div className="relative max-w-5xl mx-auto">
-          {/* Vertical axis line */}
-          <div className="absolute left-4 md:left-1/2 md:-translate-x-1/2 top-2 bottom-2 w-0.5 bg-slate-200/50 dark:bg-white/5" />
+        {/* Timeline wrapper — line is at left: 20px, content starts at pl-[52px] */}
+        <div className="relative max-w-3xl" style={{ paddingLeft: "52px" }}>
 
-          {/* Timeline events loop */}
-          <div className="space-y-16">
+          {/* Vertical timeline line — centered at x=20 from outer div left edge */}
+          <div
+            aria-hidden
+            style={{
+              position: "absolute",
+              left: "20px",
+              top: "32px",
+              bottom: "20px",
+              width: "1px",
+              background:
+                "linear-gradient(to bottom, transparent 0%, hsl(var(--c-accent-hsl) / 0.25) 8%, hsl(var(--c-accent-hsl) / 0.25) 92%, transparent 100%)",
+            }}
+          />
+
+          {/* Entries */}
+          <div className="space-y-14">
             {experience.map((exp, i) => {
-              const isLeft = i % 2 === 0;
+              const bullets = exp.description
+                .split(". ")
+                .map((s) => s.trim())
+                .filter(Boolean)
+                .map((s) => (s.endsWith(".") ? s : s + "."));
 
               return (
-                <div
+                <motion.article
                   key={`${exp.company}-${exp.position}`}
-                  className="relative group flex flex-col md:flex-row items-stretch justify-between md:even:flex-row-reverse w-full"
+                  className="relative"
+                  initial={{ opacity: 0, x: -16 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, margin: "-80px" }}
+                  transition={{ duration: 0.55, delay: i * 0.07, ease }}
+                  aria-label={`${exp.position} at ${exp.company}`}
                 >
-                  {/* Timeline axis dot */}
-                  <div className="absolute left-4 md:left-1/2 md:-translate-x-1/2 top-6 -translate-x-1/2 w-5 h-5 rounded-full border-2 border-primary bg-white dark:bg-slate-950 flex items-center justify-center transition-all duration-300 z-20 shadow-md group-hover:scale-125 group-hover:shadow-[0_0_12px_rgba(108,99,255,0.4)]">
-                    <div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-                  </div>
+                  {/* Timeline dot — positioned at left: 20px from outer div = left: 20-52 = -32px from article */}
+                  <div
+                    aria-hidden
+                    style={{
+                      position: "absolute",
+                      left: "-37.5px",   /* 20 - 52 - (11/2) = -37.5 centers the 11px dot on the line */
+                      top: "26px",
+                      width: "11px",
+                      height: "11px",
+                      borderRadius: "50%",
+                      border: "2px solid hsl(var(--c-accent-hsl))",
+                      background: "var(--c-bg)",
+                      boxShadow: "0 0 0 3px hsl(var(--c-accent-hsl) / 0.12)",
+                      transition: "box-shadow 0.2s",
+                      zIndex: 1,
+                    }}
+                  />
 
-                  {/* Card panel (fades & slides from left/right) */}
-                  <motion.div
-                    className="w-full md:w-[calc(50%-32px)] pl-10 md:pl-0"
-                    initial={{ opacity: 0, x: isLeft ? -40 : 40, scale: 0.96 }}
-                    whileInView={{ opacity: 1, x: 0, scale: 1 }}
-                    viewport={{ once: true, margin: "-100px" }}
-                    transition={{ duration: 0.6, type: "spring", bounce: 0.15 }}
-                  >
-                    <div
-                      onMouseMove={handleMouseMove}
-                      className="glass-card spotlight-card p-6 md:p-8 rounded-3xl border border-white/20 dark:border-white/5 hover:border-primary/30 hover:shadow-xl transition-all duration-300 relative"
-                    >
-                      {/* Header */}
-                      <div className="flex items-center gap-4 mb-4 relative z-10">
-                        <div className="w-12 h-12 rounded-xl border border-slate-100 dark:border-white/10 bg-white dark:bg-slate-900/60 flex items-center justify-center p-2 flex-shrink-0 shadow-sm">
-                          <img src={exp.logo} alt={exp.company} className="w-full h-full object-contain" />
-                        </div>
-                        <div>
-                          <h3 className="text-base md:text-lg font-black font-outfit text-slate-900 dark:text-slate-100 tracking-tight leading-snug group-hover:text-primary transition-colors">
-                            {exp.position}
-                          </h3>
-                          <p className="text-primary font-bold text-xs mt-0.5">{exp.company}</p>
-                        </div>
+                  {/* Header row */}
+                  <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1 mb-4">
+                    <div className="flex items-center gap-3">
+                      {/* Company logo */}
+                      <div
+                        style={{
+                          width: "36px",
+                          height: "36px",
+                          borderRadius: "var(--r-md)",
+                          background: "var(--c-surface-2)",
+                          border: "1px solid var(--c-border)",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          overflow: "hidden",
+                          flexShrink: 0,
+                        }}
+                      >
+                        <img
+                          src={exp.logo}
+                          alt={exp.company}
+                          className="w-full h-full object-contain p-1"
+                          loading="lazy"
+                        />
                       </div>
-
-                      {/* Description Bullets */}
-                      <ul className="space-y-2.5 relative z-10">
-                        {exp.description
-                          .split(". ")
-                          .filter(Boolean)
-                          .map((sentence, index) => (
-                            <li key={index} className="flex items-start gap-3 text-xs md:text-[13px] text-slate-650 dark:text-slate-350 leading-relaxed font-medium">
-                              <span className="mt-1.5 w-1 h-1 rounded-full bg-primary flex-shrink-0" />
-                              <span>{sentence.endsWith(".") ? sentence : sentence + "."}</span>
-                            </li>
-                          ))}
-                      </ul>
-
-                      {/* Mobile period display */}
-                      <span className="inline-block mt-4 px-2.5 py-0.5 bg-primary/10 dark:bg-primary/5 text-primary text-[9px] font-extrabold tracking-wider uppercase rounded-full border border-primary/20 md:hidden">
-                        {exp.period}
-                      </span>
+                      <div>
+                        <h3
+                          className="text-base font-semibold leading-snug"
+                          style={{
+                            color: "var(--c-text)",
+                            fontFamily: "'Inter', sans-serif",
+                            letterSpacing: "-0.01em",
+                          }}
+                        >
+                          {exp.position}
+                        </h3>
+                        <p
+                          className="text-sm"
+                          style={{ color: "var(--c-accent)", fontWeight: 500 }}
+                        >
+                          {exp.company}
+                        </p>
+                      </div>
                     </div>
-                  </motion.div>
 
-                  {/* Period sidebar block (Desktop only, displays opposite of card) */}
-                  <div className="hidden md:flex w-[calc(50%-32px)] items-center justify-center">
-                    <motion.div
-                      className={`w-full ${isLeft ? "text-left pl-8" : "text-right pr-8"}`}
-                      initial={{ opacity: 0, x: isLeft ? 20 : -20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.5, delay: 0.1 }}
+                    {/* Period */}
+                    <span
+                      className="text-xs font-medium flex-shrink-0"
+                      style={{
+                        color: "var(--c-text-faint)",
+                        paddingTop: "2px",
+                        letterSpacing: "0.02em",
+                      }}
                     >
-                      <span className="text-xs font-black font-plus-jakarta tracking-wider text-slate-400 dark:text-slate-500 uppercase">
-                        {exp.period.split(" - ")[0]}
-                      </span>
-                      <span className="block text-[10px] text-slate-350 dark:text-slate-600 font-bold mt-1 uppercase">
-                        to {exp.period.split(" - ")[1] || "Present"}
-                      </span>
-                    </motion.div>
+                      {exp.period}
+                    </span>
                   </div>
-                </div>
+
+                  {/* Bullets */}
+                  <ul className="space-y-2">
+                    {bullets.map((bullet, bi) => (
+                      <li
+                        key={bi}
+                        className="flex items-start gap-3 text-sm leading-relaxed"
+                        style={{ color: "var(--c-text-muted)" }}
+                      >
+                        <span
+                          style={{
+                            color: "var(--c-text-faint)",
+                            marginTop: "6px",
+                            fontSize: "5px",
+                            flexShrink: 0,
+                          }}
+                          aria-hidden
+                        >
+                          ●
+                        </span>
+                        {bullet}
+                      </li>
+                    ))}
+                  </ul>
+                </motion.article>
               );
             })}
           </div>
         </div>
-      </Container>
+      </div>
     </section>
   );
 }

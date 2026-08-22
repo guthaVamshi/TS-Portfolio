@@ -1,118 +1,116 @@
-import { Container } from "@/components/ui/container";
 import { motion } from "framer-motion";
 
-const contactMethods = [
+const ease = [0.22, 1, 0.36, 1] as const;
+
+const CONTACTS = [
   {
     icon: "fas fa-envelope",
     label: "Email",
     value: "vamshigutha@gmail.com",
     href: "mailto:vamshigutha@gmail.com",
-    color: "bg-red-50 text-red-500 border-red-100",
   },
   {
     icon: "fab fa-linkedin-in",
     label: "LinkedIn",
-    value: "vamshi-gutha",
+    value: "linkedin.com/in/vamshi-gutha",
     href: "https://www.linkedin.com/in/vamshi-gutha/",
-    color: "bg-blue-50 text-blue-500 border-blue-100",
-  },
-  {
-    icon: "fab fa-github",
-    label: "GitHub",
-    value: "guthaVamshi",
-    href: "https://github.com/guthaVamshi",
-    color: "bg-slate-50 text-slate-700 border-slate-100",
-  },
-  {
-    icon: "fab fa-skype",
-    label: "Skype",
-    value: "vamshigutha",
-    href: "skype:vamshigutha?call",
-    color: "bg-sky-50 text-sky-500 border-sky-100",
   },
 ];
 
 export default function ContactSection() {
   return (
-    <section id="contact" className="py-24 md:py-32 bg-white relative overflow-hidden">
-      {/* Background glow */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl" />
-      </div>
+    <section
+      id="contact"
+      aria-label="Contact"
+      className="section-padding"
+      style={{ background: "var(--c-surface)" }}
+    >
+      <div className="content-container">
+        <div className="max-w-[560px]">
 
-      <Container className="relative z-10">
-        {/* Section label */}
-        <motion.div
-          className="flex items-center gap-4 mb-16"
-          initial={{ opacity: 0, x: -20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-        >
-          <span className="text-5xl font-black text-slate-100 select-none leading-none">07.</span>
-          <div>
-            <p className="text-xs font-semibold tracking-[0.2em] text-primary uppercase mb-1">Say Hello</p>
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-900">Get In Touch</h2>
-          </div>
-          <div className="flex-1 h-px bg-gradient-to-r from-primary/30 to-transparent ml-6 hidden sm:block" />
-        </motion.div>
-
-        <div className="max-w-3xl mx-auto">
-          {/* CTA headline */}
+          {/* Section header */}
           <motion.div
-            className="text-center mb-12 space-y-5"
-            initial={{ opacity: 0, y: 20 }}
+            className="mb-10"
+            initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.5, ease }}
           >
-            <h3 className="text-2xl md:text-3xl font-black font-outfit text-slate-900 dark:text-slate-100">
-              Currently <span className="text-primary">open to opportunities</span>
-            </h3>
-            <p className="text-slate-500 dark:text-slate-400 max-w-xl mx-auto leading-relaxed text-[15px]">
-              Whether you have a project in mind, want to discuss Salesforce solutions, or just want to say hi —
-              my inbox is always open. I'll get back to you as soon as I can!
-            </p>
-
-            <motion.a
-              href="mailto:vamshigutha@gmail.com"
-              className="inline-flex items-center gap-2.5 px-8 py-3.5 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-xl font-bold text-xs tracking-wider uppercase shadow-lg hover:shadow-indigo-500/25 transition-all duration-300 mt-2"
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.97 }}
+            <p className="section-label">Contact</p>
+            <h2 className="section-title">
+              Let's build something
+              <br />
+              together.
+            </h2>
+            <p
+              className="mt-5 text-base leading-relaxed"
+              style={{ color: "var(--c-text-muted)", lineHeight: "1.75" }}
             >
-              <i className="fas fa-paper-plane" />
-              <span>Say Hello</span>
-            </motion.a>
+              I'm currently open to new opportunities. If you have a project in
+              mind, want to discuss Salesforce solutions, or just want to say
+              hello — reach out.
+            </p>
           </motion.div>
 
-          {/* Contact method cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {contactMethods.map((m, i) => (
+          {/* Contact rows */}
+          <div className="flex flex-col gap-3">
+            {CONTACTS.map((c, i) => (
               <motion.a
-                key={m.label}
-                href={m.href}
-                target={m.href.startsWith("mailto:") || m.href.startsWith("skype:") ? undefined : "_blank"}
-                rel={m.href.startsWith("mailto:") || m.href.startsWith("skype:") ? undefined : "noopener noreferrer"}
-                className="flex items-center gap-4 p-4 glass-card rounded-2xl border border-white/20 dark:border-white/5 shadow-sm hover:shadow-lg hover:border-primary/30 transition-all duration-300 group"
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                key={c.label}
+                href={c.href}
+                target={c.href.startsWith("mailto:") ? undefined : "_blank"}
+                rel={c.href.startsWith("mailto:") ? undefined : "noopener noreferrer"}
+                className="contact-row"
+                initial={{ opacity: 0, x: -12 }}
+                whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.07 }}
-                whileHover={{ y: -4 }}
+                transition={{ duration: 0.45, delay: i * 0.08, ease }}
+                aria-label={`${c.label}: ${c.value}`}
               >
-                <div className={`w-11 h-11 rounded-xl flex items-center justify-center border ${m.color} flex-shrink-0`}>
-                  <i className={`${m.icon} text-base`} />
+                <span className="contact-icon" aria-hidden>
+                  <i className={c.icon} />
+                </span>
+                <div>
+                  <p
+                    className="text-xs font-medium uppercase tracking-wider mb-0.5"
+                    style={{ color: "var(--c-text-faint)" }}
+                  >
+                    {c.label}
+                  </p>
+                  <p
+                    className="text-sm font-medium"
+                    style={{ color: "var(--c-text)" }}
+                  >
+                    {c.value}
+                  </p>
                 </div>
-                <div className="min-w-0">
-                  <p className="text-[10px] font-bold tracking-widest text-slate-400 dark:text-slate-500 uppercase">{m.label}</p>
-                  <p className="text-sm font-bold text-slate-800 dark:text-slate-200 truncate group-hover:text-primary transition-colors">{m.value}</p>
-                </div>
-                <i className="fas fa-arrow-right ml-auto text-slate-350 dark:text-slate-600 text-xs group-hover:text-primary group-hover:translate-x-1 transition-all duration-200" />
+                <i
+                  className="fas fa-arrow-right ml-auto text-xs"
+                  style={{ color: "var(--c-text-faint)" }}
+                  aria-hidden
+                />
               </motion.a>
             ))}
           </div>
+
+          {/* Primary CTA */}
+          <motion.div
+            className="mt-8"
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4, delay: 0.2, ease }}
+          >
+            <a
+              href="mailto:vamshigutha@gmail.com"
+              className="btn-primary"
+            >
+              <i className="fas fa-paper-plane text-xs" aria-hidden />
+              Send me an email
+            </a>
+          </motion.div>
         </div>
-      </Container>
+      </div>
     </section>
   );
 }

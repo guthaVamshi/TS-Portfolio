@@ -1,126 +1,98 @@
 import { useState, useEffect } from "react";
-import { Container } from "@/components/ui/container";
-import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
+import { cn } from "@/lib/utils";
 
 const NAV_LINKS = [
-  { name: "About",    href: "#about" },
-  { name: "Skills",   href: "#skills" },
+  { name: "About",      href: "#about" },
+  { name: "Skills",     href: "#skills" },
   { name: "Experience", href: "#experience" },
-  { name: "Projects", href: "#projects" },
-  { name: "Contact",  href: "#contact" },
+  { name: "Projects",   href: "#projects" },
+  { name: "Contact",    href: "#contact" },
 ];
 
 export default function Navbar() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [scrolled, setScrolled]     = useState(false);
-  const [scrollY, setScrollY]       = useState(0);
-  const [isMobile, setIsMobile]     = useState(false);
+  const [menuOpen, setMenuOpen]         = useState(false);
+  const [scrolled, setScrolled]         = useState(false);
   const [activeSection, setActiveSection] = useState("");
 
   useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    checkMobile();
-    window.addEventListener("resize", checkMobile, { passive: true });
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const sections = ["about", "skills", "experience", "projects", "contact"];
-      const scrollPosition = window.scrollY + 250; // offset for triggers
-
-      for (const section of sections) {
-        const el = document.getElementById(section);
-        if (el) {
-          const top = el.offsetTop;
-          const height = el.offsetHeight;
-          if (scrollPosition >= top && scrollPosition < top + height) {
-            setActiveSection(section);
-            break;
-          }
-        }
-      }
-    };
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  useEffect(() => {
-    let ticking = false;
-    const onScroll = () => {
-      if (ticking) return;
-      ticking = true;
-      requestAnimationFrame(() => {
-        setScrollY(window.scrollY);
-        setScrolled(window.scrollY > 40);
-        ticking = false;
-      });
-    };
+    const onScroll = () => setScrolled(window.scrollY > 60);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   useEffect(() => {
-    document.body.style.overflow = isMenuOpen ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
-  }, [isMenuOpen]);
+    const sections = NAV_LINKS.map((l) => l.href.slice(1));
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        }
+      },
+      { rootMargin: "-40% 0px -55% 0px" }
+    );
+    sections.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+    return () => observer.disconnect();
+  }, []);
 
-  // Compute dynamic opacity for mobile (hidden in hero, fades in as we scroll)
-  const headerOpacity = isMenuOpen
-    ? 1
-    : isMobile
-      ? Math.min(Math.max((scrollY - 50) / 350, 0), 1)
-      : 1;
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [menuOpen]);
 
   return (
     <>
       <motion.header
-        initial={{ y: -80, opacity: 0 }}
-        animate={{ y: 0, opacity: headerOpacity }}
-        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-        style={{ opacity: headerOpacity }}
-        className={cn(
-          "fixed top-0 inset-x-0 z-50 flex justify-center pt-4 sm:pt-5 px-4 transition-opacity duration-150",
-          isMobile && headerOpacity === 0 ? "pointer-events-none" : ""
-        )}
+        initial={{ y: -60, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+        className="fixed top-0 inset-x-0 z-50 flex justify-center px-4 pt-4"
+        aria-label="Site navigation"
       >
         <nav
           className={cn(
-            "flex items-center justify-between gap-2 px-4 sm:px-6 py-2 rounded-2xl transition-all duration-500 w-full max-w-4xl",
-            scrolled
-              ? "glass-card bg-white/70 dark:bg-slate-900/60 border border-white/20 dark:border-white/10 shadow-lg shadow-black/5"
-              : "bg-white/40 dark:bg-slate-950/20 border border-white/10 dark:border-white/5 shadow-sm"
+            "flex items-center justify-between gap-3 px-5 py-2.5 rounded-2xl w-full max-w-[900px] transition-all duration-400",
+            scrolled ? "nav-glass" : "bg-transparent"
           )}
         >
           {/* Logo */}
-          <a href="#" className="font-outfit font-black text-lg tracking-tight flex-shrink-0 select-none hover:opacity-85 transition-opacity">
-            Vamshi<span className="text-primary">.</span>
+          <a
+            href="#"
+            className="font-outfit font-black text-[17px] tracking-tight select-none hover:opacity-80 transition-opacity"
+            aria-label="Back to top"
+            style={{ color: "var(--c-text)" }}
+          >
+            Vamshi<span style={{ color: "var(--c-accent)" }}>.</span>
           </a>
 
           {/* Desktop links */}
-          <div className="hidden md:flex items-center gap-1.5 relative">
+          <div className="hidden md:flex items-center gap-0.5" role="list">
             {NAV_LINKS.map((link) => {
-              const isActive = activeSection === link.href.substring(1);
+              const isActive = activeSection === link.href.slice(1);
               return (
                 <a
                   key={link.name}
                   href={link.href}
+                  role="listitem"
                   className={cn(
-                    "relative px-3 py-1.5 text-[13px] font-semibold tracking-wide rounded-xl transition-colors duration-300 z-10",
-                    isActive 
-                      ? "text-primary" 
-                      : "text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white"
+                    "relative px-3 py-1.5 text-[13px] font-medium rounded-xl transition-colors duration-200",
+                    isActive
+                      ? "text-white"
+                      : "hover:text-white"
                   )}
+                  style={{ color: isActive ? "var(--c-text)" : "var(--c-text-muted)" }}
                 >
                   {link.name}
                   {isActive && (
-                    <motion.div
-                      layoutId="activeNavTab"
-                      className="absolute inset-0 bg-primary/10 rounded-xl -z-10 border border-primary/20"
-                      transition={{ type: "spring", stiffness: 350, damping: 25 }}
+                    <motion.span
+                      layoutId="navPill"
+                      className="nav-indicator"
+                      transition={{ type: "spring", stiffness: 400, damping: 30 }}
                     />
                   )}
                 </a>
@@ -128,29 +100,30 @@ export default function Navbar() {
             })}
           </div>
 
-          {/* Desktop social + CTA */}
-          <div className="hidden md:flex items-center gap-2 flex-shrink-0">
+          {/* Desktop CTA */}
+          <div className="hidden md:flex items-center gap-2">
             <a
               href="https://github.com/guthaVamshi"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-8 h-8 flex items-center justify-center rounded-xl text-slate-500 hover:text-slate-900 hover:bg-slate-100 dark:hover:bg-white/10 dark:hover:text-white transition-all duration-200"
-              aria-label="GitHub"
+              className="social-link"
+              aria-label="GitHub profile"
             >
-              <i className="fab fa-github text-sm" />
+              <i className="fab fa-github" />
             </a>
             <a
               href="https://www.linkedin.com/in/vamshi-gutha/"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-8 h-8 flex items-center justify-center rounded-xl text-slate-500 hover:text-blue-600 hover:bg-blue-50 dark:hover:bg-white/10 dark:hover:text-blue-400 transition-all duration-200"
-              aria-label="LinkedIn"
+              className="social-link"
+              aria-label="LinkedIn profile"
             >
-              <i className="fab fa-linkedin-in text-sm" />
+              <i className="fab fa-linkedin-in" />
             </a>
             <a
               href="#contact"
-              className="ml-2 px-4 py-1.5 text-[13px] font-semibold bg-primary text-white rounded-xl hover:opacity-90 active:scale-95 transition-all duration-200 shadow-sm hover:shadow-primary/30"
+              className="btn-primary"
+              style={{ padding: "8px 18px", fontSize: "13px" }}
             >
               Hire Me
             </a>
@@ -158,45 +131,66 @@ export default function Navbar() {
 
           {/* Mobile hamburger */}
           <button
-            onClick={() => setIsMenuOpen((v) => !v)}
-            className="md:hidden w-8 h-8 flex items-center justify-center rounded-xl text-slate-600 hover:bg-slate-100 transition-all hamburger-button"
-            aria-label="Toggle menu"
+            onClick={() => setMenuOpen((v) => !v)}
+            className="md:hidden w-9 h-9 flex items-center justify-center rounded-xl transition-colors"
+            style={{
+              color: "var(--c-text-muted)",
+              background: menuOpen ? "rgba(255,255,255,0.08)" : "transparent",
+            }}
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={menuOpen}
           >
-            <i className={cn("fas text-sm", isMenuOpen ? "fa-times" : "fa-bars")} />
+            <i className={cn("fas text-sm", menuOpen ? "fa-xmark" : "fa-bars")} />
           </button>
         </nav>
       </motion.header>
 
-      {/* Mobile menu */}
+      {/* Mobile full-screen menu */}
       <AnimatePresence>
-        {isMenuOpen && (
+        {menuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-40 bg-white/95 backdrop-blur-sm flex flex-col items-center justify-center gap-6 md:hidden mobile-menu-overlay"
+            className="fixed inset-0 z-40 flex flex-col items-center justify-center md:hidden"
+            style={{ background: "rgba(10, 10, 15, 0.97)", backdropFilter: "blur(20px)" }}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Navigation menu"
           >
-            {NAV_LINKS.map((link, i) => (
-              <motion.a
-                key={link.name}
-                href={link.href}
-                onClick={() => setIsMenuOpen(false)}
-                className="text-3xl font-bold text-slate-800 hover:text-primary transition-colors mobile-menu-link"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.06 }}
-              >
-                {link.name}
-              </motion.a>
-            ))}
+            <nav className="flex flex-col items-center gap-2" role="list">
+              {NAV_LINKS.map((link, i) => (
+                <motion.a
+                  key={link.name}
+                  href={link.href}
+                  role="listitem"
+                  onClick={() => setMenuOpen(false)}
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.06, ease: [0.22, 1, 0.36, 1] }}
+                  className="text-4xl font-black font-outfit tracking-tight transition-colors duration-150"
+                  style={{ color: "var(--c-text-muted)" }}
+                  onMouseEnter={(e) => {
+                    (e.target as HTMLElement).style.color = "var(--c-text)";
+                  }}
+                  onMouseLeave={(e) => {
+                    (e.target as HTMLElement).style.color = "var(--c-text-muted)";
+                  }}
+                >
+                  {link.name}
+                </motion.a>
+              ))}
+            </nav>
+
             <motion.a
               href="#contact"
-              onClick={() => setIsMenuOpen(false)}
-              className="mt-4 px-8 py-3 bg-primary text-white rounded-2xl font-semibold text-lg shadow-lg shadow-primary/30"
-              initial={{ opacity: 0, y: 20 }}
+              onClick={() => setMenuOpen(false)}
+              className="btn-primary mt-10"
+              initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: NAV_LINKS.length * 0.06 }}
+              style={{ fontSize: "15px", padding: "14px 36px" }}
             >
               Hire Me
             </motion.a>
