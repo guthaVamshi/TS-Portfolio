@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import Navbar from "@/components/navbar";
 import HeroSection from "@/components/hero-section";
 import AboutSection from "@/components/about-section";
@@ -6,7 +7,8 @@ import ExperienceSection from "@/components/experience-section";
 import ProjectsSection from "@/components/projects-section";
 import ContactSection from "@/components/contact-section";
 import Footer from "@/components/footer";
-import { useEffect } from "react";
+import ThreeBackground from "@/components/three-background";
+import CustomCursor from "@/components/custom-cursor";
 
 export default function Home() {
   // Smooth scroll for anchor links
@@ -31,9 +33,18 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="min-h-screen" style={{ background: "var(--c-bg)" }}>
+    <div className="relative min-h-screen selection:bg-purple-500/30 selection:text-white" style={{ background: "var(--c-bg)" }}>
+      {/* Interactive 3D Background */}
+      <ThreeBackground />
+
+      {/* Reactive Custom Cursor */}
+      <CustomCursor />
+
+      {/* Site Navigation */}
       <Navbar />
-      <main>
+
+      {/* Main Content */}
+      <main className="relative z-10">
         <HeroSection />
         <AboutSection />
         <SkillsSection />
@@ -41,6 +52,7 @@ export default function Home() {
         <ProjectsSection />
         <ContactSection />
       </main>
+
       <Footer />
     </div>
   );
