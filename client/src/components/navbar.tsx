@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
+import { Menu, X } from "lucide-react";
+import { Dialog, DialogContent, DialogTitle, DialogDescription } from "./ui/dialog";
 import { cn } from "@/lib/utils";
 
 const NAV_LINKS = [
@@ -17,6 +19,7 @@ export default function Navbar() {
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
+    onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -40,10 +43,6 @@ export default function Navbar() {
     return () => observer.disconnect();
   }, []);
 
-  useEffect(() => {
-    document.body.style.overflow = menuOpen ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
-  }, [menuOpen]);
 
   return (
     <>
@@ -56,13 +55,13 @@ export default function Navbar() {
       >
         <nav
           className={cn(
-            "flex items-center justify-between gap-3 px-5 py-2.5 rounded-2xl w-full max-w-[900px] transition-all duration-400",
+            "flex items-center justify-between gap-3 px-5 py-2.5 rounded-2xl w-full max-w-[1200px] transition-all duration-400",
             scrolled ? "nav-glass" : "bg-transparent"
           )}
         >
           {/* Logo */}
           <a
-            href="#"
+            href="#hero"
             className="font-outfit font-black text-[17px] tracking-tight select-none hover:opacity-80 transition-opacity"
             aria-label="Back to top"
             style={{ color: "var(--c-text)" }}
@@ -140,63 +139,21 @@ export default function Navbar() {
             aria-label={menuOpen ? "Close menu" : "Open menu"}
             aria-expanded={menuOpen}
           >
-            <i className={cn("fas text-sm", menuOpen ? "fa-xmark" : "fa-bars")} />
+            {menuOpen ? <X size={19} /> : <Menu size={19} />}
           </button>
         </nav>
       </motion.header>
 
-      {/* Mobile full-screen menu */}
-      <AnimatePresence>
-        {menuOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-40 flex flex-col items-center justify-center md:hidden"
-            style={{ background: "rgba(10, 10, 15, 0.97)", backdropFilter: "blur(20px)" }}
-            role="dialog"
-            aria-modal="true"
-            aria-label="Navigation menu"
-          >
-            <nav className="flex flex-col items-center gap-2" role="list">
-              {NAV_LINKS.map((link, i) => (
-                <motion.a
-                  key={link.name}
-                  href={link.href}
-                  role="listitem"
-                  onClick={() => setMenuOpen(false)}
-                  initial={{ opacity: 0, y: 16 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.06, ease: [0.22, 1, 0.36, 1] }}
-                  className="text-4xl font-black font-outfit tracking-tight transition-colors duration-150"
-                  style={{ color: "var(--c-text-muted)" }}
-                  onMouseEnter={(e) => {
-                    (e.target as HTMLElement).style.color = "var(--c-text)";
-                  }}
-                  onMouseLeave={(e) => {
-                    (e.target as HTMLElement).style.color = "var(--c-text-muted)";
-                  }}
-                >
-                  {link.name}
-                </motion.a>
-              ))}
-            </nav>
-
-            <motion.a
-              href="#contact"
-              onClick={() => setMenuOpen(false)}
-              className="btn-primary mt-10"
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: NAV_LINKS.length * 0.06 }}
-              style={{ fontSize: "15px", padding: "14px 36px" }}
-            >
-              Hire Me
-            </motion.a>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <Dialog open={menuOpen} onOpenChange={setMenuOpen}>
+        <DialogContent className="mobile-navigation">
+          <DialogTitle className="sr-only">Navigation menu</DialogTitle>
+          <DialogDescription className="sr-only">Explore Vamshi Gutha's portfolio.</DialogDescription>
+          <nav className="flex flex-col gap-6">
+            {NAV_LINKS.map((link, i) => <a key={link.name} href={link.href} onClick={() => setMenuOpen(false)} className="mobile-nav-link"><span>0{i + 1}</span>{link.name}</a>)}
+          </nav>
+          <a href="#contact" onClick={() => setMenuOpen(false)} className="btn-primary mt-8 w-fit">Hire Me</a>
+        </DialogContent>
+      </Dialog>
     </>
   );
 }

@@ -24,7 +24,7 @@ export default function Footer() {
           {/* Logo + tagline */}
           <div>
             <a
-              href="#"
+              href="#hero"
               className="font-outfit font-black text-base tracking-tight"
               style={{ color: "var(--c-text)" }}
               aria-label="Back to top"

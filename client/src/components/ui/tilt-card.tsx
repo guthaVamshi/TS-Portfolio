@@ -1,4 +1,5 @@
 import React, { useRef, useState } from "react";
+import { useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 interface TiltCardProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -16,13 +17,14 @@ export function TiltCard({
   style,
   ...props
 }: TiltCardProps) {
+  const reduced = useReducedMotion();
   const cardRef = useRef<HTMLDivElement>(null);
   const [rotateX, setRotateX] = useState(0);
   const [rotateY, setRotateY] = useState(0);
   const [glowPos, setGlowPos] = useState({ x: 50, y: 50, opacity: 0 });
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!cardRef.current) return;
+    if (!cardRef.current || reduced || maxTilt === 0 || !window.matchMedia("(pointer: fine)").matches) return;
     const rect = cardRef.current.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;

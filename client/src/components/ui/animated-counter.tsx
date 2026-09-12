@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-import { useInView } from "framer-motion";
+import { useInView, useReducedMotion } from "framer-motion";
 
 interface AnimatedCounterProps {
   value: string;
@@ -8,6 +8,7 @@ interface AnimatedCounterProps {
 }
 
 export function AnimatedCounter({ value, className, style }: AnimatedCounterProps) {
+  const reduced = useReducedMotion();
   const ref = useRef<HTMLSpanElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-20px" });
   
@@ -21,7 +22,8 @@ export function AnimatedCounter({ value, className, style }: AnimatedCounterProp
   useEffect(() => {
     if (!isInView || targetNum === null) return;
 
-    let start = 0;
+    if (reduced) { setCount(targetNum); return; }
+    let rafId = 0;
     const duration = 1200; // ms
     const startTime = performance.now();
 
@@ -34,15 +36,15 @@ export function AnimatedCounter({ value, className, style }: AnimatedCounterProp
       setCount(current);
 
       if (progress < 1) {
-        requestAnimationFrame(update);
+        rafId = requestAnimationFrame(update);
       } else {
         setCount(targetNum);
       }
     };
 
-    const rafId = requestAnimationFrame(update);
+    rafId = requestAnimationFrame(update);
     return () => cancelAnimationFrame(rafId);
-  }, [isInView, targetNum]);
+  }, [isInView, targetNum, reduced]);
 
   return (
     <span ref={ref} className={className} style={style}>

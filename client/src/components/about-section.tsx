@@ -39,7 +39,7 @@ export default function AboutSection() {
           transition={{ duration: 0.5, ease }}
         >
           <div className="flex items-center gap-2 mb-2">
-            <span className="w-2 h-2 rounded-full bg-purple-400" />
+            <span className="w-2 h-2 rounded-full bg-[var(--c-surface-2)]" />
             <p className="section-label mb-0">About Me</p>
           </div>
           <h2 className="section-title">
@@ -61,9 +61,9 @@ export default function AboutSection() {
           >
             {/* Tilt Profile Card */}
             <TiltCard
-              maxTilt={6}
-              glowColor="rgba(168, 85, 247, 0.25)"
-              className="rounded-2xl border border-white/10 bg-slate-900/60 p-2.5 shadow-2xl backdrop-blur-md group"
+              maxTilt={0}
+              glowColor="rgba(209, 233, 163, 0.04)"
+              className="surface-card rounded-2xl border border-white/10 bg-[var(--c-surface-2)] p-2.5 shadow-2xl backdrop-blur-md group"
             >
               <div className="relative overflow-hidden rounded-xl">
                 <img
@@ -83,9 +83,9 @@ export default function AboutSection() {
                 <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between pointer-events-none">
                   <div>
                     <p className="text-white font-outfit font-bold text-lg">Vamshi Gutha</p>
-                    <p className="text-xs text-purple-300 font-mono">Software Engineer @ Macy's</p>
+                    <p className="text-xs text-[var(--c-accent)] font-mono">Software Engineer @ Macy's</p>
                   </div>
-                  <div className="w-9 h-9 rounded-full bg-purple-500/20 border border-purple-400/30 backdrop-blur-md flex items-center justify-center text-purple-300 text-sm">
+                  <div className="w-9 h-9 rounded-full bg-[var(--c-surface-2)] border border-[var(--c-border-mid)] backdrop-blur-md flex items-center justify-center text-[var(--c-accent)] text-sm">
                     <i className="fas fa-code" />
                   </div>
                 </div>
@@ -106,7 +106,7 @@ export default function AboutSection() {
                   <div className="font-outfit font-black text-2xl text-white">
                     <AnimatedCounter value={s.value} />
                   </div>
-                  <div className="text-[11px] text-slate-400 mt-0.5 leading-tight">{s.label}</div>
+                  <div className="text-[11px] text-[var(--c-text-muted)] mt-0.5 leading-tight">{s.label}</div>
                 </motion.div>
               ))}
             </div>
@@ -121,7 +121,7 @@ export default function AboutSection() {
             transition={{ duration: 0.6, ease, delay: 0.1 }}
           >
             {/* Bio */}
-            <div className="space-y-4 text-base leading-relaxed text-slate-300">
+            <div className="space-y-4 text-base leading-relaxed text-[var(--c-text-muted)]">
               <p>
                 I'm a Full Stack Java Developer with 4 years of experience engineering
                 scalable enterprise software across retail e-commerce, insurance workflows,
@@ -137,24 +137,24 @@ export default function AboutSection() {
 
             {/* Core Highlights Grid */}
             <div>
-              <p className="text-xs font-semibold tracking-wider uppercase text-slate-400 mb-4 flex items-center gap-2">
-                <i className="fas fa-sparkles text-purple-400 text-[10px]" />
+              <p className="text-xs font-semibold tracking-wider uppercase text-[var(--c-text-muted)] mb-4 flex items-center gap-2">
+                <i className="fas fa-sparkles text-[var(--c-accent)] text-[10px]" />
                 Core Technical Capabilities
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {HIGHLIGHTS.map((item, idx) => (
                   <motion.div
                     key={item.text}
-                    className="flex items-start gap-3 p-3 rounded-xl border border-white/5 bg-slate-900/40 hover:border-purple-500/30 hover:bg-purple-950/20 transition-all duration-200 group"
+                    className="flex items-start gap-3 p-3 rounded-xl border border-white/5 bg-[var(--c-surface-2)] hover:border-[var(--c-border-mid)] hover:bg-[var(--c-surface-2)] transition-all duration-200 group"
                     initial={{ opacity: 0, y: 10 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.3, delay: idx * 0.05 }}
                   >
-                    <div className="w-7 h-7 rounded-lg bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400 text-xs flex-shrink-0 group-hover:scale-110 transition-transform">
+                    <div className="w-7 h-7 rounded-lg bg-[var(--c-surface-2)] border border-[var(--c-border-mid)] flex items-center justify-center text-[var(--c-accent)] text-xs flex-shrink-0 group-hover:scale-110 transition-transform">
                       <i className={item.icon} />
                     </div>
-                    <span className="text-xs text-slate-300 font-medium leading-tight self-center">
+                    <span className="text-xs text-[var(--c-text-muted)] font-medium leading-tight self-center">
                       {item.text}
                     </span>
                   </motion.div>
@@ -163,8 +163,8 @@ export default function AboutSection() {
             </div>
 
             {/* Education */}
-            <div className="border-l-2 border-purple-500/40 pl-5 py-1 space-y-4">
-              <p className="text-xs font-semibold tracking-wider uppercase text-slate-400">
+            <div className="border-l-2 border-[var(--c-border-mid)] pl-5 py-1 space-y-4">
+              <p className="text-xs font-semibold tracking-wider uppercase text-[var(--c-text-muted)]">
                 Education
               </p>
               <div className="space-y-3">
@@ -172,13 +172,13 @@ export default function AboutSection() {
                   <p className="text-sm font-semibold text-white">
                     M.S. Computer Science — Sacred Heart University
                   </p>
-                  <p className="text-xs text-slate-400 mt-0.5">Aug 2023 – Dec 2024</p>
+                  <p className="text-xs text-[var(--c-text-muted)] mt-0.5">Aug 2023 – Dec 2024</p>
                 </div>
                 <div>
                   <p className="text-sm font-semibold text-white">
                     B.Tech Computer Science — Lovely Professional University
                   </p>
-                  <p className="text-xs text-slate-400 mt-0.5">Aug 2018 – May 2022</p>
+                  <p className="text-xs text-[var(--c-text-muted)] mt-0.5">Aug 2018 – May 2022</p>
                 </div>
               </div>
             </div>

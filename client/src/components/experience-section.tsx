@@ -1,5 +1,5 @@
 import { useRef, useEffect, useState } from "react";
-import { motion, useScroll, useTransform, useInView } from "framer-motion";
+import { motion, useScroll, useTransform, useInView, useReducedMotion } from "framer-motion";
 import { experience } from "@/lib/data";
 import type { Experience } from "@/lib/data";
 import { TiltCard } from "./ui/tilt-card";
@@ -46,26 +46,26 @@ function ExperienceItem({
         aria-hidden="true"
         className={`absolute left-[20px] top-6 -translate-x-1/2 -translate-y-1/2 w-6 h-6 rounded-full flex items-center justify-center transition-all duration-500 z-20 ${
           isReached
-            ? "border-2 border-white bg-slate-950 shadow-[0_0_20px_rgba(168,85,247,0.95),0_0_8px_rgba(56,189,248,0.8)] scale-110"
-            : "border-2 border-slate-700/70 bg-slate-900 shadow-none scale-90"
+            ? "border-2 border-white bg-[var(--c-surface-2)] shadow-none scale-110"
+            : "border-2 border-slate-700/70 bg-[var(--c-surface-2)] shadow-none scale-90"
         }`}
       >
         <div
           className={`w-2.5 h-2.5 rounded-full transition-all duration-500 ${
             isReached
-              ? "bg-gradient-to-r from-purple-400 to-sky-300 scale-110"
-              : "bg-slate-700 scale-75"
+              ? "bg-[var(--c-accent)] scale-110"
+              : "bg-[var(--c-surface-2)] scale-75"
           }`}
         />
       </div>
 
       {/* 3D Tilt Experience Card */}
       <TiltCard
-        maxTilt={5}
-        glowColor="rgba(168, 85, 247, 0.22)"
-        className={`p-6 rounded-2xl border bg-slate-900/50 backdrop-blur-md shadow-xl transition-all duration-500 ${
+        maxTilt={0}
+        glowColor="rgba(209, 233, 163, 0.04)"
+        className={`surface-card p-6 rounded-2xl border bg-[var(--c-surface-2)] backdrop-blur-md shadow-xl transition-all duration-500 ${
           isReached
-            ? "border-purple-500/40 shadow-purple-950/20"
+            ? "border-[var(--c-border-mid)] shadow-purple-950/20"
             : "border-white/10"
         }`}
       >
@@ -73,7 +73,7 @@ function ExperienceItem({
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4 pb-4 border-b border-white/5">
           <div className="flex items-center gap-3.5">
             {/* Company Logo */}
-            <div className="w-11 h-11 rounded-xl bg-slate-800/80 border border-white/10 flex items-center justify-center p-1.5 overflow-hidden flex-shrink-0 shadow-inner group-hover:border-purple-400/40 transition-colors">
+            <div className="w-11 h-11 rounded-xl bg-[var(--c-surface-2)] border border-white/10 flex items-center justify-center p-1.5 overflow-hidden flex-shrink-0 shadow-inner group-hover:border-[var(--c-border-mid)] transition-colors">
               <img
                 src={exp.logo}
                 alt={exp.company}
@@ -82,17 +82,17 @@ function ExperienceItem({
               />
             </div>
             <div>
-              <h3 className="text-base font-bold text-white group-hover:text-purple-300 transition-colors">
+              <h3 className="text-base font-bold text-white group-hover:text-[var(--c-accent)] transition-colors">
                 {exp.position}
               </h3>
-              <p className="text-xs text-purple-400 font-semibold mt-0.5">
+              <p className="text-xs text-[var(--c-accent)] font-semibold mt-0.5">
                 {exp.company}
               </p>
             </div>
           </div>
 
           {/* Period Badge */}
-          <span className="text-xs font-mono px-3 py-1 rounded-full bg-purple-950/40 text-purple-300 border border-purple-500/20 self-start sm:self-center">
+          <span className="text-xs font-mono px-3 py-1 rounded-full bg-[var(--c-surface-2)] text-[var(--c-accent)] border border-[var(--c-border-mid)] self-start sm:self-center">
             {exp.period}
           </span>
         </div>
@@ -102,9 +102,9 @@ function ExperienceItem({
           {bullets.map((bullet, bi) => (
             <li
               key={bi}
-              className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-300 leading-relaxed"
+              className="flex items-start gap-2.5 text-xs sm:text-sm text-[var(--c-text-muted)] leading-relaxed"
             >
-              <span className="w-1.5 h-1.5 rounded-full bg-purple-400/70 mt-2 flex-shrink-0" />
+              <span className="w-1.5 h-1.5 rounded-full bg-[var(--c-surface-2)] mt-2 flex-shrink-0" />
               <span>{bullet}</span>
             </li>
           ))}
@@ -115,6 +115,7 @@ function ExperienceItem({
 }
 
 export default function ExperienceSection() {
+  const reduced = useReducedMotion();
   const containerRef = useRef<HTMLDivElement>(null);
   const firstDotRef = useRef<HTMLDivElement>(null);
   const lastDotRef = useRef<HTMLDivElement>(null);
@@ -174,7 +175,7 @@ export default function ExperienceSection() {
           transition={{ duration: 0.5, ease }}
         >
           <div className="flex items-center gap-2 mb-2">
-            <span className="w-2 h-2 rounded-full bg-indigo-400" />
+            <span className="w-2 h-2 rounded-full bg-[var(--c-surface-2)]" />
             <p className="section-label mb-0">Career Journey</p>
           </div>
           <h2 className="section-title">Professional Experience</h2>
@@ -190,7 +191,7 @@ export default function ExperienceSection() {
                 top: `${lineCoords.top}px`,
                 height: `${lineCoords.totalHeight}px`,
               }}
-              className="absolute left-[20px] -translate-x-1/2 w-[2px] bg-slate-800/80 rounded-full pointer-events-none"
+              className="absolute left-[20px] -translate-x-1/2 w-[2px] bg-[var(--c-surface-2)] rounded-full pointer-events-none"
             />
           )}
 
@@ -200,9 +201,9 @@ export default function ExperienceSection() {
               aria-hidden="true"
               style={{
                 top: `${lineCoords.top}px`,
-                height: animatedHeight,
+                height: reduced ? lineCoords.totalHeight : animatedHeight,
               }}
-              className="absolute left-[20px] -translate-x-1/2 w-[2px] bg-gradient-to-b from-purple-500 via-indigo-400 to-sky-400 rounded-full shadow-[0_0_14px_rgba(168,85,247,0.95),0_0_6px_rgba(56,189,248,0.8)] pointer-events-none z-10"
+              className="absolute left-[20px] -translate-x-1/2 w-[2px] bg-[var(--c-accent)] rounded-full shadow-none pointer-events-none z-10"
             />
           )}
 

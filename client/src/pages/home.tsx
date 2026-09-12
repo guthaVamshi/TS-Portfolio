@@ -7,10 +7,12 @@ import ExperienceSection from "@/components/experience-section";
 import ProjectsSection from "@/components/projects-section";
 import ContactSection from "@/components/contact-section";
 import Footer from "@/components/footer";
-import ThreeBackground from "@/components/three-background";
-import CustomCursor from "@/components/custom-cursor";
+import { MotionConfig, motion, useScroll, useReducedMotion } from "framer-motion";
+
 
 export default function Home() {
+  const { scrollYProgress } = useScroll();
+  const reduced = useReducedMotion();
   // Smooth scroll for anchor links
   useEffect(() => {
     const handleAnchorClick = (e: MouseEvent) => {
@@ -20,31 +22,31 @@ export default function Home() {
       const href = anchor.getAttribute("href");
       if (!href || !href.startsWith("#") || href === "#") return;
       e.preventDefault();
-      const el = document.querySelector(href);
+      const el = document.getElementById(href.slice(1));
       if (el) {
+        if (href === "#main-content") el.focus({ preventScroll: true });
         window.scrollTo({
           top: el.getBoundingClientRect().top + window.scrollY - 72,
-          behavior: "smooth",
+          behavior: reduced ? "auto" : "smooth",
         });
       }
     };
     document.addEventListener("click", handleAnchorClick);
     return () => document.removeEventListener("click", handleAnchorClick);
-  }, []);
+  }, [reduced]);
 
   return (
-    <div className="relative min-h-screen selection:bg-purple-500/30 selection:text-white" style={{ background: "var(--c-bg)" }}>
-      {/* Interactive 3D Background */}
-      <ThreeBackground />
+    <MotionConfig reducedMotion="user">
+    <div className="portfolio relative min-h-screen" style={{ background: "var(--c-bg)" }}>
+      <a href="#main-content" className="skip-link">Skip to content</a>
+      <motion.div className="reading-progress" style={{ scaleX: scrollYProgress }} aria-hidden="true" />
 
-      {/* Reactive Custom Cursor */}
-      <CustomCursor />
 
       {/* Site Navigation */}
       <Navbar />
 
       {/* Main Content */}
-      <main className="relative z-10">
+      <main id="main-content" tabIndex={-1} className="relative z-10">
         <HeroSection />
         <AboutSection />
         <SkillsSection />
@@ -55,5 +57,6 @@ export default function Home() {
 
       <Footer />
     </div>
+    </MotionConfig>
   );
 }
