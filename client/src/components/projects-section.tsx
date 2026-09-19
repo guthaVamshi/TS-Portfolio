@@ -14,11 +14,11 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
   const scale = useTransform(scrollYProgress, [0, .5, 1], [1.12, 1, 1.04]);
   const y = useTransform(scrollYProgress, [0, 1], [16, -16]);
   return (
-    <motion.article ref={ref} className="project-card" initial={{ opacity: 0, y: reduced ? 0 : 35 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: .15 }} transition={{ duration: .8, ease: [.22, 1, .36, 1] }}>
+    <motion.article ref={ref} className="project-card" layout initial={{ opacity: 0, y: reduced ? 0 : 35 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: .15 }} transition={{ duration: .8, ease: [.22, 1, .36, 1] }}>
       <Dialog>
         <DialogTrigger asChild>
           <button className="project-open" aria-label={`View ${project.name} details`}>
-            <div className="project-image"><span className="project-index">0{index + 1}</span><motion.img src={project.image} alt={`${project.name} preview`} loading="lazy" style={reduced ? undefined : { scale, y }} /></div>
+            <div className="project-image"><span className="project-index">0{index + 1}</span><span className="project-launch" aria-hidden="true"><ArrowUpRight size={20} /></span><motion.img src={project.image} alt={`${project.name} preview`} loading="lazy" style={reduced ? undefined : { scale, y }} /></div>
             <div className="project-meta"><span>{project.category}</span><span>{project.status === "in-progress" ? "In Progress" : "Completed"}</span></div>
             <h3>{project.name}<ArrowUpRight size={22} /></h3>
           </button>

@@ -59,7 +59,7 @@ export default function ContactSection() {
             >
               <TiltCard
                 maxTilt={0}
-                glowColor="rgba(209, 233, 163, 0.04)"
+                glowColor="rgba(209, 233, 163, 0.12)"
                 className="surface-card p-5 rounded-2xl border border-white/10 bg-[var(--c-surface-2)] hover:border-[var(--c-border-mid)] backdrop-blur-md flex flex-col justify-between gap-4 h-full"
               >
                 <div className="flex items-start justify-between">
@@ -102,7 +102,7 @@ export default function ContactSection() {
               >
                 <TiltCard
                   maxTilt={0}
-                  glowColor="rgba(209, 233, 163, 0.04)"
+                  glowColor="rgba(209, 233, 163, 0.12)"
                   className="surface-card p-5 rounded-2xl border border-white/10 bg-[var(--c-surface-2)] hover:border-[var(--c-border-mid)] backdrop-blur-md flex flex-col justify-between gap-4 h-full"
                 >
                   <div className="flex items-start justify-between">

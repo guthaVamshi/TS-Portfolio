@@ -61,8 +61,8 @@ export default function AboutSection() {
           >
             {/* Tilt Profile Card */}
             <TiltCard
-              maxTilt={0}
-              glowColor="rgba(209, 233, 163, 0.04)"
+              maxTilt={3}
+              glowColor="rgba(209, 233, 163, 0.12)"
               className="surface-card rounded-2xl border border-white/10 bg-[var(--c-surface-2)] p-2.5 shadow-2xl backdrop-blur-md group"
             >
               <div className="relative overflow-hidden rounded-xl">

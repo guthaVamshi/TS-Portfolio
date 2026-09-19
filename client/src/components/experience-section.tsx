@@ -62,7 +62,7 @@ function ExperienceItem({
       {/* 3D Tilt Experience Card */}
       <TiltCard
         maxTilt={0}
-        glowColor="rgba(209, 233, 163, 0.04)"
+        glowColor="rgba(209, 233, 163, 0.12)"
         className={`surface-card p-6 rounded-2xl border bg-[var(--c-surface-2)] backdrop-blur-md shadow-xl transition-all duration-500 ${
           isReached
             ? "border-[var(--c-border-mid)] shadow-purple-950/20"

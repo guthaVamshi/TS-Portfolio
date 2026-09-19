@@ -48,7 +48,7 @@ export function AnimatedCounter({ value, className, style }: AnimatedCounterProp
 
   return (
     <span ref={ref} className={className} style={style}>
-      {targetNum !== null ? `${count}${suffix}` : value}
+      {reduced || targetNum === null ? value : `${count}${suffix}`}
     </span>
   );
 }

@@ -1,7 +1,11 @@
 import { motion } from "framer-motion";
+import { Code2, Server, Database, ShieldCheck, Cloud, Sparkles } from "lucide-react";
+import { TiltCard } from "./ui/tilt-card";
 import { skills } from "@/lib/data";
 
 const ease = [0.22, 1, 0.36, 1] as const;
+
+const GROUP_ICONS = [Server, Code2, Database, ShieldCheck, Cloud, Sparkles];
 
 const GROUPS = [
   {
@@ -53,8 +57,9 @@ export default function SkillsSection() {
         </motion.div>
 
         {/* Skill groups */}
-        <div className="space-y-10">
+        <div className="skills-bento">
           {GROUPS.map((group, gi) => {
+            const Icon = GROUP_ICONS[gi];
             const groupSkills = skills.filter((s) => group.keys.includes(s.name));
             if (!groupSkills.length) return null;
 
@@ -66,6 +71,8 @@ export default function SkillsSection() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: gi * 0.07, ease }}
               >
+                <TiltCard maxTilt={2} glowColor="rgba(209, 233, 163, 0.12)" className="skill-group">
+                <div className="skill-group-top"><Icon size={22} strokeWidth={1.4} /><span>0{gi + 1}</span></div>
                 {/* Group label */}
                 <p
                   className="text-xs font-semibold tracking-widest uppercase mb-4"
@@ -90,6 +97,7 @@ export default function SkillsSection() {
                     </motion.span>
                   ))}
                 </div>
+                </TiltCard>
               </motion.div>
             );
           })}
