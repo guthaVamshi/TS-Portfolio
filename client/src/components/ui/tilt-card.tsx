@@ -24,7 +24,7 @@ export function TiltCard({
   const [glowPos, setGlowPos] = useState({ x: 50, y: 50, opacity: 0 });
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!cardRef.current || reduced || maxTilt === 0 || !window.matchMedia("(pointer: fine)").matches) return;
+    if (!cardRef.current || reduced || !window.matchMedia("(pointer: fine)").matches) return;
     const rect = cardRef.current.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;

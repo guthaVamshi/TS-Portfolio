@@ -2,7 +2,7 @@ import { useRef } from "react";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { ArrowDown, ArrowUpRight, Download } from "lucide-react";
 import resume from "../Files/VamshiGutha_JFSD.pdf";
-import HeroWater from "./hero-water";
+import HeroOrbit from "./hero-orbit";
 import { AnimatedCounter } from "./ui/animated-counter";
 
 const SOCIALS = [
@@ -22,17 +22,20 @@ export default function HeroSection() {
   return (
     <section id="hero" ref={ref} className="hero-scene" aria-label="Introduction">
       <div className="hero-stage">
-        <HeroWater />
+        <div className="hero-ambient" aria-hidden="true" />
         <motion.div className="content-container hero-content" style={reduced ? undefined : { y, scale, opacity }}>
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }} className="hero-eyebrow">
             <span>Vamshi Gutha <span className="eyebrow-divider">/</span> Full Stack Java Developer</span>
             <span className="hero-availability"><span />Available for Opportunities</span>
           </motion.div>
+          <div className="hero-composition">
           <h1 className="editorial-headline">
             {["Engineering", "resilient systems", "at scale."].map((line, i) => (
               <span className="headline-mask" key={line}><motion.span initial={reduced ? false : { y: "110%" }} animate={{ y: 0 }} transition={{ duration: 1.1, delay: 0.12 + i * 0.12, ease: [0.22, 1, 0.36, 1] }}>{line}</motion.span></span>
             ))}
           </h1>
+          <HeroOrbit />
+          </div>
           <div className="hero-bottom">
             <div className="hero-intro">
               <p>Hi, I'm <strong>Vamshi Gutha</strong>. I design and build high-throughput <strong>Java 17 &amp; Spring Boot microservices</strong>, reactive <strong>React frontends</strong>, and complex <strong>Salesforce CRM architectures</strong> that handle mission-critical enterprise workloads.</p>
