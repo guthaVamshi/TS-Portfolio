@@ -42,7 +42,7 @@ export default function HeroLandscape() {
           const p = point(column, row);
           column ? ctx.lineTo(p.x,p.y) : ctx.moveTo(p.x,p.y);
         }
-        ctx.strokeStyle = `rgba(145, 213, 177, ${.045+depth*.25})`;
+        ctx.strokeStyle = `rgba(220, 160, 60, ${.038+depth*.22})`;
         ctx.lineWidth = row % 5 === 0 ? 1 : .65;
         ctx.stroke();
       }
@@ -52,7 +52,7 @@ export default function HeroLandscape() {
           const p = point(column,row);
           row === 1 ? ctx.moveTo(p.x,p.y) : ctx.lineTo(p.x,p.y);
         }
-        ctx.strokeStyle = "rgba(121, 196, 154, .09)";
+        ctx.strokeStyle = "rgba(180, 120, 40, .07)";
         ctx.lineWidth = .6;
         ctx.stroke();
       }
@@ -60,7 +60,7 @@ export default function HeroLandscape() {
         const x = ((Math.sin(i*127.1)*43758.5453)%1+1)%1*width;
         const y = ((Math.sin(i*311.7)*19287.32)%1+1)%1*height*.8;
         const alpha = .15 + .2*(.5+.5*Math.sin(elapsed*.4+i));
-        ctx.fillStyle = `rgba(206, 233, 215, ${alpha})`;
+        ctx.fillStyle = `rgba(255, 210, 120, ${alpha})`;
         ctx.beginPath(); ctx.arc(x,y,i%7===0?1.25:.65,0,Math.PI*2);ctx.fill();
       }
     };

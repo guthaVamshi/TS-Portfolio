@@ -7,12 +7,14 @@ import ExperienceSection from "@/components/experience-section";
 import ProjectsSection from "@/components/projects-section";
 import ContactSection from "@/components/contact-section";
 import Footer from "@/components/footer";
+import CustomCursor from "@/components/custom-cursor";
+import MarqueeTicker from "@/components/marquee-ticker";
 import { MotionConfig, motion, useScroll, useReducedMotion } from "framer-motion";
-
 
 export default function Home() {
   const { scrollYProgress } = useScroll();
   const reduced = useReducedMotion();
+
   // Smooth scroll for anchor links
   useEffect(() => {
     const handleAnchorClick = (e: MouseEvent) => {
@@ -37,26 +39,32 @@ export default function Home() {
 
   return (
     <MotionConfig reducedMotion="user">
-    <div className="portfolio relative min-h-screen" style={{ background: "var(--c-bg)" }}>
-      <a href="#main-content" className="skip-link">Skip to content</a>
-      <motion.div className="reading-progress" style={{ scaleX: scrollYProgress }} aria-hidden="true" />
+      <div className="portfolio relative min-h-screen" style={{ background: "var(--c-bg)" }}>
+        <a href="#main-content" className="skip-link">Skip to content</a>
+        <motion.div className="reading-progress" style={{ scaleX: scrollYProgress }} aria-hidden="true" />
 
+        {/* Shape-shifting custom cursor */}
+        <CustomCursor />
 
-      {/* Site Navigation */}
-      <Navbar />
+        {/* Site Navigation */}
+        <Navbar />
 
-      {/* Main Content */}
-      <main id="main-content" tabIndex={-1} className="relative z-10">
-        <HeroSection />
-        <AboutSection />
-        <SkillsSection />
-        <ExperienceSection />
-        <ProjectsSection />
-        <ContactSection />
-      </main>
+        {/* Main Content */}
+        <main id="main-content" tabIndex={-1} className="relative z-10">
+          <HeroSection />
 
-      <Footer />
-    </div>
+          {/* Marquee ticker between hero and about */}
+          <MarqueeTicker />
+
+          <AboutSection />
+          <SkillsSection />
+          <ExperienceSection />
+          <ProjectsSection />
+          <ContactSection />
+        </main>
+
+        <Footer />
+      </div>
     </MotionConfig>
   );
 }

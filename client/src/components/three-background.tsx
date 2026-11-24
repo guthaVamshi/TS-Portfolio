@@ -66,9 +66,9 @@ export default function ThreeBackground() {
       if (ctx) {
         const gradient = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
         gradient.addColorStop(0, "rgba(255, 255, 255, 1)");
-        gradient.addColorStop(0.3, "rgba(168, 85, 247, 0.8)");
-        gradient.addColorStop(0.7, "rgba(99, 102, 241, 0.3)");
-        gradient.addColorStop(1, "rgba(99, 102, 241, 0)");
+        gradient.addColorStop(0.3, "rgba(245, 185, 85, 0.85)");
+        gradient.addColorStop(0.7, "rgba(200, 130, 30, 0.3)");
+        gradient.addColorStop(1, "rgba(180, 100, 20, 0)");
         ctx.fillStyle = gradient;
         ctx.fillRect(0, 0, 64, 64);
       }

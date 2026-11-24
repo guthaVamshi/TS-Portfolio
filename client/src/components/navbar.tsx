@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { Dialog, DialogContent, DialogTitle, DialogDescription } from "./ui/dialog";
 import { cn } from "@/lib/utils";
+import { useTextScramble } from "../hooks/useTextScramble";
 
 const NAV_LINKS = [
   { name: "About",      href: "#about" },
@@ -12,9 +13,40 @@ const NAV_LINKS = [
   { name: "Contact",    href: "#contact" },
 ];
 
+function NavLink({ name, href, isActive }: { name: string; href: string; isActive: boolean }) {
+  const spanRef = useRef<HTMLSpanElement>(null);
+  const { scramble } = useTextScramble();
+
+  const handleMouseEnter = () => {
+    if (spanRef.current) scramble(spanRef.current, name, 400);
+  };
+
+  return (
+    <a
+      href={href}
+      aria-current={isActive ? "location" : undefined}
+      onMouseEnter={handleMouseEnter}
+      className={cn(
+        "relative px-3 py-1.5 text-[13px] font-medium rounded-xl transition-colors duration-200",
+        isActive ? "text-white" : "hover:text-white"
+      )}
+      style={{ color: isActive ? "var(--c-text)" : "var(--c-text-muted)" }}
+    >
+      <span ref={spanRef}>{name}</span>
+      {isActive && (
+        <motion.span
+          layoutId="navPill"
+          className="nav-indicator"
+          transition={{ type: "spring", stiffness: 400, damping: 30 }}
+        />
+      )}
+    </a>
+  );
+}
+
 export default function Navbar() {
-  const [menuOpen, setMenuOpen]         = useState(false);
-  const [scrolled, setScrolled]         = useState(false);
+  const [menuOpen, setMenuOpen]           = useState(false);
+  const [scrolled, setScrolled]           = useState(false);
   const [activeSection, setActiveSection] = useState("");
 
   useEffect(() => {
@@ -25,24 +57,21 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => {
-    const sections = NAV_LINKS.map((l) => l.href.slice(1));
+    const sections = NAV_LINKS.map(l => l.href.slice(1));
     const observer = new IntersectionObserver(
-      (entries) => {
+      entries => {
         for (const entry of entries) {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
-          }
+          if (entry.isIntersecting) setActiveSection(entry.target.id);
         }
       },
       { rootMargin: "-40% 0px -55% 0px" }
     );
-    sections.forEach((id) => {
+    sections.forEach(id => {
       const el = document.getElementById(id);
       if (el) observer.observe(el);
     });
     return () => observer.disconnect();
   }, []);
-
 
   return (
     <>
@@ -69,35 +98,16 @@ export default function Navbar() {
             Vamshi<span style={{ color: "var(--c-accent)" }}>.</span>
           </a>
 
-          {/* Desktop links */}
+          {/* Desktop links with scramble */}
           <div className="hidden md:flex items-center gap-0.5" role="list">
-            {NAV_LINKS.map((link) => {
-              const isActive = activeSection === link.href.slice(1);
-              return (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  role="listitem"
-                  aria-current={isActive ? "location" : undefined}
-                  className={cn(
-                    "relative px-3 py-1.5 text-[13px] font-medium rounded-xl transition-colors duration-200",
-                    isActive
-                      ? "text-white"
-                      : "hover:text-white"
-                  )}
-                  style={{ color: isActive ? "var(--c-text)" : "var(--c-text-muted)" }}
-                >
-                  {link.name}
-                  {isActive && (
-                    <motion.span
-                      layoutId="navPill"
-                      className="nav-indicator"
-                      transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                    />
-                  )}
-                </a>
-              );
-            })}
+            {NAV_LINKS.map(link => (
+              <NavLink
+                key={link.name}
+                name={link.name}
+                href={link.href}
+                isActive={activeSection === link.href.slice(1)}
+              />
+            ))}
           </div>
 
           {/* Desktop CTA */}
@@ -131,7 +141,7 @@ export default function Navbar() {
 
           {/* Mobile hamburger */}
           <button
-            onClick={() => setMenuOpen((v) => !v)}
+            onClick={() => setMenuOpen(v => !v)}
             className="md:hidden w-9 h-9 flex items-center justify-center rounded-xl transition-colors"
             style={{
               color: "var(--c-text-muted)",
@@ -150,9 +160,21 @@ export default function Navbar() {
           <DialogTitle className="sr-only">Navigation menu</DialogTitle>
           <DialogDescription className="sr-only">Explore Vamshi Gutha's portfolio.</DialogDescription>
           <nav className="flex flex-col gap-6">
-            {NAV_LINKS.map((link, i) => <a key={link.name} href={link.href} onClick={() => setMenuOpen(false)} className="mobile-nav-link"><span>0{i + 1}</span>{link.name}</a>)}
+            {NAV_LINKS.map((link, i) => (
+              <a
+                key={link.name}
+                href={link.href}
+                onClick={() => setMenuOpen(false)}
+                className="mobile-nav-link"
+              >
+                <span>0{i + 1}</span>
+                {link.name}
+              </a>
+            ))}
           </nav>
-          <a href="#contact" onClick={() => setMenuOpen(false)} className="btn-primary mt-8 w-fit">Hire Me</a>
+          <a href="#contact" onClick={() => setMenuOpen(false)} className="btn-primary mt-8 w-fit">
+            Hire Me
+          </a>
         </DialogContent>
       </Dialog>
     </>

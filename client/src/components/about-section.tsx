@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import resume from "../Files/VamshiGutha_JFSD.pdf";
 import profilepic from "../images/Profile.jpeg";
-import { TiltCard } from "./ui/tilt-card";
+import HolographicCard from "./holographic-card";
 import { AnimatedCounter } from "./ui/animated-counter";
 
 const STATS = [
@@ -59,38 +59,38 @@ export default function AboutSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, ease }}
           >
-            {/* Tilt Profile Card */}
-            <TiltCard
-              maxTilt={3}
-              glowColor="rgba(209, 233, 163, 0.12)"
-              className="surface-card rounded-2xl border border-white/10 bg-[var(--c-surface-2)] p-2.5 shadow-2xl backdrop-blur-md group"
-            >
-              <div className="relative overflow-hidden rounded-xl">
-                <img
-                  src={profilepic}
-                  alt="Vamshi Gutha, Full Stack Java Developer"
-                  className="w-full h-auto object-cover block transition-transform duration-700 group-hover:scale-105"
-                  style={{ aspectRatio: "4/5" }}
-                  loading="lazy"
-                />
-                {/* Gradient overlay */}
-                <div
-                  aria-hidden
-                  className="absolute bottom-0 inset-x-0 h-1/2 bg-gradient-to-t from-slate-950/90 via-slate-950/40 to-transparent pointer-events-none"
-                />
-
-                {/* Card overlay badge */}
-                <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between pointer-events-none">
-                  <div>
-                    <p className="text-white font-outfit font-bold text-lg">Vamshi Gutha</p>
-                    <p className="text-xs text-[var(--c-accent)] font-mono">Software Engineer @ Macy's</p>
-                  </div>
-                  <div className="w-9 h-9 rounded-full bg-[var(--c-surface-2)] border border-[var(--c-border-mid)] backdrop-blur-md flex items-center justify-center text-[var(--c-accent)] text-sm">
-                    <i className="fas fa-code" />
+            {/* Holographic Profile Card */}
+            <HolographicCard className="rounded-2xl">
+              <div className="relative overflow-hidden rounded-2xl bg-[var(--c-surface-2)] p-2.5 border border-white/10 shadow-2xl group">
+                <div className="relative overflow-hidden rounded-xl">
+                  <img
+                    src={profilepic}
+                    alt="Vamshi Gutha, Full Stack Java Developer"
+                    className="w-full h-auto object-cover block"
+                    style={{ aspectRatio: "4/5", display: "block" }}
+                    loading="lazy"
+                  />
+                  {/* Gradient overlay */}
+                  <div
+                    aria-hidden
+                    className="absolute bottom-0 inset-x-0 h-2/3 bg-gradient-to-t from-slate-950/95 via-slate-950/50 to-transparent pointer-events-none"
+                  />
+                  {/* Floating badge — elevated Z plane for depth */}
+                  <div
+                    className="absolute bottom-4 left-4 right-4 flex items-center justify-between pointer-events-none"
+                    style={{ transform: "translateZ(30px)", transformStyle: "preserve-3d" }}
+                  >
+                    <div>
+                      <p className="text-white font-bold text-lg leading-tight">Vamshi Gutha</p>
+                      <p className="text-xs text-[var(--c-accent)] font-mono mt-0.5">Software Engineer @ Macy's</p>
+                    </div>
+                    <div className="w-9 h-9 rounded-full bg-[var(--c-surface-2)] border border-[var(--c-border-mid)] backdrop-blur-md flex items-center justify-center text-[var(--c-accent)] text-sm">
+                      <i className="fas fa-code" />
+                    </div>
                   </div>
                 </div>
               </div>
-            </TiltCard>
+            </HolographicCard>
 
             {/* Stats row with animated counters */}
             <div className="grid grid-cols-3 gap-4 mt-8">
